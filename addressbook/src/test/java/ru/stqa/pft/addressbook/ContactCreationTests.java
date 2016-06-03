@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook;
 
+import ru.stqa.pft.addressbook.data.ContactData;
 import ru.stqa.pft.addressbook.data.LoginData;
 
 import org.testng.annotations.BeforeMethod;
@@ -44,7 +45,7 @@ public class ContactCreationTests {
     @Test
     public void testContactCreation() {
         initContactCreation();
-        fillContactForm("Jon", "Dou", "void", "bigbox", "855614452266");
+        fillContactForm(new ContactData("Jon", "Dou", "void", "bigbox", "855614452266"));
         submitContactCreation();
     }
 
@@ -52,25 +53,25 @@ public class ContactCreationTests {
         wd.findElement(By.linkText("add new")).click();
     }
 
-    private void fillContactForm(String firsteName, String lastName, String nickName, String companyName, String homePhoneNumber) {
+    private void fillContactForm(ContactData contactData) {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
-        wd.findElement(By.name("firstname")).sendKeys(firsteName);
+        wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
         wd.findElement(By.name("lastname")).click();
         wd.findElement(By.name("lastname")).clear();
-        wd.findElement(By.name("lastname")).sendKeys(lastName);
+        wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
         wd.findElement(By.name("nickname")).click();
         wd.findElement(By.name("nickname")).clear();
-        wd.findElement(By.name("nickname")).sendKeys(nickName);
+        wd.findElement(By.name("nickname")).sendKeys(contactData.getNickName());
         wd.findElement(By.name("company")).click();
         wd.findElement(By.name("company")).clear();
-        wd.findElement(By.name("company")).sendKeys(companyName);
+        wd.findElement(By.name("company")).sendKeys(contactData.getCompanyName());
 
         contactBirthday();
 
         wd.findElement(By.name("home")).click();
         wd.findElement(By.name("home")).clear();
-        wd.findElement(By.name("home")).sendKeys(homePhoneNumber);
+        wd.findElement(By.name("home")).sendKeys(contactData.getHomePhoneNumber());
     }
 
     private void contactBirthday() {
