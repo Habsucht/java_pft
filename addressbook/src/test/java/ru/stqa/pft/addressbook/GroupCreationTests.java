@@ -20,9 +20,13 @@ public class GroupCreationTests {
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
-        wd.get("http://localhost/addressbook/");
+        url("http://localhost/addressbook/");
 
         logon(new LoginData("admin", "secret"));
+    }
+
+    private void url(String url) {
+        wd.get(url);
     }
 
     private void logon(LoginData loginData) {
