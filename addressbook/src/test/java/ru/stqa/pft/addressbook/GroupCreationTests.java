@@ -1,3 +1,8 @@
+package ru.stqa.pft.addressbook;
+
+import ru.stqa.pft.addressbook.data.LoginData;
+import ru.stqa.pft.addressbook.data.GroupData;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -5,6 +10,7 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.*;
+
 
 public class GroupCreationTests {
     FirefoxDriver wd;
@@ -16,16 +22,16 @@ public class GroupCreationTests {
 
         wd.get("http://localhost/addressbook/");
 
-        logon("admin", "secret");
+        logon(new LoginData("admin", "secret"));
     }
 
-    private void logon(String userName, String password) {
+    private void logon(LoginData loginData) {
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
-        wd.findElement(By.name("user")).sendKeys(userName);
+        wd.findElement(By.name("user")).sendKeys(loginData.getUserName());
         wd.findElement(By.name("pass")).click();
         wd.findElement(By.name("pass")).clear();
-        wd.findElement(By.name("pass")).sendKeys(password);
+        wd.findElement(By.name("pass")).sendKeys(loginData.getPassword());
         wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
     }
 
@@ -33,7 +39,7 @@ public class GroupCreationTests {
     public void testGroupCreation() {
         gotoGroupPage();
         initGroupCreation();
-        fillGroupForm("test1", "info1", "info1");
+        fillGroupForm(new GroupData("test1", "info1", "info1"));
         submitGroupCreation();
         returnToGroupPage();
     }
@@ -46,16 +52,16 @@ public class GroupCreationTests {
         wd.findElement(By.name("new")).click();
     }
 
-    private void fillGroupForm(String groupName, String header, String footer) {
+    private void fillGroupForm(GroupData groupData) {
         wd.findElement(By.name("group_name")).click();
         wd.findElement(By.name("group_name")).clear();
-        wd.findElement(By.name("group_name")).sendKeys(groupName);
+        wd.findElement(By.name("group_name")).sendKeys(groupData.getGroupName());
         wd.findElement(By.name("group_header")).click();
         wd.findElement(By.name("group_header")).clear();
-        wd.findElement(By.name("group_header")).sendKeys(header);
+        wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
         wd.findElement(By.name("group_footer")).click();
         wd.findElement(By.name("group_footer")).clear();
-        wd.findElement(By.name("group_footer")).sendKeys(footer);
+        wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
     }
 
     private void submitGroupCreation() {
