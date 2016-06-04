@@ -1,43 +1,11 @@
 package ru.stqa.pft.addressbook;
 
-import ru.stqa.pft.addressbook.data.LoginData;
 import ru.stqa.pft.addressbook.data.GroupData;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.AfterMethod;
+import org.openqa.selenium.*;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.*;
-
-
-public class GroupCreationTests {
-    FirefoxDriver wd;
-    
-    @BeforeMethod
-    public void setUp() throws Exception {
-        wd = new FirefoxDriver();
-        wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-
-        url("http://localhost/addressbook/");
-
-        logon(new LoginData("admin", "secret"));
-    }
-
-    private void url(String url) {
-        wd.get(url);
-    }
-
-    private void logon(LoginData loginData) {
-        wd.findElement(By.name("user")).click();
-        wd.findElement(By.name("user")).clear();
-        wd.findElement(By.name("user")).sendKeys(loginData.getUserName());
-        wd.findElement(By.name("pass")).click();
-        wd.findElement(By.name("pass")).clear();
-        wd.findElement(By.name("pass")).sendKeys(loginData.getPassword());
-        wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-    }
+public class GroupCreationTests extends GroupBasicTestsMethod {
 
     @Test
     public void testGroupCreation() {
@@ -46,10 +14,6 @@ public class GroupCreationTests {
         fillGroupForm(new GroupData("test1", "info1", "info1"));
         submitGroupCreation();
         returnToGroupPage();
-    }
-
-    private void gotoGroupPage() {
-        wd.findElement(By.linkText("groups")).click();
     }
 
     private void initGroupCreation() {
@@ -70,23 +34,5 @@ public class GroupCreationTests {
 
     private void submitGroupCreation() {
         wd.findElement(By.name("submit")).click();
-    }
-
-    private void returnToGroupPage() {
-        wd.findElement(By.linkText("group page")).click();
-    }
-
-    @AfterMethod
-    public void tearDown() {
-        wd.quit();
-    }
-    
-    public static boolean isAlertPresent(FirefoxDriver wd) {
-        try {
-            wd.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
     }
 }
