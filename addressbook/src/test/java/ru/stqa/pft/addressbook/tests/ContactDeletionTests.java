@@ -1,4 +1,4 @@
 package ru.stqa.pft.addressbook.tests;
 
-public class ContactDeletionTests {
+public class ContactDeletionTests extends ContactBasicTestsMethod {
 }

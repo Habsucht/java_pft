@@ -5,17 +5,13 @@ import ru.stqa.pft.addressbook.data.ContactData;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-public class ContactCreationTests extends BaseTestsMethod {
+public class ContactCreationTests extends ContactBasicTestsMethod {
 
     @Test
     public void testContactCreation() {
         initContactCreation();
         fillContactForm(new ContactData("Jon", "Dou", "void", "bigbox", "855614452266"));
         submitContactCreation();
-    }
-
-    protected void initContactCreation() {
-        wd.findElement(By.linkText("add new")).click();
     }
 
     protected void fillContactForm(ContactData contactData) {
@@ -51,9 +47,5 @@ public class ContactCreationTests extends BaseTestsMethod {
         wd.findElement(By.name("byear")).click();
         wd.findElement(By.name("byear")).clear();
         wd.findElement(By.name("byear")).sendKeys("1956");
-    }
-
-    protected void submitContactCreation() {
-        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
     }
 }
