@@ -19,4 +19,8 @@ public class BaseHelper {
     protected void click(By locator) {
         wd.findElement(locator).click();
     }
+
+    public void alert() {
+        wd.switchTo().alert().accept();
+    }
 }

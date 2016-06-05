@@ -14,6 +14,7 @@ public class ApplicationManager {
     private GroupHelper groupHelper;
 
     public FirefoxDriver wd;
+    private BaseHelper baseHelper;
 
     public void init() {
         wd = new FirefoxDriver();
@@ -52,5 +53,9 @@ public class ApplicationManager {
 
     public ContactHelper getContactHelper() {
         return contactHelper;
+    }
+
+    public BaseHelper getBaseHelper() {
+        return baseHelper;
     }
 }

@@ -14,6 +14,11 @@ public class ContactHelper extends BaseHelper {
         click(By.linkText("add new"));
     }
 
+    public void selectContact() {
+        if (!wd.findElement(By.id("2")).isSelected())
+        click(By.id("2"));
+    }
+
     public void fillContactForm(ContactData contactData) {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("lastname"), contactData.getLastName());
@@ -43,4 +48,7 @@ public class ContactHelper extends BaseHelper {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
+    public void deleteContact() {
+        click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    }
 }
