@@ -14,38 +14,48 @@ public class ContactHelper extends BaseHelper {
         click(By.linkText("add new"));
     }
 
-    public void selectContact() {
-        if (!wd.findElement(By.id("2")).isSelected())
-        click(By.id("2"));
+    public void selectContact(int numContact) {
+        if (!wd.findElement(By.id(String.valueOf(numContact))).isSelected())
+        click(By.id(String.valueOf(numContact)));
     }
 
     public void fillContactForm(ContactData contactData) {
-        type(By.name("firstname"), contactData.getFirstName());
-        type(By.name("lastname"), contactData.getLastName());
+        type(By.name("firstname"), contactData.firstName);
+        type(By.name("lastname"), contactData.lastName);
 
-        type(By.name("nickname"), contactData.getNickName());
+        type(By.name("nickname"), contactData.nickName);
 
-        type(By.name("company"), contactData.getCompanyName());
+        type(By.name("company"), contactData.companyName);
 
         contactBirthday(contactData);
 
-        type(By.name("home"), contactData.getHomePhoneNumber());
+        type(By.name("home"), contactData.homePhoneNumber);
     }
 
     private void contactBirthday(ContactData contactData) {
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[9]")).isSelected()) {
-            click(By.xpath("//div[@id='content']/form/select[1]//option[9]"));
+        if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[" + contactData.birthdayDay + "]")).isSelected()) {
+            click(By.xpath("//div[@id='content']/form/select[1]//option[" + contactData.birthdayDay + "]"));
         }
 
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[7]")).isSelected()) {
-            click(By.xpath("//div[@id='content']/form/select[2]//option[7]"));
+        if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[" + contactData.birthdayMonth + "]")).isSelected()) {
+            click(By.xpath("//div[@id='content']/form/select[2]//option[" + contactData.birthdayMonth + "]"));
         }
 
-        type(By.name("byear"), contactData.getBirthdayYear);
+        type(By.name("byear"), String.valueOf(contactData.birthdayYear));
     }
 
     public void submitContactCreation() {
-        click(By.xpath("//div[@id='content']/form/input[21]"));
+        submitModification();
+        //click(By.xpath("//div[@id='content']/form/input[21]"));
+    }
+
+    public void editContact(int numContact) {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[" + numContact + "]/td[8]/a/img"));
+    }
+
+    public void updateContact() {
+        click(By.name("update"));
+        //click(By.xpath("//div[@id='content']/form[1]/input[22]"));
     }
 
     public void deleteContact() {

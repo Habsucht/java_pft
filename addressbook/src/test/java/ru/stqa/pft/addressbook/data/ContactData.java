@@ -1,39 +1,27 @@
 package ru.stqa.pft.addressbook.data;
 
 public class ContactData {
-    private final String firstName;
-    private final String lastName;
-    private final String nickName;
-    private final String companyName;
-    private final String homePhoneNumber;
-    public final String getBirthdayYear;
+    public String firstName;
+    public String lastName;
+    public String nickName;
+    public String companyName;
+    public String homePhoneNumber;
 
-    public ContactData(String firstName, String lastName, String nickName, String companyName, String homePhoneNumber, String getBirthdayYear) {
+    public int birthdayDay;
+    public int birthdayMonth;
+    public int birthdayYear;
+
+    public ContactData(String firstName, String lastName, String nickName, String companyName, String homePhoneNumber, int birthdayDay, int birthdayMonth, int birthdayYear) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickName = nickName;
         this.companyName = companyName;
         this.homePhoneNumber = homePhoneNumber;
-        this.getBirthdayYear = getBirthdayYear;
+
+        this.birthdayDay = birthdayDay;
+        this.birthdayMonth = birthdayMonth;
+        this.birthdayYear = birthdayYear;
+
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public String getHomePhoneNumber() {
-        return homePhoneNumber;
-    }
 }

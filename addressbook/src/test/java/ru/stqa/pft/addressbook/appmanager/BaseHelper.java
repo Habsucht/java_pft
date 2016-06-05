@@ -23,4 +23,8 @@ public class BaseHelper {
     public void alert() {
         wd.switchTo().alert().accept();
     }
+
+    public void submitModification() {
+        click(By.name("submit"));
+    }
 }

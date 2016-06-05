@@ -21,16 +21,16 @@ public class GroupHelper extends BaseHelper {
     }
 
     public void submitGroupCreation() {
-        click(By.name("submit"));
+        submitModification();
     }
 
     public void returnToGroupPage() {
         click(By.linkText("group page"));
     }
 
-    public void selectGroup() {
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/span[1]/input")).isSelected()) {
-           click(By.xpath("//div[@id='content']/form/span[1]/input"));
+    public void selectGroup(int numGroup) {
+        if (!wd.findElement(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input")).isSelected()) {
+           click(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input"));
         }
     }
 
@@ -43,6 +43,6 @@ public class GroupHelper extends BaseHelper {
     }
 
     public void submitGroupModification() {
-        click(By.name("update"));
+        submitModification();
     }
 }
