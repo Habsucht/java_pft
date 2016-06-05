@@ -6,13 +6,15 @@ public class ContactData {
     private final String nickName;
     private final String companyName;
     private final String homePhoneNumber;
+    public final String getBirthdayYear;
 
-    public ContactData(String firstName, String lastName, String nickName, String companyName, String homePhoneNumber) {
+    public ContactData(String firstName, String lastName, String nickName, String companyName, String homePhoneNumber, String getBirthdayYear) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickName = nickName;
         this.companyName = companyName;
         this.homePhoneNumber = homePhoneNumber;
+        this.getBirthdayYear = getBirthdayYear;
     }
 
     public String getFirstName() {

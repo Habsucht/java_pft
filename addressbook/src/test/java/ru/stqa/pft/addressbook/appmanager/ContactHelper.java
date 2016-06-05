@@ -4,53 +4,43 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.data.ContactData;
 
-public class ContactHelper {
-    private FirefoxDriver wd;
+public class ContactHelper extends BaseHelper {
 
     public ContactHelper(FirefoxDriver wd) {
-        this.wd = wd;
+        super(wd);
     }
 
     public void initContactCreation() {
-        wd.findElement(By.linkText("add new")).click();
+        click(By.linkText("add new"));
     }
 
     public void fillContactForm(ContactData contactData) {
-        wd.findElement(By.name("firstname")).click();
-        wd.findElement(By.name("firstname")).clear();
-        wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
-        wd.findElement(By.name("lastname")).click();
-        wd.findElement(By.name("lastname")).clear();
-        wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
-        wd.findElement(By.name("nickname")).click();
-        wd.findElement(By.name("nickname")).clear();
-        wd.findElement(By.name("nickname")).sendKeys(contactData.getNickName());
-        wd.findElement(By.name("company")).click();
-        wd.findElement(By.name("company")).clear();
-        wd.findElement(By.name("company")).sendKeys(contactData.getCompanyName());
+        type(By.name("firstname"), contactData.getFirstName());
+        type(By.name("lastname"), contactData.getLastName());
 
-        contactBirthday();
+        type(By.name("nickname"), contactData.getNickName());
 
-        wd.findElement(By.name("home")).click();
-        wd.findElement(By.name("home")).clear();
-        wd.findElement(By.name("home")).sendKeys(contactData.getHomePhoneNumber());
+        type(By.name("company"), contactData.getCompanyName());
+
+        contactBirthday(contactData);
+
+        type(By.name("home"), contactData.getHomePhoneNumber());
     }
 
-    private void contactBirthday() {
+    private void contactBirthday(ContactData contactData) {
         if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[9]")).isSelected()) {
-            wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[9]")).click();
+            click(By.xpath("//div[@id='content']/form/select[1]//option[9]"));
         }
 
         if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[7]")).isSelected()) {
-            wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[7]")).click();
+            click(By.xpath("//div[@id='content']/form/select[2]//option[7]"));
         }
 
-        wd.findElement(By.name("byear")).click();
-        wd.findElement(By.name("byear")).clear();
-        wd.findElement(By.name("byear")).sendKeys("1956");
+        type(By.name("byear"), contactData.getBirthdayYear);
     }
 
     public void submitContactCreation() {
-        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+        click(By.xpath("//div[@id='content']/form/input[21]"));
     }
+
 }
