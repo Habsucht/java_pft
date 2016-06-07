@@ -1,10 +1,15 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import ru.stqa.pft.addressbook.data.LoginData;
-
 import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+
+import ru.stqa.pft.addressbook.data.LoginData;
 
 public class ApplicationManager {
 
@@ -13,11 +18,20 @@ public class ApplicationManager {
     private ContactHelper contactHelper;
     private GroupHelper groupHelper;
 
-    public FirefoxDriver wd;
+    public WebDriver wd;
     private BaseHelper baseHelper;
 
     public void init() {
-        wd = new FirefoxDriver();
+        String browser = BrowserType.FIREFOX;
+
+        if (browser == BrowserType.FIREFOX) {
+            wd = new FirefoxDriver();
+        } else if (browser == BrowserType.CHROME) {
+            wd = new ChromeDriver();
+        } else if (browser == BrowserType.IE) {
+            wd = new InternetExplorerDriver();
+        }
+
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
         wd.get("http://localhost/addressbook/");

@@ -1,12 +1,13 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebDriver;
+
 import ru.stqa.pft.addressbook.data.LoginData;
 
 public class SessionHelper extends BaseHelper {
 
-    public SessionHelper(FirefoxDriver wd) {
+    public SessionHelper(WebDriver wd) {
         super(wd);
     }
 
