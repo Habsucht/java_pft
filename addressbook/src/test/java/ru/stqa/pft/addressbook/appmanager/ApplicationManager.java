@@ -12,23 +12,27 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import ru.stqa.pft.addressbook.data.LoginData;
 
 public class ApplicationManager {
-
+    private BaseHelper baseHelper;
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private ContactHelper contactHelper;
     private GroupHelper groupHelper;
 
     public WebDriver wd;
-    private BaseHelper baseHelper;
+
+    private String browser;
+
+    public ApplicationManager(String browser) {
+        this.browser = browser;
+    }
+
 
     public void init() {
-        String browser = BrowserType.FIREFOX;
-
-        if (browser == BrowserType.FIREFOX) {
+        if (browser.equals(BrowserType.FIREFOX)) {
             wd = new FirefoxDriver();
-        } else if (browser == BrowserType.CHROME) {
+        } else if (browser.equals(BrowserType.CHROME)) {
             wd = new ChromeDriver();
-        } else if (browser == BrowserType.IE) {
+        } else if (browser.equals(BrowserType.IE)) {
             wd = new InternetExplorerDriver();
         }
 
