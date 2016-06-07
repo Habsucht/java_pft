@@ -48,7 +48,7 @@ public class ApplicationManager {
         wd.quit();
     }
 
-    public static boolean isAlertPresent(FirefoxDriver wd) {
+    public static boolean isAlertPresent(WebDriver wd) {
         try {
             wd.switchTo().alert();
             return true;
