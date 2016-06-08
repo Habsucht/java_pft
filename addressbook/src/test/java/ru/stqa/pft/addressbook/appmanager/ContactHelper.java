@@ -1,8 +1,10 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
+import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.data.ContactData;
 
 public class ContactHelper extends BaseHelper {
@@ -28,9 +30,13 @@ public class ContactHelper extends BaseHelper {
 
         type(By.name("company"), contactData.companyName);
 
-        contactBirthday(contactData);
-
         type(By.name("home"), contactData.homePhoneNumber);
+
+//        if (isElementPresent(By.name("new_group"))) {
+//            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+//        }
+
+        contactBirthday(contactData);
     }
 
     private void contactBirthday(ContactData contactData) {
