@@ -22,14 +22,25 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void fillContactForm(ContactData contactData) {
-        type(By.name("firstname"), contactData.firstName);
-        type(By.name("lastname"), contactData.lastName);
+        if (!wd.findElement(By.name("firstname")).getText().equals(contactData.firstName)) {
+            type(By.name("firstname"), contactData.firstName);
+        }
 
-        type(By.name("nickname"), contactData.nickName);
+        if (!wd.findElement(By.name("lastname")).getText().equals(contactData.lastName)) {
+            type(By.name("lastname"), contactData.lastName);
+        }
 
-        type(By.name("company"), contactData.companyName);
+        if (!wd.findElement(By.name("nickname")).getText().equals(contactData.nickName)) {
+            type(By.name("nickname"), contactData.nickName);
+        }
 
-        type(By.name("home"), contactData.homePhoneNumber);
+        if (!wd.findElement(By.name("company")).getText().equals(contactData.companyName)) {
+            type(By.name("company"), contactData.companyName);
+        }
+
+        if (!wd.findElement(By.name("home")).getText().equals(contactData.homePhoneNumber)) {
+            type(By.name("home"), contactData.homePhoneNumber);
+        }
 
         if (isElementPresent(By.name("new_group"))) {
             String group = contactData.getGroup();
