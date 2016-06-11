@@ -17,6 +17,8 @@ public class GroupHelper extends BaseHelper {
 
     public void fillGroupForm(GroupData groupData) {
         if (!wd.findElement(By.name("group_name")).getText().equals(groupData.groupName)) {
+            System.out.println("groupName: " + groupData.groupName);
+
             type(By.name("group_name"), groupData.groupName);
             type(By.name("group_header"), groupData.header);
             type(By.name("group_footer"), groupData.footer);

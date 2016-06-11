@@ -7,7 +7,7 @@ public class ContactDataGenerator extends BaseGenerator {
     private static String[] lastName = {"Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White", "Harris", "Martin",
             "Thompson", "Wood", "Lewis", "Scott", "Cooper", "King", "Green", "Walker", "Edwards", "Turner", "Morgan", "Baker", "Hill", "Phillips"};
 
-    private static String[] companyName = {"Facebook", "Yandex", "VK", "Google", " ", "", " ", " ", " ", " "};
+    private static String[] companyName = {"Facebook", "Yandex", "VK", "Google", "Rambler", "Sun", "Oracle", "Apple", "Cisco", "DLink"};
 
     public static String generateFirstName() {
         return firstName[generateRandom(30)];
@@ -38,9 +38,6 @@ public class ContactDataGenerator extends BaseGenerator {
     }
 
     public static int generateYear() {
-        return generateRandom(1950 + generateRandom(50));
+        return 1950 + generateRandom(50);
     }
-
-
-
 }
