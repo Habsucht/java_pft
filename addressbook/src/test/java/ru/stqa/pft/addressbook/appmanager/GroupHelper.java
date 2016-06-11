@@ -16,9 +16,11 @@ public class GroupHelper extends BaseHelper {
     }
 
     public void fillGroupForm(GroupData groupData) {
-        type(By.name("group_name"), groupData.getGroupName());
-        type(By.name("group_header"), groupData.getHeader());
-        type(By.name("group_footer"), groupData.getFooter());
+        if (!wd.findElement(By.name("group_name")).getText().equals(groupData.groupName)) {
+            type(By.name("group_name"), groupData.groupName);
+            type(By.name("group_header"), groupData.header);
+            type(By.name("group_footer"), groupData.footer);
+        }
     }
 
     public void submitGroupCreation() {

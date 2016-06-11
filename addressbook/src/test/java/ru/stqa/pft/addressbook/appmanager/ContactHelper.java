@@ -63,7 +63,9 @@ public class ContactHelper extends BaseHelper {
             click(By.xpath("//div[@id='content']/form/select[2]//option[" + contactData.birthdayMonth + "]"));
         }
 
-        type(By.name("byear"), String.valueOf(contactData.birthdayYear));
+        if (!wd.findElement(By.name("byear")).getText().equals(String.valueOf(contactData.birthdayYear))) {
+            type(By.name("byear"), String.valueOf(contactData.birthdayYear));
+        }
     }
 
     public void submitContactCreation() {
