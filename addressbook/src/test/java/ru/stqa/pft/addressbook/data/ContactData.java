@@ -50,6 +50,6 @@ public class ContactData {
     }
 
     public String getGroup() {
-        return group;
+        return this.group;
     }
 }

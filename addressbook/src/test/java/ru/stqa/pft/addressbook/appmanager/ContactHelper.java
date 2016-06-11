@@ -1,7 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.support.ui.Select;
@@ -32,9 +31,14 @@ public class ContactHelper extends BaseHelper {
 
         type(By.name("home"), contactData.homePhoneNumber);
 
-//        if (isElementPresent(By.name("new_group"))) {
-//            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-//        }
+        if (isElementPresent(By.name("new_group"))) {
+            String group = contactData.getGroup();
+            if (wd.findElement(By.name("new_group")).getText().equals(group)) {
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(group);
+            } else {
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("test1");
+            }
+        }
 
         contactBirthday(contactData);
     }
