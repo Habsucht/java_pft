@@ -7,9 +7,9 @@ import org.testng.annotations.Test;
 public class ContactCreationTests extends BaseTests {
 
     @Test
-    public void testContactCreation() {
+    public static void testContactCreation() {
         app.getContactHelper().initContactCreation();
         app.getContactHelper().fillContactForm(new ContactData());
-        app.getContactHelper().submitContactCreation();
+        app.getContactHelper().submitModification();
     }
 }

@@ -7,11 +7,11 @@ import org.testng.annotations.Test;
 public class GroupCreationTests extends BaseTests {
 
     @Test
-    public void testGroupCreation() {
+    public static void testGroupCreation() {
         app.getNavigationHelper().gotoGroupPage();
         app.getGroupHelper().initGroupCreation();
         app.getGroupHelper().fillGroupForm(new GroupData());
-        app.getGroupHelper().submitGroupCreation();
+        app.getGroupHelper().submitModification();
         app.getGroupHelper().returnToGroupPage();
     }
 }

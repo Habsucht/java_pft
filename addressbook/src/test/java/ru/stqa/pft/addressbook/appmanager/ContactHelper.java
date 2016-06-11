@@ -17,8 +17,7 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void selectContact(int numContact) {
-        if (!wd.findElement(By.id(String.valueOf(numContact))).isSelected())
-        click(By.id(String.valueOf(numContact)));
+        click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[" + numContact + "]/td[1]/input"));
     }
 
     public void fillContactForm(ContactData contactData) {
@@ -54,7 +53,7 @@ public class ContactHelper extends BaseHelper {
             if (wd.findElement(By.name("new_group")).getText().equals(group)) {
                 new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(group);
             } else {
-                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("test1");
+            //    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("test1");
             }
         }
 
@@ -86,21 +85,15 @@ public class ContactHelper extends BaseHelper {
         System.out.println("birthdayYear: " + contactData.birthdayYear);
     }
 
-    public void submitContactCreation() {
-        submitModification();
-        //click(By.xpath("//div[@id='content']/form/input[21]"));
-    }
-
     public void editContact(int numContact) {
         click(By.xpath("//table[@id='maintable']/tbody/tr[" + numContact + "]/td[8]/a/img"));
     }
 
-    public void updateContact() {
-        click(By.name("update"));
-        //click(By.xpath("//div[@id='content']/form[1]/input[22]"));
-    }
-
     public void deleteContact() {
         click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
     }
 }

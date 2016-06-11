@@ -30,14 +30,14 @@ public class ContactDataGenerator extends BaseGenerator {
     }
 
     public static int generateDay() {
-        return generateRandom(31);
+        return generateRandom(30) + 1;
     }
 
     public static int generateMonth() {
-        return generateRandom(12);
+        return generateRandom(11) + 1;
     }
 
     public static int generateYear() {
-        return 1950 + generateRandom(50);
+        return generateRandom(50) + 1950;
     }
 }

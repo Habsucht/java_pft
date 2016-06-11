@@ -25,18 +25,15 @@ public class GroupHelper extends BaseHelper {
         }
     }
 
-    public void submitGroupCreation() {
-        submitModification();
-    }
-
     public void returnToGroupPage() {
         click(By.linkText("group page"));
     }
 
     public void selectGroup(int numGroup) {
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input")).isSelected()) {
-           click(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input"));
-        }
+        click(By.name("selected[]"));
+        //if (!wd.findElement(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input")).isSelected()) {
+        //   click(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input"));
+        //}
     }
 
     public void deleteGroup() {
@@ -47,7 +44,7 @@ public class GroupHelper extends BaseHelper {
         click(By.name("edit"));
     }
 
-    public void submitGroupModification() {
-        submitModification();
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
     }
 }

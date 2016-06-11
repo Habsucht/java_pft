@@ -31,7 +31,11 @@ public class BaseHelper {
     }
 
     public void submitModification() {
-        click(By.name("submit"));
+        if (isElementPresent(By.name("update"))) {
+            click(By.name("update"));
+        } else if (isElementPresent(By.name("submit"))){
+            click(By.name("submit"));
+        }
     }
 
     public boolean isElementPresent(By locator) {
