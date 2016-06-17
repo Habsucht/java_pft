@@ -72,7 +72,6 @@ public class ContactHelper extends BaseHelper {
         }
         System.out.println("birthdayDay: " + contactData.birthdayDay);
 
-
         if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[" + (contactData.birthdayMonth + i) + "]")).isSelected()) {
             click(By.xpath("//div[@id='content']/form/select[2]"));
             click(By.xpath("//div[@id='content']/form/select[2]//option[" + (contactData.birthdayMonth + i) + "]"));
@@ -82,6 +81,7 @@ public class ContactHelper extends BaseHelper {
         if (!wd.findElement(By.name("byear")).getText().equals(String.valueOf(contactData.birthdayYear))) {
             type(By.name("byear"), String.valueOf(contactData.birthdayYear));
         }
+
         System.out.println("birthdayYear: " + contactData.birthdayYear);
     }
 

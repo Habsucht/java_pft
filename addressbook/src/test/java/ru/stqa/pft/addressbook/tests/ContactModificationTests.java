@@ -15,5 +15,4 @@ public class ContactModificationTests extends BaseTests {
         app.getContactHelper().fillContactForm(new ContactData("Jon_", "Dou_", "void_", "bigbox_", "855614452266", 21, 10, 1987, null));
         app.getContactHelper().submitModification();
     }
-
 }
