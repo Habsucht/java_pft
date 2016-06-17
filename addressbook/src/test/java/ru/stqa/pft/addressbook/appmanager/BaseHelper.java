@@ -31,11 +31,13 @@ public class BaseHelper {
     }
 
     public void submitModification() {
-        if (isElementPresent(By.name("update"))) {
-            click(By.name("update"));
-        } else if (isElementPresent(By.name("submit"))){
-            click(By.name("submit"));
-        }
+        click(By.xpath("//*[@name='submit' or @name='update']"));
+
+        //if (isElementPresent(By.name("update"))) {
+        //    click(By.name("update"));
+        //} else if (isElementPresent(By.name("submit"))){
+        //    click(By.name("submit"));
+        //}
     }
 
     public boolean isElementPresent(By locator) {
