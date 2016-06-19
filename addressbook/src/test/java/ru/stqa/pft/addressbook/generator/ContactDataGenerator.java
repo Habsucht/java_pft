@@ -13,6 +13,8 @@ public class ContactDataGenerator extends BaseGenerator {
 
     private static String[] companyName = {"Facebook", "Yandex", "VK", "Google", "Rambler", "Sun", "Oracle", "Apple", "Cisco", "DLink"};
 
+    private static String[] birthdayMonth = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+
     public static String generateFirstName() {
         return firstName[generateRandom(30)];
     }
@@ -37,8 +39,8 @@ public class ContactDataGenerator extends BaseGenerator {
         return generateRandom(30) + 1;
     }
 
-    public static int generateMonth() {
-        return generateRandom(11) + 1;
+    public static String generateMonth() {
+        return birthdayMonth[generateRandom(11)];
     }
 
     public static int generateYear() {

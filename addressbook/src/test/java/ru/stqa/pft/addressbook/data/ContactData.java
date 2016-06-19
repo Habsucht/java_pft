@@ -17,10 +17,10 @@ public class ContactData {
     public String group;
 
     public int birthdayDay;
-    public int birthdayMonth;
+    public String birthdayMonth;
     public int birthdayYear;
 
-    public ContactData(String firstName, String lastName, String nickName, String companyName, String homePhoneNumber, int birthdayDay, int birthdayMonth,
+    public ContactData(String firstName, String lastName, String nickName, String companyName, String homePhoneNumber, int birthdayDay, String birthdayMonth,
                        int birthdayYear, String group) {
         this.firstName = firstName;
         this.lastName = lastName;

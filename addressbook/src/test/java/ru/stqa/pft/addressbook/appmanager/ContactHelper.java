@@ -64,21 +64,30 @@ public class ContactHelper extends BaseHelper {
     }
 
     private void contactBirthday(ContactData contactData) {
-        byte i;
-        if (isElementPresent(By.name("update"))) {
-            i = 2;
-        } else i = 1;
-
+        /*
         if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[" + (contactData.birthdayDay + 2) + "]")).isSelected()) {
             click(By.xpath("//div[@id='content']/form/select[1]"));
             click(By.xpath("//div[@id='content']/form/select[1]//option[" + (contactData.birthdayDay + 2) + "]"));
         }
+        */
+
+        Select bDay = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[1]")));
+        bDay.selectByIndex(contactData.birthdayDay);
         System.out.println("birthdayDay: " + contactData.birthdayDay);
 
+        /*
+        byte i;
+        if (isElementPresent(By.name("update"))) {
+            i = 2;
+        } else i = 1;
         if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[" + (contactData.birthdayMonth + i) + "]")).isSelected()) {
             click(By.xpath("//div[@id='content']/form/select[2]"));
             click(By.xpath("//div[@id='content']/form/select[2]//option[" + (contactData.birthdayMonth + i) + "]"));
         }
+        */
+
+        Select bMonth = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[2]")));
+        bMonth.selectByValue(contactData.birthdayMonth);
         System.out.println("birthdayMonth: " + contactData.birthdayMonth);
 
         if (!wd.findElement(By.name("byear")).getText().equals(String.valueOf(contactData.birthdayYear))) {
