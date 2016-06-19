@@ -7,6 +7,7 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class BaseHelper {
     WebDriver wd;
@@ -24,6 +25,11 @@ public class BaseHelper {
                 wd.findElement(locator).sendKeys(text);
             }
         }
+    }
+
+    Select select(By locator) {
+        Select select = new Select(wd.findElement(locator));
+        return select;
     }
 
     void click(By locator) {

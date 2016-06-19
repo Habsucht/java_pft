@@ -71,8 +71,7 @@ public class ContactHelper extends BaseHelper {
         }
         */
 
-        Select bDay = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[1]")));
-        bDay.selectByIndex(contactData.birthdayDay);
+        select(By.xpath("//div[@id='content']/form/select[1]")).selectByIndex(contactData.birthdayDay + 1);
         System.out.println("birthdayDay: " + contactData.birthdayDay);
 
         /*
@@ -86,8 +85,7 @@ public class ContactHelper extends BaseHelper {
         }
         */
 
-        Select bMonth = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[2]")));
-        bMonth.selectByValue(contactData.birthdayMonth);
+        select(By.xpath("//div[@id='content']/form/select[2]")).selectByValue(contactData.birthdayMonth);
         System.out.println("birthdayMonth: " + contactData.birthdayMonth);
 
         if (!wd.findElement(By.name("byear")).getText().equals(String.valueOf(contactData.birthdayYear))) {
