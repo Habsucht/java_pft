@@ -1,3 +1,7 @@
+/**
+ *  The class implements the action with groups
+ */
+
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
@@ -7,7 +11,7 @@ import ru.stqa.pft.addressbook.data.GroupData;
 
 public class GroupHelper extends BaseHelper {
 
-    public GroupHelper(WebDriver wd) {
+    GroupHelper(WebDriver wd) {
         super(wd);
     }
 
@@ -31,9 +35,11 @@ public class GroupHelper extends BaseHelper {
 
     public void selectGroup(int numGroup) {
         click(By.name("selected[]"));
-        //if (!wd.findElement(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input")).isSelected()) {
-        //   click(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input"));
-        //}
+        /*
+        if (!wd.findElement(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input")).isSelected()) {
+           click(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input"));
+        }
+        */
     }
 
     public void deleteGroup() {

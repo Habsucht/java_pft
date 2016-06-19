@@ -1,3 +1,7 @@
+/**
+ *  The basic test class for initialization and termination
+ */
+
 package ru.stqa.pft.addressbook.tests;
 
 import org.openqa.selenium.remote.BrowserType;
@@ -8,7 +12,7 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 
 public class BaseTests {
 
-    protected static final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
+    static final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
 
     @BeforeMethod
     public void setUp() throws Exception {

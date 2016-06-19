@@ -1,3 +1,7 @@
+/**
+ *  The class for the implementation of the contact data
+ */
+
 package ru.stqa.pft.addressbook.data;
 
 import ru.stqa.pft.addressbook.generator.ContactDataGenerator;

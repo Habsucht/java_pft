@@ -1,3 +1,7 @@
+/**
+ *  Class to implement authentication data
+ */
+
 package ru.stqa.pft.addressbook.data;
 
 public class LoginData {
@@ -7,6 +11,11 @@ public class LoginData {
     public LoginData(String userName, String password) {
         this.userName = userName;
         this.password = password;
+    }
+
+    public LoginData() {
+        this.userName = "admin";
+        this.password = "admin";
     }
 
     public String getUserName() {

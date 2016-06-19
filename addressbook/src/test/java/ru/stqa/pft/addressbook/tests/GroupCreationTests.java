@@ -1,3 +1,7 @@
+/**
+ *  A class to test the creation of a new group
+ */
+
 package ru.stqa.pft.addressbook.tests;
 
 import ru.stqa.pft.addressbook.data.GroupData;

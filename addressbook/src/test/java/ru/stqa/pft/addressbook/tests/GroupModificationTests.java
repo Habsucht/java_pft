@@ -1,3 +1,7 @@
+/**
+ *  A class to test the change of group data
+ */
+
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
@@ -9,6 +13,7 @@ public class GroupModificationTests extends BaseTests{
     public void testGroupModification() {
         app.getNavigationHelper().gotoGroupPage();
 
+        //  Checking for the presence of at least one group with the subsequent creation
         if (!app.getGroupHelper().isThereAGroup()) {
             GroupCreationTests.testGroupCreation();
         }

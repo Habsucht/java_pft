@@ -1,3 +1,7 @@
+/**
+ *  Class data generation for groups
+ */
+
 package ru.stqa.pft.addressbook.generator;
 
 public class GroupDataGenerator extends BaseGenerator {

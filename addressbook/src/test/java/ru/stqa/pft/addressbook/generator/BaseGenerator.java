@@ -1,8 +1,12 @@
+/**
+ *  Class random number generation
+ */
+
 package ru.stqa.pft.addressbook.generator;
 
 import java.util.Random;
 
-public class BaseGenerator {
+class BaseGenerator {
 
     private static Random random = new Random();
 

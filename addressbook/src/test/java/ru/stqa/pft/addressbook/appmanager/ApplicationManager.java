@@ -1,3 +1,6 @@
+/**
+ *  The class implements the communication with selenium
+ */
 package ru.stqa.pft.addressbook.appmanager;
 
 import java.util.concurrent.TimeUnit;
@@ -12,13 +15,12 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import ru.stqa.pft.addressbook.data.LoginData;
 
 public class ApplicationManager {
-    private BaseHelper baseHelper;
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private ContactHelper contactHelper;
     private GroupHelper groupHelper;
 
-    public WebDriver wd;
+    private WebDriver wd;
 
     private String browser;
 
@@ -28,12 +30,17 @@ public class ApplicationManager {
 
 
     public void init() {
-        if (browser.equals(BrowserType.FIREFOX)) {
-            wd = new FirefoxDriver();
-        } else if (browser.equals(BrowserType.CHROME)) {
-            wd = new ChromeDriver();
-        } else if (browser.equals(BrowserType.IE)) {
-            wd = new InternetExplorerDriver();
+        //Check to run a browser
+        switch (browser) {
+            case BrowserType.FIREFOX:
+                wd = new FirefoxDriver();
+                break;
+            case BrowserType.CHROME:
+                wd = new ChromeDriver();
+                break;
+            case BrowserType.IE:
+                wd = new InternetExplorerDriver();
+                break;
         }
 
         wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -71,9 +78,5 @@ public class ApplicationManager {
 
     public ContactHelper getContactHelper() {
         return contactHelper;
-    }
-
-    public BaseHelper getBaseHelper() {
-        return baseHelper;
     }
 }

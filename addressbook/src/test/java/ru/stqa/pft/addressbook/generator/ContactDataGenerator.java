@@ -1,3 +1,7 @@
+/**
+ *  Class data generation for contacts
+ */
+
 package ru.stqa.pft.addressbook.generator;
 
 public class ContactDataGenerator extends BaseGenerator {

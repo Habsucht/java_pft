@@ -1,3 +1,7 @@
+/**
+ *  A class to test the change of contact data
+ */
+
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
@@ -7,6 +11,7 @@ public class ContactModificationTests extends BaseTests {
 
     @Test
     public void testContactModification() {
+        //  Checking for the presence of at least one contact with the subsequent creation
         if (!app.getContactHelper().isThereAContact()) {
             ContactCreationTests.testContactCreation();
         }

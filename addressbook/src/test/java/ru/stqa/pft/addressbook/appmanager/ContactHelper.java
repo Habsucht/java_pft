@@ -1,3 +1,7 @@
+/**
+ *  The class implements the action with contacts
+ */
+
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
@@ -8,7 +12,7 @@ import ru.stqa.pft.addressbook.data.ContactData;
 
 public class ContactHelper extends BaseHelper {
 
-    public ContactHelper(WebDriver wd) {
+    ContactHelper(WebDriver wd) {
         super(wd);
     }
 
@@ -52,9 +56,8 @@ public class ContactHelper extends BaseHelper {
 
             if (wd.findElement(By.name("new_group")).getText().equals(group)) {
                 new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(group);
-            } else {
-            //    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("test1");
             }
+            //else { new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("test1"); }
         }
 
         contactBirthday(contactData);

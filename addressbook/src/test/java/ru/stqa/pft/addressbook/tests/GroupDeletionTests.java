@@ -1,3 +1,7 @@
+/**
+ *  A class to test the group removal
+ */
+
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
@@ -8,6 +12,7 @@ public class GroupDeletionTests extends BaseTests {
     public void testGroupDeletion() {
         app.getNavigationHelper().gotoGroupPage();
 
+        //  Checking for the presence of at least one group with the subsequent creation
         if (!app.getGroupHelper().isThereAGroup()) {
             GroupCreationTests.testGroupCreation();
         }
