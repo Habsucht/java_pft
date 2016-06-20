@@ -11,7 +11,7 @@ public class ContactDeletionTests extends BaseTests {
 
     @Test
     public void testContactDeletion() {
-        app.getNavigationHelper().gotoGroupPage();
+        app.getNavigationHelper().gotoHomePage();
 
         //  Checking for the presence of at least one contact with the subsequent creation
         if (!app.getContactHelper().isThereAContact()) {
@@ -22,6 +22,8 @@ public class ContactDeletionTests extends BaseTests {
 
         app.getContactHelper().selectContact(2);
         app.getContactHelper().deleteContact();
+
+        app.getNavigationHelper().returnToHomePage();
 
         int afterCount = app.getContactHelper().getContactCount();
         Assert.assertEquals(afterCount, beforeCount - 1);

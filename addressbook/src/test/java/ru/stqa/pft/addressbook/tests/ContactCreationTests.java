@@ -13,13 +13,15 @@ public class ContactCreationTests extends BaseTests {
 
     @Test
     public static void testContactCreation() {
-        app.getNavigationHelper().gotoGroupPage();
+        app.getNavigationHelper().gotoHomePage();
 
         int beforeCount = app.getContactHelper().getContactCount();
 
         app.getContactHelper().initContactCreation();
         app.getContactHelper().fillContactForm(new ContactData());
         app.getContactHelper().submitModification();
+
+        app.getNavigationHelper().returnToHomePage();
 
         int afterCount = app.getContactHelper().getContactCount();
         Assert.assertEquals(afterCount, beforeCount + 1);

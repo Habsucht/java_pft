@@ -19,9 +19,17 @@ public class NavigationHelper extends BaseHelper {
         }
     }
 
+    public void returnToGroupPage() {
+        click(By.linkText("group page"));
+    }
+
     public void gotoHomePage() {
         if (!isElementPresent(By.id("maintable"))) {
             click(By.linkText("home"));
         }
+    }
+
+    public void returnToHomePage() {
+        click(By.linkText("home page"));
     }
 }

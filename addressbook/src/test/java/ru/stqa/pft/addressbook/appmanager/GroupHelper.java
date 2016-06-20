@@ -29,10 +29,6 @@ public class GroupHelper extends BaseHelper {
         }
     }
 
-    public void returnToGroupPage() {
-        click(By.linkText("group page"));
-    }
-
     public void selectGroup(int numGroup) {
         click(By.name("selected[]"));
         /*
