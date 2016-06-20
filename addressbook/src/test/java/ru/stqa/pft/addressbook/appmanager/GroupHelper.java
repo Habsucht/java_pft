@@ -29,8 +29,8 @@ public class GroupHelper extends BaseHelper {
         }
     }
 
-    public void selectGroup(int numGroup) {
-        click(By.name("selected[]"));
+    public void selectGroup(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
         /*
         if (!wd.findElement(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input")).isSelected()) {
            click(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input"));
