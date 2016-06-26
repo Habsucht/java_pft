@@ -7,29 +7,33 @@ package ru.stqa.pft.addressbook.data;
 import ru.stqa.pft.addressbook.generator.GroupDataGenerator;
 
 public class GroupData {
-    private final String groupId;
+    private int groupId;
     private final String groupName;
     private final String header;
     private final String footer;
 
-    public GroupData(String groupId, String groupName, String header, String footer) {
+    public GroupData(int groupId, String groupName, String header, String footer) {
         this.groupId = groupId;
         this.groupName = groupName;
         this.header = header;
         this.footer = footer;
     }
 
-    public GroupData(String groupId) {
+    public GroupData() {
         String group = GroupDataGenerator.generateGroup();
 
-        this.groupId = groupId;
+        this.groupId = 0;
         this.groupName = group;
         this.header = "This" + group;
         this.footer = group;
     }
 
-    public String getGroupId() {
+    public int getGroupId() {
         return groupId;
+    }
+
+    public void setGroupId(int maxId) {
+        this.groupId = maxId;
     }
 
     public String getGroupName() {
@@ -59,14 +63,14 @@ public class GroupData {
 
         GroupData groupData = (GroupData) o;
 
-        if (groupId != null ? !groupId.equals(groupData.groupId) : groupData.groupId != null) return false;
+        if (groupId != groupData.groupId) return false;
         return groupName != null ? groupName.equals(groupData.groupName) : groupData.groupName == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = groupId != null ? groupId.hashCode() : 0;
+        int result = groupId;
         result = 31 * result + (groupName != null ? groupName.hashCode() : 0);
         return result;
     }

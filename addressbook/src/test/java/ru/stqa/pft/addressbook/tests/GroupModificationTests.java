@@ -27,7 +27,7 @@ public class GroupModificationTests extends BaseTests{
         List<GroupData> beforeGroupList = app.getGroupHelper().getGroupList();
 
         int index = generateRandom(beforeGroupList.size());
-        GroupData group = new GroupData(beforeGroupList.get(index).getGroupId());
+        GroupData group = new GroupData();
 
         app.getGroupHelper().selectGroup(index);
         app.getGroupHelper().initGroupModification();
@@ -43,6 +43,7 @@ public class GroupModificationTests extends BaseTests{
 
         // Check elements for identity verification
         beforeGroupList.remove(index);
+        group.setGroupId(beforeGroupList.get(index).getGroupId());
         beforeGroupList.add(group);
         Assert.assertEquals(new HashSet<Object>(beforeGroupList), new HashSet<Object>(afterGroupList));
     }
