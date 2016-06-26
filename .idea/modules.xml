@@ -3,13 +3,22 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook_main.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook_main.iml" group="addressbook" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook_main.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook_main.iml" group="addressbook" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook_test.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook_test.iml" group="addressbook" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook_test.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook_test.iml" group="addressbook" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/distance.iml" filepath="$PROJECT_DIR$/.idea/modules/distance.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/distance.iml" filepath="$PROJECT_DIR$/.idea/modules/distance.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/distance_main.iml" filepath="$PROJECT_DIR$/.idea/modules/distance_main.iml" group="distance" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/distance_main.iml" filepath="$PROJECT_DIR$/.idea/modules/distance_main.iml" group="distance" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/distance_test.iml" filepath="$PROJECT_DIR$/.idea/modules/distance_test.iml" group="distance" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/distance_test.iml" filepath="$PROJECT_DIR$/.idea/modules/distance_test.iml" group="distance" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sandbox.iml" filepath="$PROJECT_DIR$/.idea/modules/sandbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sandbox.iml" filepath="$PROJECT_DIR$/.idea/modules/sandbox.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sandbox_main.iml" filepath="$PROJECT_DIR$/.idea/modules/sandbox_main.iml" group="sandbox" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sandbox_main.iml" filepath="$PROJECT_DIR$/.idea/modules/sandbox_main.iml" group="sandbox" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sandbox_test.iml" filepath="$PROJECT_DIR$/.idea/modules/sandbox_test.iml" group="sandbox" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sandbox_test.iml" filepath="$PROJECT_DIR$/.idea/modules/sandbox_test.iml" group="sandbox" />
     </modules>
   </component>
