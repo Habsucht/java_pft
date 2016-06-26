@@ -8,6 +8,7 @@ import ru.stqa.pft.addressbook.generator.GroupDataGenerator;
 
 public class GroupData {
     private int groupId;
+
     private final String groupName;
     private final String header;
     private final String footer;
@@ -32,8 +33,8 @@ public class GroupData {
         return groupId;
     }
 
-    public void setGroupId(int maxId) {
-        this.groupId = maxId;
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public String getGroupName() {

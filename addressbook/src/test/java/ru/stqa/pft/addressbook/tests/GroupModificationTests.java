@@ -42,8 +42,8 @@ public class GroupModificationTests extends BaseTests{
         Assert.assertEquals(afterGroupList.size(), beforeGroupList.size());
 
         // Check elements for identity verification
-        beforeGroupList.remove(index);
         group.setGroupId(beforeGroupList.get(index).getGroupId());
+        beforeGroupList.remove(index);
         beforeGroupList.add(group);
         Assert.assertEquals(new HashSet<Object>(beforeGroupList), new HashSet<Object>(afterGroupList));
     }

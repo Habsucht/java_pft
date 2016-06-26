@@ -39,6 +39,7 @@ public class GroupCreationTests extends BaseTests {
                 group.setGroupId(g.getGroupId());
             }
         }
+        beforeGroupList.add(group);
         Assert.assertEquals(new HashSet<Object>(beforeGroupList), new HashSet<Object>(afterGroupList));
     }
 }

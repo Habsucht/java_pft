@@ -7,8 +7,12 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.data.ContactData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends BaseHelper {
 
@@ -26,37 +30,37 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void fillContactForm(ContactData contactData) {
-        if (!wd.findElement(By.name("firstname")).getText().equals(contactData.firstName)) {
-            type(By.name("firstname"), contactData.firstName);
+        if (!wd.findElement(By.name("firstname")).getText().equals(contactData.getFirstName())) {
+            type(By.name("firstname"), contactData.getFirstName());
         }
-        System.out.println("firstName: " + contactData.firstName);
+        System.out.println("firstName: " + contactData.getFirstName());
 
-        if (!wd.findElement(By.name("lastname")).getText().equals(contactData.lastName)) {
-            type(By.name("lastname"), contactData.lastName);
+        if (!wd.findElement(By.name("lastname")).getText().equals(contactData.getLastName())) {
+            type(By.name("lastname"), contactData.getLastName());
         }
-        System.out.println("lastName: " + contactData.lastName);
+        System.out.println("lastName: " + contactData.getLastName());
 
-        if (!wd.findElement(By.name("nickname")).getText().equals(contactData.nickName)) {
-            type(By.name("nickname"), contactData.nickName);
+        if (!wd.findElement(By.name("nickname")).getText().equals(contactData.getNickName())) {
+            type(By.name("nickname"), contactData.getNickName());
         }
-        System.out.println("nickName: " + contactData.nickName);
+        System.out.println("nickName: " + contactData.getNickName());
 
-        if (!wd.findElement(By.name("company")).getText().equals(contactData.companyName)) {
-            type(By.name("company"), contactData.companyName);
+        if (!wd.findElement(By.name("company")).getText().equals(contactData.getCompanyName())) {
+            type(By.name("company"), contactData.getCompanyName());
         }
-        System.out.println("companyName: " + contactData.companyName);
+        System.out.println("companyName: " + contactData.getCompanyName());
 
-        if (!wd.findElement(By.name("home")).getText().equals(contactData.homePhoneNumber)) {
-            type(By.name("home"), contactData.homePhoneNumber);
+        if (!wd.findElement(By.name("home")).getText().equals(contactData.getHomePhoneNumber())) {
+            type(By.name("home"), contactData.getHomePhoneNumber());
         }
-        System.out.println("homePhoneNumber: " + contactData.homePhoneNumber);
+        System.out.println("homePhoneNumber: " + contactData.getHomePhoneNumber());
 
         if (isElementPresent(By.name("new_group"))) {
             String group = contactData.getGroup();
-            System.out.println("group: " + contactData.group);
+            System.out.println("group: " + contactData.getGroup());
 
             if (wd.findElement(By.name("new_group")).getText().equals(group)) {
-                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(group);
+                select(By.name("new_group")).selectByValue(group);
             }
             //else { new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("test1"); }
         }
@@ -72,8 +76,8 @@ public class ContactHelper extends BaseHelper {
         }
         */
 
-        select(By.xpath("//div[@id='content']/form/select[1]")).selectByIndex(contactData.birthdayDay + 1);
-        System.out.println("birthdayDay: " + contactData.birthdayDay);
+        select(By.xpath("//div[@id='content']/form/select[1]")).selectByIndex(contactData.getBirthdayDay() + 1);
+        System.out.println("birthdayDay: " + contactData.getBirthdayDay());
 
         /*
         byte i;
@@ -86,18 +90,17 @@ public class ContactHelper extends BaseHelper {
         }
         */
 
-        select(By.xpath("//div[@id='content']/form/select[2]")).selectByValue(contactData.birthdayMonth);
-        System.out.println("birthdayMonth: " + contactData.birthdayMonth);
+        select(By.xpath("//div[@id='content']/form/select[2]")).selectByValue(contactData.getBirthdayMonth());
+        System.out.println("birthdayMonth: " + contactData.getBirthdayMonth());
 
-        if (!wd.findElement(By.name("byear")).getText().equals(String.valueOf(contactData.birthdayYear))) {
-            type(By.name("byear"), String.valueOf(contactData.birthdayYear));
+        if (!wd.findElement(By.name("byear")).getText().equals(String.valueOf(contactData.getBirthdayYear()))) {
+            type(By.name("byear"), String.valueOf(contactData.getBirthdayYear()));
         }
-
-        System.out.println("birthdayYear: " + contactData.birthdayYear);
+        System.out.println("birthdayYear: " + contactData.getBirthdayYear());
     }
 
-    public void editContact(int numContact) {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[" + numContact + "]/td[8]/a/img"));
+    public void editContact(int index) {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[" + index + 2 + "]/td[8]/a/img"));
     }
 
     public void deleteContact() {
@@ -111,5 +114,19 @@ public class ContactHelper extends BaseHelper {
 
     public int getContactCount() {
         return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contactList = new ArrayList<>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+
+        for (WebElement element : elements) {
+            int contactId = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            String firstName = element.findElements(By.tagName("td")).get(2).getText();
+            String lastName = element.findElements(By.tagName("td")).get(1).getText();
+            String homePhoneNumber = element.findElements(By.tagName("td")).get(5).getText();
+            contactList.add(new ContactData(contactId, firstName, lastName, null, null, homePhoneNumber, null, 0, null, 0));
+        }
+        return contactList;
     }
 }
