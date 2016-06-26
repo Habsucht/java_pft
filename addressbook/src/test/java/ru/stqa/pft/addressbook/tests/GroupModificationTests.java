@@ -8,6 +8,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.GroupData;
 
+import java.util.List;
+
 public class GroupModificationTests extends BaseTests{
 
     @Test
@@ -19,7 +21,7 @@ public class GroupModificationTests extends BaseTests{
             GroupCreationTests.testGroupCreation();
         }
 
-        int beforeCount = app.getGroupHelper().getGroupCount();
+        List<GroupData> beforeGroupList = app.getGroupHelper().getGroupList();
 
         app.getGroupHelper().selectGroup(1);
         app.getGroupHelper().initGroupModification();
@@ -28,7 +30,7 @@ public class GroupModificationTests extends BaseTests{
 
         app.getNavigationHelper().returnToGroupPage();
 
-        int afterCount = app.getGroupHelper().getGroupCount();
-        Assert.assertEquals(afterCount, beforeCount);
+        List<GroupData> afterGroupList = app.getGroupHelper().getGroupList();
+        Assert.assertEquals(afterGroupList.size(), beforeGroupList.size() + 1);
     }
 }

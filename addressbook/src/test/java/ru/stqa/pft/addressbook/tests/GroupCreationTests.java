@@ -9,13 +9,15 @@ import ru.stqa.pft.addressbook.data.GroupData;
 
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class GroupCreationTests extends BaseTests {
 
     @Test
     public static void testGroupCreation() {
         app.getNavigationHelper().gotoGroupPage();
 
-        int beforeCount = app.getGroupHelper().getGroupCount();
+        List<GroupData> beforeGroupList = app.getGroupHelper().getGroupList();
 
         app.getGroupHelper().initGroupCreation();
         app.getGroupHelper().fillGroupForm(new GroupData());
@@ -23,7 +25,7 @@ public class GroupCreationTests extends BaseTests {
 
         app.getNavigationHelper().returnToGroupPage();
 
-        int afterCount = app.getGroupHelper().getGroupCount();
-        Assert.assertEquals(afterCount, beforeCount + 1);
+        List<GroupData> afterGroupList = app.getGroupHelper().getGroupList();
+        Assert.assertEquals(afterGroupList.size(), beforeGroupList.size() + 1);
     }
 }
