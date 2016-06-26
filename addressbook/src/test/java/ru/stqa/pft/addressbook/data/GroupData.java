@@ -24,4 +24,34 @@ public class GroupData {
         this.header = "This" + group;
         this.footer = group;
     }
+
+    @Override
+    public String toString() {
+        return "GroupData{" +
+                "groupName='" + groupName + '\'' +
+                ", header='" + header + '\'' +
+                ", footer='" + footer + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GroupData groupData = (GroupData) o;
+
+        if (groupName != null ? !groupName.equals(groupData.groupName) : groupData.groupName != null) return false;
+        if (header != null ? !header.equals(groupData.header) : groupData.header != null) return false;
+        return footer != null ? footer.equals(groupData.footer) : groupData.footer == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = groupName != null ? groupName.hashCode() : 0;
+        result = 31 * result + (header != null ? header.hashCode() : 0);
+        result = 31 * result + (footer != null ? footer.hashCode() : 0);
+        return result;
+    }
 }

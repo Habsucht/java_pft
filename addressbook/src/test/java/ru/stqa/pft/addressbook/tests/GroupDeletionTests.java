@@ -25,12 +25,23 @@ public class GroupDeletionTests extends BaseTests {
 
         List<GroupData> beforeGroupList = app.getGroupHelper().getGroupList();
 
-        app.getGroupHelper().selectGroup(generateRandom(beforeGroupList.size()));
+        int index = generateRandom(beforeGroupList.size());
+
+        app.getGroupHelper().selectGroup(index);
         app.getGroupHelper().deleteGroup();
 
         app.getNavigationHelper().returnToGroupPage();
 
         List<GroupData> afterGroupList = app.getGroupHelper().getGroupList();
+
+        // Check on the number of elements
         Assert.assertEquals(afterGroupList.size(), beforeGroupList.size() - 1);
+
+        // Check elements for identity verification
+        beforeGroupList.remove(index);
+        Assert.assertEquals(beforeGroupList, afterGroupList);
+        //for (int i = 0; i < afterGroupList.size(); i++) {
+        //    Assert.assertEquals(beforeGroupList.get(i), afterGroupList.get(i));
+        //}
     }
 }
