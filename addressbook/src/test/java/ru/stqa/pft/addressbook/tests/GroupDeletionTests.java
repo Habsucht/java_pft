@@ -10,6 +10,8 @@ import ru.stqa.pft.addressbook.data.GroupData;
 
 import java.util.List;
 
+import static ru.stqa.pft.addressbook.generator.BaseGenerator.generateRandom;
+
 public class GroupDeletionTests extends BaseTests {
 
     @Test
@@ -23,7 +25,7 @@ public class GroupDeletionTests extends BaseTests {
 
         List<GroupData> beforeGroupList = app.getGroupHelper().getGroupList();
 
-        app.getGroupHelper().selectGroup(1);
+        app.getGroupHelper().selectGroup(generateRandom(beforeGroupList.size()));
         app.getGroupHelper().deleteGroup();
 
         app.getNavigationHelper().returnToGroupPage();
