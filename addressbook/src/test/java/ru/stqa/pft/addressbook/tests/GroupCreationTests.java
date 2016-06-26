@@ -20,7 +20,7 @@ public class GroupCreationTests extends BaseTests {
         List<GroupData> beforeGroupList = app.getGroupHelper().getGroupList();
 
         app.getGroupHelper().initGroupCreation();
-        app.getGroupHelper().fillGroupForm(new GroupData());
+        app.getGroupHelper().fillGroupForm(new GroupData(null));
         app.getGroupHelper().submitModification();
 
         app.getNavigationHelper().returnToGroupPage();

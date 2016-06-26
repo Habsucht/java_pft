@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.GroupData;
 
+import java.util.HashSet;
 import java.util.List;
 
 import static ru.stqa.pft.addressbook.generator.BaseGenerator.generateRandom;
@@ -25,14 +26,24 @@ public class GroupModificationTests extends BaseTests{
 
         List<GroupData> beforeGroupList = app.getGroupHelper().getGroupList();
 
-        app.getGroupHelper().selectGroup(generateRandom(beforeGroupList.size()));
+        int index = generateRandom(beforeGroupList.size());
+        GroupData group = new GroupData(beforeGroupList.get(index).getGroupId());
+
+        app.getGroupHelper().selectGroup(index);
         app.getGroupHelper().initGroupModification();
-        app.getGroupHelper().fillGroupForm(new GroupData());
+        app.getGroupHelper().fillGroupForm(group);
         app.getGroupHelper().submitModification();
 
         app.getNavigationHelper().returnToGroupPage();
 
         List<GroupData> afterGroupList = app.getGroupHelper().getGroupList();
-        Assert.assertEquals(afterGroupList.size(), beforeGroupList.size() + 1);
+
+        // Check on the number of elements
+        Assert.assertEquals(afterGroupList.size(), beforeGroupList.size());
+
+        // Check elements for identity verification
+        beforeGroupList.remove(index);
+        beforeGroupList.add(group);
+        Assert.assertEquals(new HashSet<Object>(beforeGroupList), new HashSet<Object>(afterGroupList));
     }
 }
