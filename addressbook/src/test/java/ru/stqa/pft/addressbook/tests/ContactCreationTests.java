@@ -9,6 +9,8 @@ import ru.stqa.pft.addressbook.data.ContactData;
 
 import org.testng.annotations.Test;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -39,7 +41,16 @@ public class ContactCreationTests extends BaseTests {
                 contact.setContactId(c.getContactId());
             }
         }
+        /* implementation without the for loop
+        contact.setContactId(afterContactList.stream().max((o1, o2) -> Integer.compare(o1.getContactId(), o2.getContactId())).get().getContactId());
+         */
         beforeContactList.add(contact);
+
+        // Sort the list by id
+        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getContactId(), c2.getContactId());
+        beforeContactList.sort(byId);
+        afterContactList.sort(byId);
+
         Assert.assertEquals(new HashSet<Object>(beforeContactList), new HashSet<Object>(afterContactList));
     }
 }
