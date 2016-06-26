@@ -9,21 +9,37 @@ import ru.stqa.pft.addressbook.data.GroupData;
 
 import org.testng.annotations.Test;
 
+import java.util.HashSet;
+import java.util.List;
+
 public class GroupCreationTests extends BaseTests {
 
     @Test
     public static void testGroupCreation() {
         app.getNavigationHelper().gotoGroupPage();
 
-        int beforeCount = app.getGroupHelper().getGroupCount();
+        List<GroupData> beforeGroupList = app.getGroupHelper().getGroupList();
+
+        GroupData group = new GroupData();
 
         app.getGroupHelper().initGroupCreation();
-        app.getGroupHelper().fillGroupForm(new GroupData());
+        app.getGroupHelper().fillGroupForm(group);
         app.getGroupHelper().submitModification();
 
         app.getNavigationHelper().returnToGroupPage();
 
-        int afterCount = app.getGroupHelper().getGroupCount();
-        Assert.assertEquals(afterCount, beforeCount + 1);
+        List<GroupData> afterGroupList = app.getGroupHelper().getGroupList();
+
+        // Check on the number of elements
+        Assert.assertEquals(afterGroupList.size(), beforeGroupList.size() + 1);
+
+        // Check elements for identity verification
+        for (GroupData g : afterGroupList) {
+            if (g.getGroupId() > group.getGroupId()) {
+                group.setGroupId(g.getGroupId());
+            }
+        }
+        beforeGroupList.add(group);
+        Assert.assertEquals(new HashSet<Object>(beforeGroupList), new HashSet<Object>(afterGroupList));
     }
 }

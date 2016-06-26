@@ -6,6 +6,11 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.data.ContactData;
+
+import java.util.List;
+
+import static ru.stqa.pft.addressbook.generator.BaseGenerator.generateRandom;
 
 public class ContactDeletionTests extends BaseTests {
 
@@ -18,12 +23,20 @@ public class ContactDeletionTests extends BaseTests {
             ContactCreationTests.testContactCreation();
         }
 
-        int beforeCount = app.getContactHelper().getContactCount();
+        List<ContactData> beforeContactList = app.getContactHelper().getContactList();
 
-        app.getContactHelper().selectContact(2);
+        int index = generateRandom(beforeContactList.size());
+
+        app.getContactHelper().selectContact(index);
         app.getContactHelper().deleteContact();
 
-        int afterCount = app.getContactHelper().getContactCount();
-        Assert.assertEquals(afterCount, beforeCount - 1);
+        List<ContactData> afterContactList = app.getContactHelper().getContactList();
+
+        // Check on the number of elements
+        Assert.assertEquals(afterContactList.size(), beforeContactList.size() - 1);
+
+        // Check elements for identity verification
+        beforeContactList.remove(index);
+        Assert.assertEquals(beforeContactList, afterContactList);
     }
 }

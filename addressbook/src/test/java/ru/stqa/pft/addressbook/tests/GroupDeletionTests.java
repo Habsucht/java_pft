@@ -6,6 +6,11 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.data.GroupData;
+
+import java.util.List;
+
+import static ru.stqa.pft.addressbook.generator.BaseGenerator.generateRandom;
 
 public class GroupDeletionTests extends BaseTests {
 
@@ -18,14 +23,27 @@ public class GroupDeletionTests extends BaseTests {
             GroupCreationTests.testGroupCreation();
         }
 
-        int beforeCount = app.getGroupHelper().getGroupCount();
+        List<GroupData> beforeGroupList = app.getGroupHelper().getGroupList();
 
-        app.getGroupHelper().selectGroup(1);
+        int index = generateRandom(beforeGroupList.size());
+
+        app.getGroupHelper().selectGroup(index);
         app.getGroupHelper().deleteGroup();
 
         app.getNavigationHelper().returnToGroupPage();
 
-        int afterCount = app.getGroupHelper().getGroupCount();
-        Assert.assertEquals(afterCount, beforeCount - 1);
+        List<GroupData> afterGroupList = app.getGroupHelper().getGroupList();
+
+        // Check on the number of elements
+        Assert.assertEquals(afterGroupList.size(), beforeGroupList.size() - 1);
+
+        // Check elements for identity verification
+        beforeGroupList.remove(index);
+        Assert.assertEquals(beforeGroupList, afterGroupList);
+        /*
+        for (int i = 0; i < afterGroupList.size(); i++) {
+            Assert.assertEquals(beforeGroupList.get(i), afterGroupList.get(i));
+        }
+        */
     }
 }
