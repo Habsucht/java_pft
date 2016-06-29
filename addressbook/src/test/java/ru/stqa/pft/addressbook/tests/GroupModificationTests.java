@@ -5,6 +5,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.GroupData;
 
@@ -14,16 +15,18 @@ import java.util.List;
 import static ru.stqa.pft.addressbook.generator.BaseGenerator.generateRandom;
 
 public class GroupModificationTests extends BaseTests{
-
-    @Test
-    public void testGroupModification() {
+    @BeforeMethod
+    public void ensurePrecondition() {
         app.getNavigationHelper().gotoGroupPage();
 
         //  Checking for the presence of at least one group with the subsequent creation
         if (!app.getGroupHelper().isThereAGroup()) {
             GroupCreationTests.testGroupCreation();
         }
+    }
 
+    @Test
+    public void testGroupModification() {
         List<GroupData> beforeGroupList = app.getGroupHelper().getGroupList();
 
         int index = generateRandom(beforeGroupList.size());

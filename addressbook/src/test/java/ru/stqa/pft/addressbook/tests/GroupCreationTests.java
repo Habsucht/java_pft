@@ -5,6 +5,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import ru.stqa.pft.addressbook.data.GroupData;
 
 import org.testng.annotations.Test;
@@ -13,11 +14,13 @@ import java.util.HashSet;
 import java.util.List;
 
 public class GroupCreationTests extends BaseTests {
+    @BeforeMethod
+    public void ensurePrecondition() {
+        app.getNavigationHelper().gotoGroupPage();
+    }
 
     @Test
     public static void testGroupCreation() {
-        app.getNavigationHelper().gotoGroupPage();
-
         List<GroupData> beforeGroupList = app.getGroupHelper().getGroupList();
 
         GroupData group = new GroupData();

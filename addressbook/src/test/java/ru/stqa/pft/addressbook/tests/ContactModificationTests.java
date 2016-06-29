@@ -5,6 +5,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.ContactData;
 
@@ -15,16 +16,18 @@ import java.util.List;
 import static ru.stqa.pft.addressbook.generator.BaseGenerator.generateRandom;
 
 public class ContactModificationTests extends BaseTests {
-
-    @Test
-    public void testContactModification() {
+    @BeforeMethod
+    public void ensurePrecondition() {
         app.getNavigationHelper().gotoHomePage();
 
         //  Checking for the presence of at least one contact with the subsequent creation
         if (!app.getContactHelper().isThereAContact()) {
             ContactCreationTests.testContactCreation();
         }
+    }
 
+    @Test
+    public void testContactModification() {
         List<ContactData> beforeContactList = app.getContactHelper().getContactList();
 
         int index = generateRandom(beforeContactList.size());

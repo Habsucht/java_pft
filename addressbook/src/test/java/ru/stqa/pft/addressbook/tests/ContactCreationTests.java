@@ -5,21 +5,22 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.ContactData;
 
-import org.testng.annotations.Test;
-
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
 public class ContactCreationTests extends BaseTests {
+    @BeforeMethod
+    public void ensurePrecondition() {
+        app.getNavigationHelper().gotoHomePage();
+    }
 
     @Test
     public static void testContactCreation() {
-        app.getNavigationHelper().gotoHomePage();
-
         List<ContactData> beforeContactList = app.getContactHelper().getContactList();
 
         ContactData contact = new ContactData();
