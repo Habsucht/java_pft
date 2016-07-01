@@ -1,7 +1,7 @@
 #Ignore Line
 
 # Gradle files
-.gradle
+# .gradle
 /gradle
 /build
 
