@@ -125,7 +125,7 @@ public class ContactHelper extends BaseHelper {
             String firstName = element.findElements(By.tagName("td")).get(2).getText();
             String lastName = element.findElements(By.tagName("td")).get(1).getText();
             String homePhoneNumber = element.findElements(By.tagName("td")).get(5).getText();
-            contactList.add(new ContactData(contactId, firstName, lastName, null, null, homePhoneNumber, null, 0, null, 0));
+            contactList.add(new ContactData().setContactId(contactId).setFirstName(firstName).setLastName(lastName).setHomePhoneNumber(homePhoneNumber));
         }
         return contactList;
     }

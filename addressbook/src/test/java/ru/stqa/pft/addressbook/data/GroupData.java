@@ -22,20 +22,24 @@ public class GroupData {
         this.footer = group;
     }
 
-    public void setGroupId(int groupId) {
+    public GroupData setGroupId(int groupId) {
         this.groupId = groupId;
+        return this;
     }
 
-    public void setGroupName(String groupName) {
+    public GroupData setGroupName(String groupName) {
         this.groupName = groupName;
+        return this;
     }
 
-    public void setGroupHeader(String header) {
+    public GroupData setGroupHeader(String header) {
         this.header = header;
+        return this;
     }
 
-    public void setGroupFooter(String footer) {
+    public GroupData setGroupFooter(String footer) {
         this.footer = footer;
+        return this;
     }
 
     public int getGroupId() {

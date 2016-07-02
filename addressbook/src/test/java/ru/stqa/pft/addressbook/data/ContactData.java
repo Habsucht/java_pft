@@ -40,44 +40,54 @@ public class ContactData {
         this.birthdayYear = ContactDataGenerator.generateYear();
     }
 
-    public void setContactId(int contactId) {
-         this.contactId = contactId;
+    public ContactData setContactId(int contactId) {
+        this.contactId = contactId;
+        return this;
     }
 
-    public void setFirstName(String firstName) {
+    public ContactData setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
-    public void setLastName(String lastName) {
+    public ContactData setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
-    public void setNickName(String nickName) {
+    public ContactData setNickName(String nickName) {
         this.nickName = nickName;
+        return this;
     }
 
-    public void setCompanyName(String companyName) {
+    public ContactData setCompanyName(String companyName) {
         this.companyName = companyName;
+        return this;
     }
 
-    public void setHomePhoneNumber(String homePhoneNumber) {
+    public ContactData setHomePhoneNumber(String homePhoneNumber) {
         this.homePhoneNumber = homePhoneNumber;
+        return this;
     }
 
-    public void setGroup(String group) {
+    public ContactData setGroup(String group) {
         this.group = group;
+        return this;
     }
 
-    public void setBirthdayDay(int birthdayDay) {
+    public ContactData setBirthdayDay(int birthdayDay) {
         this.birthdayDay = birthdayDay;
+        return this;
     }
 
-    public void setBirthdayMonth(String birthdayMonth) {
+    public ContactData setBirthdayMonth(String birthdayMonth) {
         this.birthdayMonth = birthdayMonth;
+        return this;
     }
 
-    public void setBirthdayYear(int birthdayYear) {
+    public ContactData setBirthdayYear(int birthdayYear) {
         this.birthdayYear = birthdayYear;
+        return this;
     }
 
     public int getContactId() {
