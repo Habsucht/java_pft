@@ -10,10 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.data.GroupData;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class GroupHelper extends BaseHelper {
 
@@ -62,25 +59,23 @@ public class GroupHelper extends BaseHelper {
 
     public List<GroupData> getGroupList() {
         List<GroupData> groupList = new ArrayList<>();
-        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-
-        for (WebElement element : elements) {
-            int groupId = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            String name = element.getText();
-            groupList.add(new GroupData().setGroupId(groupId).setGroupName(name));
-        }
+        AllGroups(groupList);
         return groupList;
     }
 
     public Set<GroupData> getGroupSet() {
         Set<GroupData> groupSet = new HashSet<>();
+        AllGroups(groupSet);
+        return groupSet;
+    }
+
+    private void AllGroups(Collection<GroupData> collection) {
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
 
         for (WebElement element : elements) {
             int groupId = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             String name = element.getText();
-            groupSet.add(new GroupData().setGroupId(groupId).setGroupName(name));
+            collection.add(new GroupData().setGroupId(groupId).setGroupName(name));
         }
-        return groupSet;
     }
 }

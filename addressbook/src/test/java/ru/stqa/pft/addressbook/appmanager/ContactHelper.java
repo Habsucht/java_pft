@@ -11,10 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.data.ContactData;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ContactHelper extends BaseHelper {
 
@@ -120,20 +117,17 @@ public class ContactHelper extends BaseHelper {
 
     public List<ContactData> getContactList() {
         List<ContactData> contactList = new ArrayList<>();
-        List<WebElement> elements = wd.findElements(By.name("entry"));
-
-        for (WebElement element : elements) {
-            int contactId = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            String firstName = element.findElements(By.tagName("td")).get(2).getText();
-            String lastName = element.findElements(By.tagName("td")).get(1).getText();
-            String homePhoneNumber = element.findElements(By.tagName("td")).get(5).getText();
-            contactList.add(new ContactData().setContactId(contactId).setFirstName(firstName).setLastName(lastName).setHomePhoneNumber(homePhoneNumber));
-        }
+        AllContacts(contactList);
         return contactList;
     }
 
     public Set<ContactData> getContactSet() {
         Set<ContactData> contactSet = new HashSet<>();
+        AllContacts(contactSet);
+        return contactSet;
+    }
+
+    private void AllContacts(Collection<ContactData> collection) {
         List<WebElement> elements = wd.findElements(By.name("entry"));
 
         for (WebElement element : elements) {
@@ -141,8 +135,7 @@ public class ContactHelper extends BaseHelper {
             String firstName = element.findElements(By.tagName("td")).get(2).getText();
             String lastName = element.findElements(By.tagName("td")).get(1).getText();
             String homePhoneNumber = element.findElements(By.tagName("td")).get(5).getText();
-            contactSet.add(new ContactData().setContactId(contactId).setFirstName(firstName).setLastName(lastName).setHomePhoneNumber(homePhoneNumber));
+            collection.add(new ContactData().setContactId(contactId).setFirstName(firstName).setLastName(lastName).setHomePhoneNumber(homePhoneNumber));
         }
-        return contactSet;
     }
 }
