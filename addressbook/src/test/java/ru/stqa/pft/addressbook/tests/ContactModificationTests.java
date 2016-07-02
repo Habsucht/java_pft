@@ -44,7 +44,7 @@ public class ContactModificationTests extends BaseTests {
         // Check on the number of elements
         Assert.assertEquals(afterContactList.size(), beforeContactList.size());
 
-        // Check elements for identity verification
+        // Assign Id the modification element
         contact.setContactId(beforeContactList.get(index).getContactId());
         beforeContactList.remove(index);
         beforeContactList.add(contact);
@@ -54,6 +54,7 @@ public class ContactModificationTests extends BaseTests {
         beforeContactList.sort(byId);
         afterContactList.sort(byId);
 
+        // Check elements for identity verification
         Assert.assertEquals(new HashSet<Object>(beforeContactList), new HashSet<Object>(afterContactList));
     }
 }

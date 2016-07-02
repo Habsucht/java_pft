@@ -37,10 +37,8 @@ public class GroupCreationTests extends BaseTests {
 
         // Find the maximum Id and assign the created element
         for (GroupData g : afterGroupSet) {
-            System.out.println("find " + g.toString());
             if (g.getGroupId() > group.getGroupId()) {
                 group.setGroupId(g.getGroupId());
-                System.out.println("set " + g.toString());
             }
         }
         //group.setGroupId(afterGroupSet.stream().mapToInt((g) -> g.getGroupId().max().getAsInt()));

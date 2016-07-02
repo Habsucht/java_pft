@@ -36,7 +36,7 @@ public class ContactCreationTests extends BaseTests {
         // Check on the number of elements
         Assert.assertEquals(afterContactList.size(), beforeContactList.size() + 1);
 
-        // Check elements for identity verification
+        // Find the maximum Id and assign the created element
         for (ContactData c : afterContactList) {
             if (c.getContactId() > contact.getContactId()) {
                 contact.setContactId(c.getContactId());
@@ -52,6 +52,7 @@ public class ContactCreationTests extends BaseTests {
         beforeContactList.sort(byId);
         afterContactList.sort(byId);
 
+        // Check elements for identity verification
         Assert.assertEquals(new HashSet<Object>(beforeContactList), new HashSet<Object>(afterContactList));
     }
 }

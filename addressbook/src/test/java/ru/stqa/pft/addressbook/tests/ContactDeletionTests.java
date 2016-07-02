@@ -38,8 +38,10 @@ public class ContactDeletionTests extends BaseTests {
         // Check on the number of elements
         Assert.assertEquals(afterContactList.size(), beforeContactList.size() - 1);
 
-        // Check elements for identity verification
+        // Removing non-existent element
         beforeContactList.remove(index);
+
+        // Check elements for identity verification
         Assert.assertEquals(beforeContactList, afterContactList);
     }
 }
