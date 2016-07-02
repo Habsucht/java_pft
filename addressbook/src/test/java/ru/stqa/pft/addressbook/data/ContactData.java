@@ -10,36 +10,17 @@ import ru.stqa.pft.addressbook.generator.GroupDataGenerator;
 public class ContactData {
     private int contactId;
 
-    private final String firstName;
-    private final String lastName;
-    private final String nickName;
-    private final String companyName;
-    private final String homePhoneNumber;
+    private String firstName;
+    private String lastName;
+    private String nickName;
+    private String companyName;
+    private String homePhoneNumber;
 
-    private final String group;
+    private String group;
 
-    private final int birthdayDay;
-    private final String birthdayMonth;
-    private final int birthdayYear;
-
-    public ContactData(int contactId, String firstName, String lastName, String nickName, String companyName, String homePhoneNumber, String group, int birthdayDay, String birthdayMonth,
-                       int birthdayYear) {
-        this.contactId = contactId;
-
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.nickName = nickName;
-
-        this.companyName = companyName;
-
-        this.homePhoneNumber = homePhoneNumber;
-
-        this.group = group;
-
-        this.birthdayDay = birthdayDay;
-        this.birthdayMonth = birthdayMonth;
-        this.birthdayYear = birthdayYear;
-    }
+    private int birthdayDay;
+    private String birthdayMonth;
+    private int birthdayYear;
 
     public ContactData() {
         this.contactId = 0;
@@ -59,12 +40,48 @@ public class ContactData {
         this.birthdayYear = ContactDataGenerator.generateYear();
     }
 
-    public int getContactId() {
-        return this.contactId;
-    }
-
     public void setContactId(int contactId) {
          this.contactId = contactId;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public void setHomePhoneNumber(String homePhoneNumber) {
+        this.homePhoneNumber = homePhoneNumber;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public void setBirthdayDay(int birthdayDay) {
+        this.birthdayDay = birthdayDay;
+    }
+
+    public void setBirthdayMonth(String birthdayMonth) {
+        this.birthdayMonth = birthdayMonth;
+    }
+
+    public void setBirthdayYear(int birthdayYear) {
+        this.birthdayYear = birthdayYear;
+    }
+
+    public int getContactId() {
+        return this.contactId;
     }
 
     public String getFirstName() {
