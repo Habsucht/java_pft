@@ -40,8 +40,10 @@ public class GroupDeletionTests extends BaseTests {
         // Check on the number of elements
         Assert.assertEquals(afterGroupList.size(), beforeGroupList.size() - 1);
 
-        // Check elements for identity verification
+        // Removing non-existent element
         beforeGroupList.remove(index);
+
+        // Check elements for identity verification
         Assert.assertEquals(beforeGroupList, afterGroupList);
         /*
         for (int i = 0; i < afterGroupList.size(); i++) {

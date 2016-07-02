@@ -12,7 +12,9 @@ import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.data.ContactData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends BaseHelper {
 
@@ -128,5 +130,19 @@ public class ContactHelper extends BaseHelper {
             contactList.add(new ContactData().setContactId(contactId).setFirstName(firstName).setLastName(lastName).setHomePhoneNumber(homePhoneNumber));
         }
         return contactList;
+    }
+
+    public Set<ContactData> getContactSet() {
+        Set<ContactData> contactSet = new HashSet<>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+
+        for (WebElement element : elements) {
+            int contactId = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            String firstName = element.findElements(By.tagName("td")).get(2).getText();
+            String lastName = element.findElements(By.tagName("td")).get(1).getText();
+            String homePhoneNumber = element.findElements(By.tagName("td")).get(5).getText();
+            contactSet.add(new ContactData().setContactId(contactId).setFirstName(firstName).setLastName(lastName).setHomePhoneNumber(homePhoneNumber));
+        }
+        return contactSet;
     }
 }
