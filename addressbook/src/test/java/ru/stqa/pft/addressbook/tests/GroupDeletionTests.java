@@ -30,7 +30,7 @@ public class GroupDeletionTests extends BaseTests {
 
         int index = generateRandom(beforeGroupList.size());
 
-        app.getGroupHelper().selectGroup(index);
+        app.getGroupHelper().selectGroupByIndex(index);
         app.getGroupHelper().deleteGroup();
 
         app.getNavigationHelper().returnToGroupPage();

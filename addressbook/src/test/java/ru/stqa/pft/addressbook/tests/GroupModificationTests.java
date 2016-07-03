@@ -32,7 +32,7 @@ public class GroupModificationTests extends BaseTests{
         int index = generateRandom(beforeGroupList.size());
         GroupData group = new GroupData();
 
-        app.getGroupHelper().selectGroup(index);
+        app.getGroupHelper().selectGroupByIndex(index);
         app.getGroupHelper().initGroupModification();
         app.getGroupHelper().fillGroupForm(group);
         app.getGroupHelper().submitModification();

@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.data.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.*;
 
@@ -32,13 +33,17 @@ public class GroupHelper extends BaseHelper {
         }
     }
 
-    public void selectGroup(int index) {
+    public void selectGroupByIndex(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
         /*
         if (!wd.findElement(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input")).isSelected()) {
            click(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input"));
         }
         */
+    }
+
+    public void selectGroupById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
     public void deleteGroup() {
@@ -67,6 +72,12 @@ public class GroupHelper extends BaseHelper {
         Set<GroupData> groupSet = new HashSet<>();
         AllGroups(groupSet);
         return groupSet;
+    }
+
+    public Groups all() {
+        Groups groups = new Groups();
+        AllGroups(groups);
+        return groups;
     }
 
     private void AllGroups(Collection<GroupData> collection) {

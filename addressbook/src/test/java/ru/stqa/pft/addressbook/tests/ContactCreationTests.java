@@ -47,10 +47,11 @@ public class ContactCreationTests extends BaseTests {
          */
         beforeContactList.add(contact);
 
-        // Sort the list by id
+        /* Sort the list by id
         Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getContactId(), c2.getContactId());
         beforeContactList.sort(byId);
         afterContactList.sort(byId);
+        */
 
         // Check elements for identity verification
         Assert.assertEquals(new HashSet<Object>(beforeContactList), new HashSet<Object>(afterContactList));

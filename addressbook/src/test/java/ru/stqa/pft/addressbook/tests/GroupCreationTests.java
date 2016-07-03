@@ -41,7 +41,7 @@ public class GroupCreationTests extends BaseTests {
                 group.setGroupId(g.getGroupId());
             }
         }
-        //group.setGroupId(afterGroupSet.stream().mapToInt((g) -> g.getGroupId().max().getAsInt()));
+        //group.setGroupId(afterGroupSet.stream().mapToInt((g) -> g.getGroupId()).max().getAsInt());
 
         // Attaching a created element
         beforeGroupSet.add(group);
