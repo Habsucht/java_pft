@@ -8,8 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.data.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.*;
 
@@ -23,9 +23,13 @@ public class ContactHelper extends BaseHelper {
         click(By.linkText("add new"));
     }
 
-    public void selectContact(int index) {
+    public void selectContactByIndex(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
         //click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[" + numContact + "]/td[1]/input"));
+    }
+
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
     public void fillContactForm(ContactData contactData) {
@@ -98,8 +102,12 @@ public class ContactHelper extends BaseHelper {
         System.out.println("birthdayYear: " + contactData.getBirthdayYear());
     }
 
-    public void editContact(int index) {
+    public void editContactByIndex(int index) {
         click(By.xpath("//table[@id='maintable']/tbody/tr[" + index + 2 + "]/td[8]/a/img"));
+    }
+
+    public void editContactById(int id) {
+        wd.get("http://localhost/addressbook/edit.php?id=" + id);
     }
 
     public void deleteContact() {
@@ -125,6 +133,12 @@ public class ContactHelper extends BaseHelper {
         Set<ContactData> contactSet = new HashSet<>();
         AllContacts(contactSet);
         return contactSet;
+    }
+
+    public Contacts all() {
+        Contacts contacts = new Contacts();
+        AllContacts(contacts);
+        return contacts;
     }
 
     private void AllContacts(Collection<ContactData> collection) {

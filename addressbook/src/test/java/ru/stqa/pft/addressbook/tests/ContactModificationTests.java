@@ -33,7 +33,7 @@ public class ContactModificationTests extends BaseTests {
         int index = generateRandom(beforeContactList.size());
         ContactData contact = new ContactData();
 
-        app.getContactHelper().editContact(index);
+        app.getContactHelper().editContactByIndex(index);
         app.getContactHelper().fillContactForm(contact);
         app.getContactHelper().submitModification();
 

@@ -10,12 +10,8 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
-import java.util.HashSet;
-import java.util.List;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static ru.stqa.pft.addressbook.generator.BaseGenerator.generateRandom;
 
 public class GroupModificationTestsFluentImplementation extends BaseTests{
     @BeforeMethod

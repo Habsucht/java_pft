@@ -8,12 +8,15 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static ru.stqa.pft.addressbook.generator.BaseGenerator.generateRandom;
 
-public class ContactDeletionTests extends BaseTests {
+public class ContactDeletionTestsFluentImplementation extends BaseTests {
     @BeforeMethod
     public void ensurePrecondition() {
         app.getNavigationHelper().gotoHomePage();
@@ -26,22 +29,19 @@ public class ContactDeletionTests extends BaseTests {
 
     @Test
     public void testContactDeletion() {
-        List<ContactData> beforeContactList = app.getContactHelper().getContactList();
+        Contacts beforeContactSet = app.getContactHelper().all();
 
-        int index = generateRandom(beforeContactList.size());
+        ContactData deletedContact = beforeContactSet.iterator().next();
 
-        app.getContactHelper().selectContactByIndex(index);
+        app.getContactHelper().selectContactById(deletedContact.getContactId());
         app.getContactHelper().deleteContact();
 
-        List<ContactData> afterContactList = app.getContactHelper().getContactList();
+        Contacts afterContactSet = app.getContactHelper().all();
 
         // Check on the number of elements
-        Assert.assertEquals(afterContactList.size(), beforeContactList.size() - 1);
-
-        // Removing non-existent element
-        beforeContactList.remove(index);
+        Assert.assertEquals(afterContactSet.size(), beforeContactSet.size() - 1);
 
         // Check elements for identity verification
-        Assert.assertEquals(beforeContactList, afterContactList);
+        assertThat(afterContactSet, equalTo(beforeContactSet.withOut(deletedContact)));
     }
 }
