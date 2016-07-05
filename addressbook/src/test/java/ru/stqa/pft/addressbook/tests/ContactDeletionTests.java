@@ -8,9 +8,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static ru.stqa.pft.addressbook.generator.BaseGenerator.generateRandom;
 
 public class ContactDeletionTests extends BaseTests {
@@ -20,12 +23,13 @@ public class ContactDeletionTests extends BaseTests {
 
         //  Checking for the presence of at least one contact with the subsequent creation
         if (!app.getContactHelper().isThereAContact()) {
-            ContactCreationTests.testContactCreation();
+            ContactCreationTests.testContactCreationVer1();
         }
     }
 
     @Test
-    public void testContactDeletion() {
+    // Base test deletion contact
+    public void testContactDeletionVer1() {
         List<ContactData> beforeContactList = app.getContactHelper().getContactList();
 
         int index = generateRandom(beforeContactList.size());
@@ -43,5 +47,24 @@ public class ContactDeletionTests extends BaseTests {
 
         // Check elements for identity verification
         Assert.assertEquals(beforeContactList, afterContactList);
+    }
+
+    @Test
+    // Test deletion contact fluent implementation
+    public void testContactDeletionVer2() {
+        Contacts beforeContactSet = app.getContactHelper().all();
+
+        ContactData deletedContact = beforeContactSet.iterator().next();
+
+        app.getContactHelper().selectContactById(deletedContact.getContactId());
+        app.getContactHelper().deleteContact();
+
+        Contacts afterContactSet = app.getContactHelper().all();
+
+        // Check on the number of elements
+        Assert.assertEquals(afterContactSet.size(), beforeContactSet.size() - 1);
+
+        // Check elements for identity verification
+        assertThat(afterContactSet, equalTo(beforeContactSet.withOut(deletedContact)));
     }
 }

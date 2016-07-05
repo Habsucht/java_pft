@@ -8,9 +8,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static ru.stqa.pft.addressbook.generator.BaseGenerator.generateRandom;
 
 public class GroupDeletionTests extends BaseTests {
@@ -20,12 +23,13 @@ public class GroupDeletionTests extends BaseTests {
 
         //  Checking for the presence of at least one group with the subsequent creation
         if (!app.getGroupHelper().isThereAGroup()) {
-            GroupCreationTests.testGroupCreation();
+            GroupCreationTests.testGroupCreationVer1();
         }
     }
 
     @Test
-    public void testGroupDeletion() {
+    // Base test deletion group
+    public void testGroupDeletionVer1() {
         List<GroupData> beforeGroupList = app.getGroupHelper().getGroupList();
 
         int index = generateRandom(beforeGroupList.size());
@@ -50,5 +54,26 @@ public class GroupDeletionTests extends BaseTests {
             Assert.assertEquals(beforeGroupList.get(i), afterGroupList.get(i));
         }
         */
+    }
+
+    @Test
+    // Test deletion group fluent implementation
+    public void testGroupDeletionVer2() {
+        Groups beforeGroupSet = app.getGroupHelper().all();
+
+        GroupData deletedGroup = beforeGroupSet.iterator().next();
+
+        app.getGroupHelper().selectGroupById(deletedGroup.getGroupId());
+        app.getGroupHelper().deleteGroup();
+
+        app.getNavigationHelper().returnToGroupPage();
+
+        Groups afterGroupSet = app.getGroupHelper().all();
+
+        // Check on the number of elements
+        Assert.assertEquals(afterGroupSet.size(), beforeGroupSet.size() - 1);
+
+        // Check elements for identity verification
+        assertThat(afterGroupSet, equalTo(beforeGroupSet.withOut(deletedGroup)));
     }
 }

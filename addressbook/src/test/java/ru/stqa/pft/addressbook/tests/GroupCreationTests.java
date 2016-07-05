@@ -9,8 +9,12 @@ import org.testng.annotations.BeforeMethod;
 import ru.stqa.pft.addressbook.data.GroupData;
 
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.Set;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class GroupCreationTests extends BaseTests {
     @BeforeMethod
@@ -19,7 +23,8 @@ public class GroupCreationTests extends BaseTests {
     }
 
     @Test
-    public static void testGroupCreation() {
+    // Base test creation group
+    public static void testGroupCreationVer1() {
         Set<GroupData> beforeGroupSet = app.getGroupHelper().getGroupSet();
 
         GroupData group = new GroupData();
@@ -48,5 +53,27 @@ public class GroupCreationTests extends BaseTests {
 
         // Check elements for identity verification
         Assert.assertEquals(beforeGroupSet, afterGroupSet);
+    }
+
+    @Test
+    // Test creation group fluent implementation
+    public static void testGroupCreationVer2() {
+        Groups beforeGroupSet = app.getGroupHelper().all();
+
+        GroupData group = new GroupData();
+
+        app.getGroupHelper().initGroupCreation();
+        app.getGroupHelper().fillGroupForm(group);
+        app.getGroupHelper().submitModification();
+
+        app.getNavigationHelper().returnToGroupPage();
+
+        Groups afterGroupSet = app.getGroupHelper().all();
+
+        // Check on the number of elements
+        assertThat(afterGroupSet.size(), equalTo(beforeGroupSet.size() + 1));
+
+        // Check elements for identity verification
+        assertThat(afterGroupSet, equalTo(beforeGroupSet.withAdded(group.setGroupId(afterGroupSet.stream().mapToInt((g) -> g.getGroupId()).max().getAsInt()))));
     }
 }
