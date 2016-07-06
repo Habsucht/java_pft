@@ -76,4 +76,26 @@ public class GroupCreationTests extends BaseTests {
         // Check elements for identity verification
         assertThat(afterGroupSet, equalTo(beforeGroupSet.withAdded(group.setGroupId(afterGroupSet.stream().mapToInt((g) -> g.getGroupId()).max().getAsInt()))));
     }
+
+    @Test
+    // Test creation group with the unacceptable title
+    public static void testBadGroupCreationVer1() {
+        Set<GroupData> beforeGroupSet = app.getGroupHelper().getGroupSet();
+
+        GroupData group = new GroupData().setGroupName("BadName'");
+
+        app.getGroupHelper().initGroupCreation();
+        app.getGroupHelper().fillGroupForm(group);
+        app.getGroupHelper().submitModification();
+
+        app.getNavigationHelper().returnToGroupPage();
+
+        Set<GroupData> afterGroupSet = app.getGroupHelper().getGroupSet();
+
+        // Check on the number of elements
+        Assert.assertEquals(app.getGroupHelper().getGroupCount(), beforeGroupSet.size());
+
+        // Check elements for identity verification
+        Assert.assertEquals(beforeGroupSet, afterGroupSet);
+    }
 }
