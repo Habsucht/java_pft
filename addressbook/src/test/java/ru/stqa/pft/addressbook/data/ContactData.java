@@ -14,13 +14,20 @@ public class ContactData {
     private String lastName;
     private String nickName;
     private String companyName;
+
     private String homePhoneNumber;
+    private String mobilePhoneNumber;
+    private String workPhoneNumber;
 
     private String group;
 
     private int birthdayDay;
     private String birthdayMonth;
     private int birthdayYear;
+
+    public ContactData(int contactId) {
+        this.contactId = contactId;
+    }
 
     public ContactData() {
         this.contactId = 0;
@@ -31,7 +38,9 @@ public class ContactData {
 
         this.companyName = ContactDataGenerator.generateCompanyName();
 
-        this.homePhoneNumber = ContactDataGenerator.generateHomePhoneNumber();
+        this.homePhoneNumber = ContactDataGenerator.generatePhoneNumber();
+        this.mobilePhoneNumber = ContactDataGenerator.generatePhoneNumber();
+        this.workPhoneNumber = ContactDataGenerator.generatePhoneNumber();
 
         this.group = GroupDataGenerator.generateGroup();
 
@@ -67,6 +76,16 @@ public class ContactData {
 
     public ContactData setHomePhoneNumber(String homePhoneNumber) {
         this.homePhoneNumber = homePhoneNumber;
+        return this;
+    }
+
+    public ContactData setMobilePhoneNumber(String mobilePhoneNumber) {
+        this.mobilePhoneNumber = mobilePhoneNumber;
+        return this;
+    }
+
+    public ContactData setWorkPhoneNumber(String workPhoneNumber) {
+        this.workPhoneNumber = workPhoneNumber;
         return this;
     }
 
@@ -112,6 +131,14 @@ public class ContactData {
 
     public String getHomePhoneNumber() {
         return this.homePhoneNumber;
+    }
+
+    public String getMobilePhoneNumber() {
+        return this.mobilePhoneNumber;
+    }
+
+    public String getWorkPhoneNumber() {
+        return this.workPhoneNumber;
     }
 
     public int getBirthdayDay() {

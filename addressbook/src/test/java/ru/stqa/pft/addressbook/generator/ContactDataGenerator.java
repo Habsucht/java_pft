@@ -27,7 +27,7 @@ public class ContactDataGenerator extends BaseGenerator {
         return firstName + generateRandom(100);
     }
 
-    public static String generateHomePhoneNumber() {
+    public static String generatePhoneNumber() {
         return "8(9" + generateRandom(10) + generateRandom(10) + ")" + generateRandom(10) + generateRandom(10) + generateRandom(10) + "-" + generateRandom(10) + generateRandom(10) + "-" + generateRandom(10) + generateRandom(10);
     }
 
