@@ -43,10 +43,10 @@ public class ContactModificationTests extends BaseTests {
 
         app.getNavigationHelper().returnToHomePage();
 
-        List<ContactData> afterContactList = app.getContactHelper().getContactList();
-
         // Check on the number of elements
-        Assert.assertEquals(afterContactList.size(), beforeContactList.size());
+        Assert.assertEquals(app.getContactHelper().getContactCount(), beforeContactList.size());
+
+        List<ContactData> afterContactList = app.getContactHelper().getContactList();
 
         // Assign Id the modification element
         contact.setContactId(beforeContactList.get(index).getContactId());
@@ -76,10 +76,10 @@ public class ContactModificationTests extends BaseTests {
 
         app.getNavigationHelper().returnToHomePage();
 
-        Contacts afterContactSet = app.getContactHelper().all();
-
         // Check on the number of elements
-        Assert.assertEquals(afterContactSet.size(), beforeContactSet.size());
+        assertThat(app.getContactHelper().getContactCount(), equalTo(beforeContactSet.size()));
+
+        Contacts afterContactSet = app.getContactHelper().all();
 
         // Assign Id the modification element
         contact.setContactId(modifiedContact.getContactId());

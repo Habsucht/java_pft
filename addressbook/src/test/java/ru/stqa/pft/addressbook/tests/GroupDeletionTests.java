@@ -39,10 +39,10 @@ public class GroupDeletionTests extends BaseTests {
 
         app.getNavigationHelper().returnToGroupPage();
 
-        List<GroupData> afterGroupList = app.getGroupHelper().getGroupList();
-
         // Check on the number of elements
-        Assert.assertEquals(afterGroupList.size(), beforeGroupList.size() - 1);
+        Assert.assertEquals(app.getGroupHelper().getGroupCount(), beforeGroupList.size() - 1);
+
+        List<GroupData> afterGroupList = app.getGroupHelper().getGroupList();
 
         // Removing non-existent element
         beforeGroupList.remove(index);
@@ -68,10 +68,10 @@ public class GroupDeletionTests extends BaseTests {
 
         app.getNavigationHelper().returnToGroupPage();
 
-        Groups afterGroupSet = app.getGroupHelper().all();
-
         // Check on the number of elements
-        Assert.assertEquals(afterGroupSet.size(), beforeGroupSet.size() - 1);
+        assertThat(app.getGroupHelper().getGroupCount(), equalTo(beforeGroupSet.size() - 1));
+
+        Groups afterGroupSet = app.getGroupHelper().all();
 
         // Check elements for identity verification
         assertThat(afterGroupSet, equalTo(beforeGroupSet.withOut(deletedGroup)));

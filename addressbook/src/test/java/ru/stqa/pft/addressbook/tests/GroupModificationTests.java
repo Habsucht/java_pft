@@ -43,10 +43,10 @@ public class GroupModificationTests extends BaseTests{
 
         app.getNavigationHelper().returnToGroupPage();
 
-        List<GroupData> afterGroupList = app.getGroupHelper().getGroupList();
-
         // Check on the number of elements
-        Assert.assertEquals(afterGroupList.size(), beforeGroupList.size());
+        Assert.assertEquals(app.getGroupHelper().getGroupCount(), beforeGroupList.size());
+
+        List<GroupData> afterGroupList = app.getGroupHelper().getGroupList();
 
         // Assign Id the modification element
         group.setGroupId(beforeGroupList.get(index).getGroupId());
@@ -72,10 +72,10 @@ public class GroupModificationTests extends BaseTests{
 
         app.getNavigationHelper().returnToGroupPage();
 
-        Groups afterGroupSet = app.getGroupHelper().all();
-
         // Check on the number of elements
-        Assert.assertEquals(afterGroupSet.size(), beforeGroupSet.size());
+        assertThat(app.getGroupHelper().getGroupCount(), equalTo(beforeGroupSet.size()));
+
+        Groups afterGroupSet = app.getGroupHelper().all();
 
         // Assign Id the modification element
         group.setGroupId(modifiedGroup.getGroupId());

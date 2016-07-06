@@ -37,10 +37,10 @@ public class ContactDeletionTests extends BaseTests {
         app.getContactHelper().selectContactByIndex(index);
         app.getContactHelper().deleteContact();
 
-        List<ContactData> afterContactList = app.getContactHelper().getContactList();
-
         // Check on the number of elements
-        Assert.assertEquals(afterContactList.size(), beforeContactList.size() - 1);
+        Assert.assertEquals(app.getContactHelper().getContactCount(), beforeContactList.size() - 1);
+
+        List<ContactData> afterContactList = app.getContactHelper().getContactList();
 
         // Removing non-existent element
         beforeContactList.remove(index);
@@ -59,10 +59,10 @@ public class ContactDeletionTests extends BaseTests {
         app.getContactHelper().selectContactById(deletedContact.getContactId());
         app.getContactHelper().deleteContact();
 
-        Contacts afterContactSet = app.getContactHelper().all();
-
         // Check on the number of elements
-        Assert.assertEquals(afterContactSet.size(), beforeContactSet.size() - 1);
+        assertThat(app.getContactHelper().getContactCount(), equalTo(beforeContactSet.size() - 1));
+
+        Contacts afterContactSet = app.getContactHelper().all();
 
         // Check elements for identity verification
         assertThat(afterContactSet, equalTo(beforeContactSet.withOut(deletedContact)));

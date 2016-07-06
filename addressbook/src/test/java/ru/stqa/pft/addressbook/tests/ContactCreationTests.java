@@ -35,6 +35,9 @@ public class ContactCreationTests extends BaseTests {
 
         app.getNavigationHelper().returnToHomePage();
 
+        // Check on the number of elements
+        Assert.assertEquals(app.getContactHelper().getContactCount(), beforeContactList.size() + 1);
+
         List<ContactData> afterContactList = app.getContactHelper().getContactList();
 
         // Check on the number of elements
@@ -74,10 +77,10 @@ public class ContactCreationTests extends BaseTests {
 
         app.getNavigationHelper().returnToHomePage();
 
-        Contacts afterContactSet = app.getContactHelper().all();
-
         // Check on the number of elements
-        Assert.assertEquals(afterContactSet.size(), beforeContactSet.size() + 1);
+        assertThat(app.getContactHelper().getContactCount(), equalTo(beforeContactSet.size() + 1));
+
+        Contacts afterContactSet = app.getContactHelper().all();
 
         // Check elements for identity verification
         assertThat(afterContactSet, equalTo(beforeContactSet.withAdded(contact.setContactId(afterContactSet.stream().mapToInt((g) -> g.getContactId()).max().getAsInt()))));

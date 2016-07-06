@@ -35,10 +35,10 @@ public class GroupCreationTests extends BaseTests {
 
         app.getNavigationHelper().returnToGroupPage();
 
-        Set<GroupData> afterGroupSet = app.getGroupHelper().getGroupSet();
-
         // Check on the number of elements
-        Assert.assertEquals(afterGroupSet.size(), beforeGroupSet.size() + 1);
+        Assert.assertEquals(app.getGroupHelper().getGroupCount(), beforeGroupSet.size() + 1);
+
+        Set<GroupData> afterGroupSet = app.getGroupHelper().getGroupSet();
 
         // Find the maximum Id and assign the created element
         for (GroupData g : afterGroupSet) {
@@ -68,10 +68,10 @@ public class GroupCreationTests extends BaseTests {
 
         app.getNavigationHelper().returnToGroupPage();
 
-        Groups afterGroupSet = app.getGroupHelper().all();
-
         // Check on the number of elements
-        assertThat(afterGroupSet.size(), equalTo(beforeGroupSet.size() + 1));
+        assertThat(app.getGroupHelper().getGroupCount(), equalTo(beforeGroupSet.size() + 1));
+
+        Groups afterGroupSet = app.getGroupHelper().all();
 
         // Check elements for identity verification
         assertThat(afterGroupSet, equalTo(beforeGroupSet.withAdded(group.setGroupId(afterGroupSet.stream().mapToInt((g) -> g.getGroupId()).max().getAsInt()))));
@@ -90,10 +90,10 @@ public class GroupCreationTests extends BaseTests {
 
         app.getNavigationHelper().returnToGroupPage();
 
-        Set<GroupData> afterGroupSet = app.getGroupHelper().getGroupSet();
-
         // Check on the number of elements
         Assert.assertEquals(app.getGroupHelper().getGroupCount(), beforeGroupSet.size());
+
+        Set<GroupData> afterGroupSet = app.getGroupHelper().getGroupSet();
 
         // Check elements for identity verification
         Assert.assertEquals(beforeGroupSet, afterGroupSet);
