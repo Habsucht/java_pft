@@ -58,6 +58,16 @@ public class ContactHelper extends BaseHelper {
         }
         System.out.println("homePhoneNumber: " + contactData.getHomePhoneNumber());
 
+        if (!wd.findElement(By.name("mobile")).getText().equals(contactData.getMobilePhoneNumber())) {
+            type(By.name("mobile"), contactData.getMobilePhoneNumber());
+        }
+        System.out.println("mobilePhoneNumber: " + contactData.getMobilePhoneNumber());
+
+        if (!wd.findElement(By.name("work")).getText().equals(contactData.getWorkPhoneNumber())) {
+            type(By.name("work"), contactData.getWorkPhoneNumber());
+        }
+        System.out.println("workPhoneNumber: " + contactData.getWorkPhoneNumber());
+
         if (isElementPresent(By.name("new_group"))) {
             String group = contactData.getGroup();
             System.out.println("group: " + contactData.getGroup());
@@ -95,14 +105,14 @@ public class ContactHelper extends BaseHelper {
         String mobilePhoneNumber = wd.findElement(By.name("mobile")).getAttribute("value");
         String workPhoneNumber = wd.findElement(By.name("work")).getAttribute("value");
 
-        int birthdayDay = Integer.parseInt(wd.findElement(By.name("bday")).getAttribute("selected"));
-        String birthdayMonth = wd.findElement(By.name("bmonth")).getAttribute("value");
-        int birthdayYear = Integer.parseInt(wd.findElement(By.name("byear")).getAttribute("value"));
+        //int birthdayDay = Integer.parseInt(wd.findElement(By.name("bday")).getAttribute("selected"));
+        //String birthdayMonth = wd.findElement(By.name("bmonth")).getAttribute("value");
+        //int birthdayYear = Integer.parseInt(wd.findElement(By.name("byear")).getAttribute("value"));
 
         wd.navigate().back();
         return new ContactData(contact.getContactId()).setFirstName(firstName).setLastName(lastName).setNickName(nickName).setCompanyName(companyName)
-                .setHomePhoneNumber(homePhoneNumber).setMobilePhoneNumber(mobilePhoneNumber).setWorkPhoneNumber(workPhoneNumber)
-                .setBirthdayDay(birthdayDay).setBirthdayMonth(birthdayMonth).setBirthdayYear(birthdayYear);
+                .setHomePhoneNumber(homePhoneNumber).setMobilePhoneNumber(mobilePhoneNumber).setWorkPhoneNumber(workPhoneNumber);
+                //.setBirthdayDay(birthdayDay).setBirthdayMonth(birthdayMonth).setBirthdayYear(birthdayYear);
     }
 
     public void editContactByIndex(int index) {
@@ -152,8 +162,9 @@ public class ContactHelper extends BaseHelper {
             int contactId = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             String firstName = element.findElements(By.tagName("td")).get(2).getText();
             String lastName = element.findElements(By.tagName("td")).get(1).getText();
-            String homePhoneNumber = element.findElements(By.tagName("td")).get(5).getText();
-            collection.add(new ContactData().setContactId(contactId).setFirstName(firstName).setLastName(lastName).setHomePhoneNumber(homePhoneNumber));
+            String[] phones = element.findElements(By.tagName("td")).get(5).getText().split("\n");
+            collection.add(new ContactData(contactId).setFirstName(firstName).setLastName(lastName)
+                    .setHomePhoneNumber(phones[0]).setMobilePhoneNumber(phones[1]).setWorkPhoneNumber(phones[2]));
         }
     }
 }
