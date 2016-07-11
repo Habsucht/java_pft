@@ -53,6 +53,11 @@ public class ContactHelper extends BaseHelper {
         }
         System.out.println("companyName: " + contactData.getCompanyName());
 
+        if (!wd.findElement(By.name("address")).getText().equals(contactData.getPostAddress())) {
+            type(By.name("address"), contactData.getPostAddress());
+        }
+        System.out.println("contactAddress: " + contactData.getPostAddress());
+
         if (!wd.findElement(By.name("home")).getText().equals(contactData.getHomePhoneNumber())) {
             type(By.name("home"), contactData.getHomePhoneNumber());
         }
@@ -61,12 +66,32 @@ public class ContactHelper extends BaseHelper {
         if (!wd.findElement(By.name("mobile")).getText().equals(contactData.getMobilePhoneNumber())) {
             type(By.name("mobile"), contactData.getMobilePhoneNumber());
         }
-        System.out.println("mobilePhoneNumber: " + contactData.getMobilePhoneNumber());
 
+        System.out.println("mobilePhoneNumber: " + contactData.getMobilePhoneNumber());
         if (!wd.findElement(By.name("work")).getText().equals(contactData.getWorkPhoneNumber())) {
             type(By.name("work"), contactData.getWorkPhoneNumber());
         }
         System.out.println("workPhoneNumber: " + contactData.getWorkPhoneNumber());
+
+        if (!wd.findElement(By.name("fax")).getText().equals(contactData.getFaxPhoneNumber())) {
+            type(By.name("fax"), contactData.getFaxPhoneNumber());
+        }
+        System.out.println("faxPhoneNumber: " + contactData.getFaxPhoneNumber());
+
+        if (!wd.findElement(By.name("email")).getText().equals(contactData.getEmailAddress1())) {
+            type(By.name("email"), contactData.getEmailAddress1());
+        }
+        System.out.println("emailAddress1: " + contactData.getEmailAddress1());
+
+        if (!wd.findElement(By.name("email2")).getText().equals(contactData.getEmailAddress2())) {
+            type(By.name("email2"), contactData.getEmailAddress2());
+        }
+        System.out.println("emailAddress1: " + contactData.getEmailAddress2());
+
+        if (!wd.findElement(By.name("email3")).getText().equals(contactData.getEmailAddress3())) {
+            type(By.name("email3"), contactData.getEmailAddress3());
+        }
+        System.out.println("emailAddress3: " + contactData.getEmailAddress3());
 
         if (isElementPresent(By.name("new_group"))) {
             String group = contactData.getGroup();
@@ -101,9 +126,16 @@ public class ContactHelper extends BaseHelper {
         String nickName = wd.findElement(By.name("nickname")).getAttribute("value");
         String companyName = wd.findElement(By.name("company")).getAttribute("value");
 
+        String contactAddress = wd.findElement(By.name("address")).getAttribute("value");
+
         String homePhoneNumber = wd.findElement(By.name("home")).getAttribute("value");
         String mobilePhoneNumber = wd.findElement(By.name("mobile")).getAttribute("value");
         String workPhoneNumber = wd.findElement(By.name("work")).getAttribute("value");
+        String faxPhoneNumber = wd.findElement(By.name("fax")).getAttribute("value");
+
+        String emailAddress1 = wd.findElement(By.name("email")).getAttribute("value");
+        String emailAddress2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String emailAddress3 = wd.findElement(By.name("email3")).getAttribute("value");
 
         //int birthdayDay = Integer.parseInt(wd.findElement(By.name("bday")).getAttribute("selected"));
         //String birthdayMonth = wd.findElement(By.name("bmonth")).getAttribute("value");
@@ -111,7 +143,8 @@ public class ContactHelper extends BaseHelper {
 
         wd.navigate().back();
         return new ContactData(contact.getContactId()).setFirstName(firstName).setLastName(lastName).setNickName(nickName).setCompanyName(companyName)
-                .setHomePhoneNumber(homePhoneNumber).setMobilePhoneNumber(mobilePhoneNumber).setWorkPhoneNumber(workPhoneNumber);
+                .setPostAddress(contactAddress).setHomePhoneNumber(homePhoneNumber).setMobilePhoneNumber(mobilePhoneNumber).setWorkPhoneNumber(workPhoneNumber)
+                .setFaxPhoneNumber(faxPhoneNumber).setEmailAddress1(emailAddress1).setEmailAddress2(emailAddress2).setEmailAddress3(emailAddress3);
                 //.setBirthdayDay(birthdayDay).setBirthdayMonth(birthdayMonth).setBirthdayYear(birthdayYear);
     }
 
@@ -160,11 +193,13 @@ public class ContactHelper extends BaseHelper {
 
         for (WebElement element : elements) {
             int contactId = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            String firstName = element.findElements(By.tagName("td")).get(2).getText();
             String lastName = element.findElements(By.tagName("td")).get(1).getText();
+            String firstName = element.findElements(By.tagName("td")).get(2).getText();
+            String address = element.findElements(By.tagName("td")).get(3).getText();
+            String allEmails = element.findElements(By.tagName("td")).get(4).getText();
             String allPhones = element.findElements(By.tagName("td")).get(5).getText();
             collection.add(new ContactData(contactId).setFirstName(firstName).setLastName(lastName)
-                    .setAllPhoneNumber(allPhones));
+                    .setPostAddress(address).setAllPhoneNumber(allPhones).setAllEmailAddress(allEmails));
         }
     }
 }

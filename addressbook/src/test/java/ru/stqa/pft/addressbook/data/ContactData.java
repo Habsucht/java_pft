@@ -15,11 +15,20 @@ public class ContactData {
     private String nickName;
     private String companyName;
 
+    private String postAddress;
+
     private String homePhoneNumber;
     private String mobilePhoneNumber;
     private String workPhoneNumber;
+    private String faxPhoneNumber;
 
     private String allPhoneNumber;
+
+    private String emailAddress1;
+    private String emailAddress2;
+    private String emailAddress3;
+
+    private String allEmailAddress;
 
     private String group;
 
@@ -40,11 +49,16 @@ public class ContactData {
 
         this.companyName = ContactDataGenerator.generateCompanyName();
 
+        this.postAddress = ContactDataGenerator.generateContactAddress();
+
         this.homePhoneNumber = ContactDataGenerator.generatePhoneNumber();
         this.mobilePhoneNumber = ContactDataGenerator.generatePhoneNumber();
         this.workPhoneNumber = ContactDataGenerator.generatePhoneNumber();
+        this.faxPhoneNumber = ContactDataGenerator.generatePhoneNumber();
 
-        this.allPhoneNumber = homePhoneNumber + mobilePhoneNumber + workPhoneNumber;
+        this.emailAddress1 = ContactDataGenerator.generateEmailAddress(firstName, lastName, companyName);
+        this.emailAddress2 = ContactDataGenerator.generateEmailAddress(firstName, lastName, companyName);
+        this.emailAddress3 = ContactDataGenerator.generateEmailAddress(firstName, lastName, companyName);
 
         this.group = GroupDataGenerator.generateGroup();
 
@@ -78,6 +92,11 @@ public class ContactData {
         return this;
     }
 
+    public ContactData setPostAddress(String postAddress) {
+        this.postAddress = postAddress;
+        return this;
+    }
+
     public ContactData setHomePhoneNumber(String homePhoneNumber) {
         this.homePhoneNumber = homePhoneNumber;
         return this;
@@ -93,8 +112,33 @@ public class ContactData {
         return this;
     }
 
+    public ContactData setFaxPhoneNumber(String faxPhoneNumber) {
+        this.faxPhoneNumber = faxPhoneNumber;
+        return this;
+    }
+
     public ContactData setAllPhoneNumber(String allPhoneNumber) {
         this.allPhoneNumber = allPhoneNumber;
+        return this;
+    }
+
+    public ContactData setEmailAddress1(String emailAddress1) {
+        this.emailAddress1 = emailAddress1;
+        return this;
+    }
+
+    public ContactData setEmailAddress2(String emailAddress2) {
+        this.emailAddress2 = emailAddress2;
+        return this;
+    }
+
+    public ContactData setEmailAddress3(String emailAddress3) {
+        this.emailAddress3 = emailAddress3;
+        return this;
+    }
+
+    public ContactData setAllEmailAddress(String allEmailAddress) {
+        this.allEmailAddress = allEmailAddress;
         return this;
     }
 
@@ -138,6 +182,10 @@ public class ContactData {
         return this.companyName;
     }
 
+    public String getPostAddress() {
+        return postAddress;
+    }
+
     public String getHomePhoneNumber() {
         return this.homePhoneNumber;
     }
@@ -150,8 +198,28 @@ public class ContactData {
         return this.workPhoneNumber;
     }
 
+    public String getFaxPhoneNumber() {
+        return faxPhoneNumber;
+    }
+
     public String getAllPhoneNumber() {
         return this.allPhoneNumber;
+    }
+
+    public String getEmailAddress1() {
+        return emailAddress1;
+    }
+
+    public String getEmailAddress2() {
+        return emailAddress2;
+    }
+
+    public String getEmailAddress3() {
+        return emailAddress3;
+    }
+
+    public String getAllEmailAddress() {
+        return allEmailAddress;
     }
 
     public int getBirthdayDay() {

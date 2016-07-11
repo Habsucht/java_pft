@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class ContactPhoneTests extends BaseTests{
+public class ContactEmailTests extends BaseTests {
     @BeforeMethod
     public void ensurePrecondition() {
         app.getNavigationHelper().gotoHomePage();
@@ -22,29 +22,17 @@ public class ContactPhoneTests extends BaseTests{
     }
 
     @Test
-    // Base test phone contacts
-    public static void testContactPhone() {
+    // Base test email contacts
+    public static void testContactEmail() {
         ContactData contact = app.getContactHelper().all().iterator().next();
         ContactData contactInfoFromEditForm = app.getContactHelper().infoFromEditForm(contact);
 
-        assertThat(contact.getAllPhoneNumber(), equalTo(mergePhone(contactInfoFromEditForm)));
+        assertThat(contact.getAllEmailAddress(), equalTo(mergeEmails(contactInfoFromEditForm)));
     }
 
-    public static String mergePhone(ContactData contact) {
-        /*
-        String result = "";
-        if (contact.getHomePhoneNumber() != null) { result = result + contact.getHomePhoneNumber(); }
-        if (contact.getMobilePhoneNumber() != null) { result = result + "\n" + contact.getMobilePhoneNumber(); }
-        if (contact.getWorkPhoneNumber() != null) { result = result + "\n" + contact.getWorkPhoneNumber(); }
-        return result;
-        */
-        return Arrays.asList(contact.getHomePhoneNumber(), contact.getMobilePhoneNumber(), contact.getWorkPhoneNumber())
+    public static String mergeEmails(ContactData contact) {
+        return Arrays.asList(contact.getEmailAddress1(), contact.getEmailAddress2(), contact.getEmailAddress3())
                 .stream().filter((s) -> !s.equals(""))      // Filter the flow of blank lines
-                .map(ContactPhoneTests::cleanedPhone)       // The application features to the stream
                 .collect(Collectors.joining("\n"));         // Merge lines delimited \n
-    }
-
-    public static String cleanedPhone(String phone) {
-        return phone.replaceAll("\\s", "").replaceAll("[-+()]", "");
     }
 }
