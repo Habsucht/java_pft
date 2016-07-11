@@ -1,4 +1,5 @@
 #Ignore Line
+*.exe
 
 # Gradle files
 # .gradle
