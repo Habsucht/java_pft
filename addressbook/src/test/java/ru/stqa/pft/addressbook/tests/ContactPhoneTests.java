@@ -1,8 +1,13 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.openqa.selenium.support.ui.SystemClock;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.ContactData;
+
+import java.util.Arrays;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -12,7 +17,7 @@ public class ContactPhoneTests extends BaseTests{
     public void ensurePrecondition() {
         app.getNavigationHelper().gotoHomePage();
 
-        //  Checking for the presence of at least one contact with the subsequent creation
+        // Checking for the presence of at least one contact with the subsequent creation
         if (!app.getContactHelper().isThereAContact()) {
             ContactCreationTests.testContactCreationVer1();
         }
@@ -24,9 +29,21 @@ public class ContactPhoneTests extends BaseTests{
         ContactData contact = app.getContactHelper().all().iterator().next();
         ContactData contactInfoFromEditForm = app.getContactHelper().infoFromEditForm(contact);
 
-        assertThat(contact.getHomePhoneNumber(), equalTo(cleanedPhone(contactInfoFromEditForm.getHomePhoneNumber())));
-        assertThat(contact.getMobilePhoneNumber(), equalTo(cleanedPhone(contactInfoFromEditForm.getMobilePhoneNumber())));
-        assertThat(contact.getWorkPhoneNumber(), equalTo(cleanedPhone(contactInfoFromEditForm.getWorkPhoneNumber())));
+        assertThat(contact.getAllPhoneNumber(), equalTo(mergePhone(contactInfoFromEditForm)));
+    }
+
+    public static String mergePhone(ContactData contact) {
+        /*
+        String result = "";
+        if (contact.getHomePhoneNumber() != null) { result = result + contact.getHomePhoneNumber(); }
+        if (contact.getMobilePhoneNumber() != null) { result = result + "\n" + contact.getMobilePhoneNumber(); }
+        if (contact.getWorkPhoneNumber() != null) { result = result + "\n" + contact.getWorkPhoneNumber(); }
+        return result;
+        */
+        return Arrays.asList(contact.getHomePhoneNumber(), contact.getMobilePhoneNumber(), contact.getWorkPhoneNumber())
+                .stream().filter((s) -> !s.equals(""))      // Filter the flow of blank lines
+                .map(ContactPhoneTests::cleanedPhone)       // The application features to the stream
+                .collect(Collectors.joining("\n"));         // Merge lines delimited \n
     }
 
     public static String cleanedPhone(String phone) {

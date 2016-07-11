@@ -19,6 +19,8 @@ public class ContactData {
     private String mobilePhoneNumber;
     private String workPhoneNumber;
 
+    private String allPhoneNumber;
+
     private String group;
 
     private int birthdayDay;
@@ -41,6 +43,8 @@ public class ContactData {
         this.homePhoneNumber = ContactDataGenerator.generatePhoneNumber();
         this.mobilePhoneNumber = ContactDataGenerator.generatePhoneNumber();
         this.workPhoneNumber = ContactDataGenerator.generatePhoneNumber();
+
+        this.allPhoneNumber = homePhoneNumber + mobilePhoneNumber + workPhoneNumber;
 
         this.group = GroupDataGenerator.generateGroup();
 
@@ -86,6 +90,11 @@ public class ContactData {
 
     public ContactData setWorkPhoneNumber(String workPhoneNumber) {
         this.workPhoneNumber = workPhoneNumber;
+        return this;
+    }
+
+    public ContactData setAllPhoneNumber(String allPhoneNumber) {
+        this.allPhoneNumber = allPhoneNumber;
         return this;
     }
 
@@ -139,6 +148,10 @@ public class ContactData {
 
     public String getWorkPhoneNumber() {
         return this.workPhoneNumber;
+    }
+
+    public String getAllPhoneNumber() {
+        return this.allPhoneNumber;
     }
 
     public int getBirthdayDay() {

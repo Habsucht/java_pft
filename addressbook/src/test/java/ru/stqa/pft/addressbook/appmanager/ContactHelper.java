@@ -162,9 +162,9 @@ public class ContactHelper extends BaseHelper {
             int contactId = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             String firstName = element.findElements(By.tagName("td")).get(2).getText();
             String lastName = element.findElements(By.tagName("td")).get(1).getText();
-            String[] phones = element.findElements(By.tagName("td")).get(5).getText().split("\n");
+            String allPhones = element.findElements(By.tagName("td")).get(5).getText();
             collection.add(new ContactData(contactId).setFirstName(firstName).setLastName(lastName)
-                    .setHomePhoneNumber(phones[0]).setMobilePhoneNumber(phones[1]).setWorkPhoneNumber(phones[2]));
+                    .setAllPhoneNumber(allPhones));
         }
     }
 }
