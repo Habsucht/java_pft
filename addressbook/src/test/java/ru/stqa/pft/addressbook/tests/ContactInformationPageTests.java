@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.stream.Collectors;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
+
 public class ContactInformationPageTests extends BaseTests {
     @BeforeMethod
     public void ensurePrecondition() {
@@ -30,10 +33,8 @@ public class ContactInformationPageTests extends BaseTests {
         ContactData contactInfoFromEditForm = app.getContactHelper().infoFromEditForm(contact);
 
         String allInfoFromInfoPage = app.getContactHelper().infoFromInfoPage(contact);
-        String allInfoFromEditForm = mergeInfo(contactInfoFromEditForm);
 
-        System.out.println(allInfoFromInfoPage);
-        System.out.println(allInfoFromEditForm);
+        assertThat(allInfoFromInfoPage, equalTo(mergeInfo(contactInfoFromEditForm)));
     }
 
     public static String mergeInfo(ContactData contact) {
@@ -65,18 +66,25 @@ public class ContactInformationPageTests extends BaseTests {
         return firstParagraph + "\n\n" + secondParagraph + "\n\n" + thirdParagraph + "\n\n" + fourthParagraph;
     }
 
-    private static int getAge(ContactData contact) {
+    private static long getAge(ContactData contact) {
         int month = 0;
         for (int i = 0; i < ContactDataGenerator.getBirthdayMonth().length; i++) {
-            if (contact.getBirthdayMonth().equals(ContactDataGenerator.getBirthdayMonth()[i])) month = i + 1;  }
+            if (contact.getBirthdayMonth().equals(ContactDataGenerator.getBirthdayMonth()[i])) { month = i; }  }
 
+        // Get current date time with Date()
         Date date = new Date();
-        System.out.println(date.getYear());
 
-        int age = (date.getYear() - Integer.parseInt(contact.getBirthdayYear()));
+        // Get birthday contact date time with Date()
+        Date dateBirthday = new Date(Integer.parseInt(contact.getBirthdayYear()) - 1900, month, Integer.parseInt(contact.getBirthdayDay()));
 
-        if (date.getDay()*date.getMonth() - Integer.parseInt(contact.getBirthdayDay())*month >= 0) { age = age + 1; }
-
+        int age = date.getYear() - (dateBirthday.getYear());
+        if (date.getMonth() < month) {
+            age = age - 1;
+        } else if (date.getMonth() == month) {
+            if (date.getDate() <= Integer.parseInt(contact.getBirthdayDay())) {
+                age = age - 1;
+            }
+        }
         return age;
     }
 }
