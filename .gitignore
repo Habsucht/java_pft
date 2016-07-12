@@ -1,7 +1,8 @@
 #Ignore Line
+*.exe
 
 # Gradle files
-.gradle
+# .gradle
 /gradle
 /build
 

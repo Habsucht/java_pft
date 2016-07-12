@@ -9,9 +9,9 @@ import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.data.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class GroupHelper extends BaseHelper {
 
@@ -33,13 +33,17 @@ public class GroupHelper extends BaseHelper {
         }
     }
 
-    public void selectGroup(int index) {
+    public void selectGroupByIndex(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
         /*
         if (!wd.findElement(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input")).isSelected()) {
            click(By.xpath("//div[@id='content']/form/span[" + numGroup + "]/input"));
         }
         */
+    }
+
+    public void selectGroupById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
     public void deleteGroup() {
@@ -60,13 +64,29 @@ public class GroupHelper extends BaseHelper {
 
     public List<GroupData> getGroupList() {
         List<GroupData> groupList = new ArrayList<>();
+        AllGroups(groupList);
+        return groupList;
+    }
+
+    public Set<GroupData> getGroupSet() {
+        Set<GroupData> groupSet = new HashSet<>();
+        AllGroups(groupSet);
+        return groupSet;
+    }
+
+    public Groups all() {
+        Groups groups = new Groups();
+        AllGroups(groups);
+        return groups;
+    }
+
+    private void AllGroups(Collection<GroupData> collection) {
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
 
         for (WebElement element : elements) {
             int groupId = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             String name = element.getText();
-            groupList.add(new GroupData(groupId, name, null, null));
+            collection.add(new GroupData().setGroupId(groupId).setGroupName(name));
         }
-        return groupList;
     }
 }

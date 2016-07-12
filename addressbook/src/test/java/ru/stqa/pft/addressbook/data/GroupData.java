@@ -9,16 +9,9 @@ import ru.stqa.pft.addressbook.generator.GroupDataGenerator;
 public class GroupData {
     private int groupId;
 
-    private final String groupName;
-    private final String header;
-    private final String footer;
-
-    public GroupData(int groupId, String groupName, String header, String footer) {
-        this.groupId = groupId;
-        this.groupName = groupName;
-        this.header = header;
-        this.footer = footer;
-    }
+    private String groupName;
+    private String header;
+    private String footer;
 
     public GroupData() {
         String group = GroupDataGenerator.generateGroup();
@@ -29,12 +22,28 @@ public class GroupData {
         this.footer = group;
     }
 
-    public int getGroupId() {
-        return groupId;
+    public GroupData setGroupId(int groupId) {
+        this.groupId = groupId;
+        return this;
     }
 
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
+    public GroupData setGroupName(String groupName) {
+        this.groupName = groupName;
+        return this;
+    }
+
+    public GroupData setGroupHeader(String header) {
+        this.header = header;
+        return this;
+    }
+
+    public GroupData setGroupFooter(String footer) {
+        this.footer = footer;
+        return this;
+    }
+
+    public int getGroupId() {
+        return groupId;
     }
 
     public String getGroupName() {
