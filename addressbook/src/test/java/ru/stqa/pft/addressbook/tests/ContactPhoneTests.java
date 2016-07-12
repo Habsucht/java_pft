@@ -24,7 +24,10 @@ public class ContactPhoneTests extends BaseTests{
     @Test
     // Base test phone contacts
     public static void testContactPhone() {
+        // Selection of accidental contact
         ContactData contact = app.getContactHelper().all().iterator().next();
+
+        // Data collection from the contact
         ContactData contactInfoFromEditForm = app.getContactHelper().infoFromEditForm(contact);
 
         assertThat(contact.getAllPhoneNumber(), equalTo(mergePhone(contactInfoFromEditForm)));

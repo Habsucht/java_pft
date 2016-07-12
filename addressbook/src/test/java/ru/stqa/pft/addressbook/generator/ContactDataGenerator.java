@@ -24,6 +24,14 @@ public class ContactDataGenerator extends BaseGenerator {
     private static String[] birthdayMonth = {"January", "February", "March", "April", "May", "June", "July", "August",
             "September", "October", "November", "December"};
 
+    public static String[] getBirthdayMonth() {
+        return birthdayMonth;
+    }
+
+    public static void setBirthdayMonth(String[] birthdayMonth) {
+        ContactDataGenerator.birthdayMonth = birthdayMonth;
+    }
+
     public static String generateFirstName() {
         return firstName[generateRandom(firstName.length)];
     }
@@ -55,15 +63,15 @@ public class ContactDataGenerator extends BaseGenerator {
         return firstName + "." + lastName + "@" + companyName + domain[generateRandom(domain.length)];
     }
 
-    public static int generateDay() {
-        return generateRandom(30) + 1;
+    public static String generateDay() {
+        return String.valueOf(generateRandom(30) + 1);
     }
 
     public static String generateMonth() {
         return birthdayMonth[generateRandom(birthdayMonth.length)];
     }
 
-    public static int generateYear() {
-        return generateRandom(50) + 1950;
+    public static String generateYear() {
+        return String.valueOf(generateRandom(50) + 1950);
     }
 }

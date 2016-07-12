@@ -32,12 +32,37 @@ public class ContactData {
 
     private String group;
 
-    private int birthdayDay;
+    private String birthdayDay;
     private String birthdayMonth;
-    private int birthdayYear;
+    private String birthdayYear;
 
     public ContactData(int contactId) {
         this.contactId = contactId;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "contactId=" + contactId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", postAddress='" + postAddress + '\'' +
+                ", homePhoneNumber='" + homePhoneNumber + '\'' +
+                ", mobilePhoneNumber='" + mobilePhoneNumber + '\'' +
+                ", workPhoneNumber='" + workPhoneNumber + '\'' +
+                ", faxPhoneNumber='" + faxPhoneNumber + '\'' +
+                ", allPhoneNumber='" + allPhoneNumber + '\'' +
+                ", emailAddress1='" + emailAddress1 + '\'' +
+                ", emailAddress2='" + emailAddress2 + '\'' +
+                ", emailAddress3='" + emailAddress3 + '\'' +
+                ", allEmailAddress='" + allEmailAddress + '\'' +
+                ", group='" + group + '\'' +
+                ", birthdayDay=" + birthdayDay +
+                ", birthdayMonth='" + birthdayMonth + '\'' +
+                ", birthdayYear=" + birthdayYear +
+                '}';
     }
 
     public ContactData() {
@@ -147,7 +172,7 @@ public class ContactData {
         return this;
     }
 
-    public ContactData setBirthdayDay(int birthdayDay) {
+    public ContactData setBirthdayDay(String birthdayDay) {
         this.birthdayDay = birthdayDay;
         return this;
     }
@@ -157,7 +182,7 @@ public class ContactData {
         return this;
     }
 
-    public ContactData setBirthdayYear(int birthdayYear) {
+    public ContactData setBirthdayYear(String birthdayYear) {
         this.birthdayYear = birthdayYear;
         return this;
     }
@@ -222,7 +247,7 @@ public class ContactData {
         return allEmailAddress;
     }
 
-    public int getBirthdayDay() {
+    public String getBirthdayDay() {
         return this.birthdayDay;
     }
 
@@ -230,21 +255,12 @@ public class ContactData {
         return this.birthdayMonth;
     }
 
-    public int getBirthdayYear() {
+    public String getBirthdayYear() {
         return this.birthdayYear;
     }
 
     public String getGroup() {
         return this.group;
-    }
-
-    @Override
-    public String toString() {
-        return "ContactData{" +
-                "contactId=" + contactId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
     }
 
     @Override

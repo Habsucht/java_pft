@@ -24,7 +24,10 @@ public class ContactEmailTests extends BaseTests {
     @Test
     // Base test email contacts
     public static void testContactEmail() {
+        // Selection of accidental contact
         ContactData contact = app.getContactHelper().all().iterator().next();
+
+        // Data collection from the contact
         ContactData contactInfoFromEditForm = app.getContactHelper().infoFromEditForm(contact);
 
         assertThat(contact.getAllEmailAddress(), equalTo(mergeEmails(contactInfoFromEditForm)));
