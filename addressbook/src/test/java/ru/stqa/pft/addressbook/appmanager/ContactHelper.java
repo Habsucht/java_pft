@@ -48,6 +48,8 @@ public class ContactHelper extends BaseHelper {
         }
         System.out.println("nickName: " + contactData.getNickName());
 
+        if (contactData.getPhoto() != null) { attach(By.name("photo"), contactData.getPhoto()); }
+
         if (!wd.findElement(By.name("company")).getText().equals(contactData.getCompanyName())) {
             type(By.name("company"), contactData.getCompanyName());
         }
@@ -104,7 +106,7 @@ public class ContactHelper extends BaseHelper {
         }
 
         // Fill contact birthday day
-        select(By.xpath("//div[@id='content']/form/select[1]")).selectByIndex(Integer.parseInt(contactData.getBirthdayDay() + 1));
+        select(By.xpath("//div[@id='content']/form/select[1]")).selectByValue(contactData.getBirthdayDay());
         System.out.println("birthdayDay: " + contactData.getBirthdayDay());
 
         // Fill contact birthday month

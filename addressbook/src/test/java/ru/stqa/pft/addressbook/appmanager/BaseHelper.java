@@ -33,14 +33,14 @@ public class BaseHelper {
     }
 
     void attach(By locator, File file) {
-        if (text != null) {
+        if (file != null) {
             wd.findElement(locator).sendKeys(file.getAbsolutePath());
+            System.out.println("Add file " + file.getAbsolutePath());
         }
     }
 
     Select select(By locator) {
-        Select select = new Select(wd.findElement(locator));
-        return select;
+        return new Select(wd.findElement(locator));
     }
 
     void click(By locator) {

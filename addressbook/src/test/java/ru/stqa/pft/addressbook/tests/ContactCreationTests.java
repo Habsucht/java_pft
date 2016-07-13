@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.List;
 
@@ -28,6 +29,8 @@ public class ContactCreationTests extends BaseTests {
         List<ContactData> beforeContactList = app.getContactHelper().getContactList();
 
         ContactData contact = new ContactData();
+
+        contact.setPhoto(new File("src/test/resources/image1.jpg"));
 
         app.getContactHelper().initContactCreation();
         app.getContactHelper().fillContactForm(contact);
@@ -70,6 +73,8 @@ public class ContactCreationTests extends BaseTests {
         Contacts beforeContactSet = app.getContactHelper().all();
 
         ContactData contact = new ContactData();
+
+        contact.setPhoto(new File("src/test/resources/image2.png"));
 
         app.getContactHelper().initContactCreation();
         app.getContactHelper().fillContactForm(contact);
