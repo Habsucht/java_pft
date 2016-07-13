@@ -9,7 +9,10 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.File;
 import java.util.List;
+
+import static java.awt.SystemColor.text;
 
 public class BaseHelper {
     WebDriver wd;
@@ -26,6 +29,12 @@ public class BaseHelper {
                 wd.findElement(locator).clear();
                 wd.findElement(locator).sendKeys(text);
             }
+        }
+    }
+
+    void attach(By locator, File file) {
+        if (text != null) {
+            wd.findElement(locator).sendKeys(file.getAbsolutePath());
         }
     }
 
