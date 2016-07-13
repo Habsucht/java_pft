@@ -34,7 +34,7 @@ public class ContactInformationPageTests extends BaseTests {
 
         String allInfoFromInfoPage = app.getContactHelper().infoFromInfoPage(contact);
 
-        assertThat(allInfoFromInfoPage, equalTo(mergeInfo(contactInfoFromEditForm)));
+        assertThat(allInfoFromInfoPage.replace("\n\n", "\n"), equalTo(mergeInfo(contactInfoFromEditForm).replace("\n\n", "\n")));
     }
 
     public static String mergeInfo(ContactData contact) {
