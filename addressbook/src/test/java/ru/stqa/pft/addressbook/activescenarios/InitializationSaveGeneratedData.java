@@ -36,6 +36,11 @@ public class InitializationSaveGeneratedData {
         saveGroups(count, new File(file));
     }
 
+    public static void save(Object object, File file) throws IOException {
+        Writer writer = new FileWriter(file);
+        writer.write(object.toString());
+        writer.close();
+    }
 
     public static void saveGroups(int count, File file) throws IOException {
         Writer writer = new FileWriter(file);
