@@ -24,7 +24,7 @@ public class GroupModificationTests extends BaseTests{
 
         //  Checking for the presence of at least one group with the subsequent creation
         if (!app.getGroupHelper().isThereAGroup()) {
-            GroupCreationTests.testGroupCreationVer1();
+            GroupCreationTests.testGroupCreationVer1(new GroupData());
         }
     }
 

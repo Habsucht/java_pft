@@ -6,29 +6,38 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class ContactCreationTests extends BaseTests {
+    @DataProvider
+    public Iterator<Object[]> validContacts() {
+        List<Object[]> list = new ArrayList<>();
+        list.add(new Object[] {new ContactData()});
+        list.add(new Object[] {new ContactData()});
+        return list.iterator();
+    }
+
     @BeforeMethod
     public void ensurePrecondition() {
         app.getNavigationHelper().gotoHomePage();
     }
 
-    @Test
+    @Test(dataProvider = "validContacts")
     // Base test creation contact
-    public static void testContactCreationVer1() {
+    public static void testContactCreationVer1(ContactData contact) {
         List<ContactData> beforeContactList = app.getContactHelper().getContactList();
-
-        ContactData contact = new ContactData();
 
         contact.setPhoto(new File("src/test/resources/image1.jpg"));
 
@@ -67,12 +76,10 @@ public class ContactCreationTests extends BaseTests {
         Assert.assertEquals(new HashSet<Object>(beforeContactList), new HashSet<Object>(afterContactList));
     }
 
-    @Test
+    @Test(dataProvider = "validContacts")
     // Test creation contact fluent implementation
-    public static void testContactCreationVer2() {
+    public static void testContactCreationVer2(ContactData contact) {
         Contacts beforeContactSet = app.getContactHelper().all();
-
-        ContactData contact = new ContactData();
 
         contact.setPhoto(new File("src/test/resources/image2.png"));
 

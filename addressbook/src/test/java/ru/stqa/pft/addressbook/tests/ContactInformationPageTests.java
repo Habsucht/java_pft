@@ -19,7 +19,7 @@ public class ContactInformationPageTests extends BaseTests {
 
         // Checking for the presence of at least one contact with the subsequent creation
         if (!app.getContactHelper().isThereAContact()) {
-            ContactCreationTests.testContactCreationVer1();
+            ContactCreationTests.testContactCreationVer1(new ContactData());
         }
     }
 

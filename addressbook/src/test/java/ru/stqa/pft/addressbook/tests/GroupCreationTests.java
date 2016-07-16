@@ -6,28 +6,39 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import ru.stqa.pft.addressbook.data.ContactData;
 import ru.stqa.pft.addressbook.data.GroupData;
 
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.Groups;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class GroupCreationTests extends BaseTests {
+    @DataProvider
+    public Iterator<Object[]> validGroups() {
+        List<Object[]> list = new ArrayList<>();
+        list.add(new Object[] {new GroupData()});
+        list.add(new Object[] {new GroupData()});
+        return list.iterator();
+    }
+
     @BeforeMethod
     public void ensurePrecondition() {
         app.getNavigationHelper().gotoGroupPage();
     }
 
-    @Test
+    @Test(dataProvider = "validGroups")
     // Base test creation group
-    public static void testGroupCreationVer1() {
+    public static void testGroupCreationVer1(GroupData group) {
         Set<GroupData> beforeGroupSet = app.getGroupHelper().getGroupSet();
-
-        GroupData group = new GroupData();
 
         app.getGroupHelper().initGroupCreation();
         app.getGroupHelper().fillGroupForm(group);
@@ -55,12 +66,10 @@ public class GroupCreationTests extends BaseTests {
         Assert.assertEquals(beforeGroupSet, afterGroupSet);
     }
 
-    @Test
+    @Test(dataProvider = "validGroups")
     // Test creation group fluent implementation
-    public static void testGroupCreationVer2() {
+    public static void testGroupCreationVer2(GroupData group) {
         Groups beforeGroupSet = app.getGroupHelper().all();
-
-        GroupData group = new GroupData();
 
         app.getGroupHelper().initGroupCreation();
         app.getGroupHelper().fillGroupForm(group);
