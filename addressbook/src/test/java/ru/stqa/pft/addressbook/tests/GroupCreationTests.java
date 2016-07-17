@@ -7,7 +7,6 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
-import ru.stqa.pft.addressbook.data.ContactData;
 import ru.stqa.pft.addressbook.data.GroupData;
 
 import org.testng.annotations.Test;
