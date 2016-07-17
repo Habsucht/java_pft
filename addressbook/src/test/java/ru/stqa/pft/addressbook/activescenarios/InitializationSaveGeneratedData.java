@@ -30,6 +30,25 @@ public class InitializationSaveGeneratedData {
     @Parameter(names = "-d", description = "Format save data")
     private String format;
 
+    private static String savedGroups;
+    private static String savedContacts;
+
+    public static String getSavedGroups() {
+        return savedGroups;
+    }
+
+    private void setSavedGroups(String savedGroups) {
+        this.savedGroups = savedGroups;
+    }
+
+    public static String getSavedContacts() {
+        return savedContacts;
+    }
+
+    private void setSavedContacts(String savedContacts) {
+        this.savedContacts = savedContacts;
+    }
+
     public static void main(String[] args) throws IOException {
         InitializationSaveGeneratedData initializationSaveGeneratedData = new InitializationSaveGeneratedData();
         JCommander jCommander = new JCommander(initializationSaveGeneratedData);
@@ -47,9 +66,6 @@ public class InitializationSaveGeneratedData {
         if (directory == null) { directory = "addressbook/src/test/resources/"; }
         if (format == null) { format = "xml"; }
 
-        numberGroups = 3;
-        numberContacts = 3;
-
         List<Object> listGroups = new ArrayList<>();
         List<Object> listContacts = new ArrayList<>();
 
@@ -57,7 +73,10 @@ public class InitializationSaveGeneratedData {
         for (int i = 0; i < numberContacts; i++) { listContacts.add(new ContactData()); }
 
         save(listGroups, directory + "/groups." + format);
+        setSavedGroups(directory + "/groups." + format);
+
         save(listContacts, directory + "/contacts." + format);
+        setSavedContacts(directory + "/contacts." + format);
     }
 
     private void save(List<Object> list, String pathToTheFile) throws IOException {
@@ -67,7 +86,7 @@ public class InitializationSaveGeneratedData {
         Writer writer = new FileWriter(pathToTheFile);
 
         switch (format) {
-            case "csv":
+            case "Csv":
                 writer.write(convertAsCsv(list));
                 break;
             case "xml":
