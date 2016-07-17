@@ -64,7 +64,7 @@ public class InitializationSaveGeneratedData {
 
     void run() throws IOException {
         if (directory == null) { directory = "addressbook/src/test/resources/"; }
-        if (format == null) { format = "xml"; }
+        if (format == null) { format = "json"; }
 
         List<Object> listGroups = new ArrayList<>();
         List<Object> listContacts = new ArrayList<>();

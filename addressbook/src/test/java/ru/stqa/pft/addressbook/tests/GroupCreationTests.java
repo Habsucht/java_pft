@@ -4,6 +4,8 @@
 
 package ru.stqa.pft.addressbook.tests;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -41,7 +43,7 @@ public class GroupCreationTests extends BaseTests {
 
     @DataProvider
     public Iterator<Object[]> loadValidGroupsXml() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(InitializationSaveGeneratedData.getSavedGroups()));
+        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/groups.xml"));
         String xml = "";
         String line = reader.readLine();
         while (line != null) {
@@ -50,6 +52,20 @@ public class GroupCreationTests extends BaseTests {
         }
         XStream xStream = new XStream();
         List<GroupData> groups = (List<GroupData>) xStream.fromXML(xml);
+        return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+    }
+
+    @DataProvider
+    public Iterator<Object[]> loadValidGroupsJson() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/groups.json"));
+        String json = "";
+        String line = reader.readLine();
+        while (line != null) {
+            json += line;
+            line = reader.readLine();
+        }
+        Gson gson = new Gson();
+        List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>(){}.getType());
         return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 

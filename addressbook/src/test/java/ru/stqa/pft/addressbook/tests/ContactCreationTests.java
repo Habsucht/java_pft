@@ -4,6 +4,8 @@
 
 package ru.stqa.pft.addressbook.tests;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -47,6 +49,20 @@ public class ContactCreationTests extends BaseTests {
             XStream xStream = new XStream();
             List<ContactData> groups = (List<ContactData>) xStream.fromXML(xml);
             return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+    }
+
+    @DataProvider
+    public Iterator<Object[]> loadValidContactsJson() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.json"));
+        String json = "";
+        String line = reader.readLine();
+        while (line != null) {
+            json += line;
+            line = reader.readLine();
+        }
+        Gson gson = new Gson();
+        List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<GroupData>>(){}.getType());
+        return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
     @BeforeMethod
