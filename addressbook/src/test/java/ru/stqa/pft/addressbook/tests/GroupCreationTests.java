@@ -10,7 +10,6 @@ import com.thoughtworks.xstream.XStream;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
-import ru.stqa.pft.addressbook.activescenarios.InitializationSaveGeneratedData;
 import ru.stqa.pft.addressbook.data.GroupData;
 
 import org.testng.annotations.Test;
@@ -18,14 +17,12 @@ import ru.stqa.pft.addressbook.generator.BaseGenerator;
 import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -11,7 +11,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.activescenarios.InitializationSaveGeneratedData;
 import ru.stqa.pft.addressbook.data.ContactData;
 import ru.stqa.pft.addressbook.data.GroupData;
 import ru.stqa.pft.addressbook.generator.BaseGenerator;

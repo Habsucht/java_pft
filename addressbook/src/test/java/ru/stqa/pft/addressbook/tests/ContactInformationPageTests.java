@@ -37,7 +37,7 @@ public class ContactInformationPageTests extends BaseTests {
         assertThat(allInfoFromInfoPage.replace("\n\n", "\n"), equalTo(mergeInfo(contactInfoFromEditForm).replace("\n\n", "\n")));
     }
 
-    public static String mergeInfo(ContactData contact) {
+    private static String mergeInfo(ContactData contact) {
         String firstParagraph = contact.getFirstName() + " " + contact.getLastName() + "\n"
                 + Arrays.asList(contact.getNickName(), contact.getCompanyName(), contact.getPostAddress())
                 .stream().filter((s) -> !s.equals(""))      // Filter the flow of blank lines
