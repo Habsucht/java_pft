@@ -39,7 +39,7 @@ public class ContactCreationTests extends BaseTests {
 
     @DataProvider
     public Iterator<Object[]> loadValidContactsXml() throws IOException {
-            BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.xml"));
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.xml"))) {
             String xml = "";
             String line = reader.readLine();
             while (line != null) {
@@ -48,21 +48,24 @@ public class ContactCreationTests extends BaseTests {
             }
             XStream xStream = new XStream();
             List<ContactData> groups = (List<ContactData>) xStream.fromXML(xml);
-            return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+            return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+            }
     }
 
     @DataProvider
     public Iterator<Object[]> loadValidContactsJson() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.json"));
-        String json = "";
-        String line = reader.readLine();
-        while (line != null) {
-            json += line;
-            line = reader.readLine();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.json"))) {
+            String json = "";
+            String line = reader.readLine();
+            while (line != null) {
+                json += line;
+                line = reader.readLine();
+            }
+            Gson gson = new Gson();
+            List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<GroupData>>() {
+            }.getType());
+            return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
         }
-        Gson gson = new Gson();
-        List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<GroupData>>(){}.getType());
-        return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
     @BeforeMethod

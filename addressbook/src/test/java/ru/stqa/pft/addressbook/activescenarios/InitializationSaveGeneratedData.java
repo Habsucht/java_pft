@@ -83,23 +83,22 @@ public class InitializationSaveGeneratedData {
         File file = new File(pathToTheFile);
         if (!file.exists()) { file.createNewFile(); }
 
-        Writer writer = new FileWriter(pathToTheFile);
-
-        switch (format) {
-            case "Csv":
-                writer.write(convertAsCsv(list));
-                break;
-            case "xml":
-                writer.write(convertAsXml(list));
-                break;
-            case "json":
-                writer.write(convertAsJson(list));
-                break;
-            default:
-                System.out.println("Unrecognized format " + format);
-                break;
+        try (Writer writer = new FileWriter(pathToTheFile)) {
+            switch (format) {
+                case "Csv":
+                    writer.write(convertAsCsv(list));
+                    break;
+                case "xml":
+                    writer.write(convertAsXml(list));
+                    break;
+                case "json":
+                    writer.write(convertAsJson(list));
+                    break;
+                default:
+                    System.out.println("Unrecognized format " + format);
+                    break;
+            }
         }
-        writer.close();
     }
 
     private String convertAsCsv(List<Object> list) {
