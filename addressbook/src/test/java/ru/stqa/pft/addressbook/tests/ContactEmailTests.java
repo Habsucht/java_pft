@@ -1,3 +1,6 @@
+/**
+ *  A class to test the valid email address of contact data
+ */
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.BeforeMethod;

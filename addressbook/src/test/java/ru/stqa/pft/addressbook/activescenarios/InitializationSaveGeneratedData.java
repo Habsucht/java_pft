@@ -1,3 +1,6 @@
+/**
+ *  A class to save data
+ */
 package ru.stqa.pft.addressbook.activescenarios;
 
 import com.beust.jcommander.JCommander;
