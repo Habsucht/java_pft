@@ -7,12 +7,17 @@ package ru.stqa.pft.addressbook.data;
 import ru.stqa.pft.addressbook.generator.ContactDataGenerator;
 import ru.stqa.pft.addressbook.generator.GroupDataGenerator;
 
+import java.io.File;
+
 public class ContactData {
     private int contactId;
 
     private String firstName;
     private String lastName;
     private String nickName;
+
+    private File photo;
+
     private String companyName;
 
     private String postAddress;
@@ -112,6 +117,11 @@ public class ContactData {
         return this;
     }
 
+    public ContactData setPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
+
     public ContactData setCompanyName(String companyName) {
         this.companyName = companyName;
         return this;
@@ -201,6 +211,10 @@ public class ContactData {
 
     public String getNickName() {
         return this.nickName;
+    }
+
+    public File getPhoto() {
+        return this.photo;
     }
 
     public String getCompanyName() {

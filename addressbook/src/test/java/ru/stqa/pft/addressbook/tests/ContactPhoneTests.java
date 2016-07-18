@@ -1,3 +1,6 @@
+/**
+ *  A class to test the valid phone of contact data
+ */
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.BeforeMethod;
@@ -17,7 +20,7 @@ public class ContactPhoneTests extends BaseTests{
 
         // Checking for the presence of at least one contact with the subsequent creation
         if (!app.getContactHelper().isThereAContact()) {
-            ContactCreationTests.testContactCreationVer1();
+            ContactCreationTests.testContactCreationVer1(new ContactData());
         }
     }
 
@@ -33,7 +36,7 @@ public class ContactPhoneTests extends BaseTests{
         assertThat(contact.getAllPhoneNumber(), equalTo(mergePhone(contactInfoFromEditForm)));
     }
 
-    public static String mergePhone(ContactData contact) {
+    private static String mergePhone(ContactData contact) {
         /*
         String result = "";
         if (contact.getHomePhoneNumber() != null) { result = result + contact.getHomePhoneNumber(); }
@@ -47,7 +50,7 @@ public class ContactPhoneTests extends BaseTests{
                 .collect(Collectors.joining("\n"));         // Merge lines delimited \n
     }
 
-    public static String cleanedPhone(String phone) {
+    private static String cleanedPhone(String phone) {
         return phone.replaceAll("\\s", "").replaceAll("[-+()]", "");
     }
 }

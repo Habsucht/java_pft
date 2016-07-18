@@ -19,7 +19,7 @@ public class ContactInformationPageTests extends BaseTests {
 
         // Checking for the presence of at least one contact with the subsequent creation
         if (!app.getContactHelper().isThereAContact()) {
-            ContactCreationTests.testContactCreationVer1();
+            ContactCreationTests.testContactCreationVer1(new ContactData());
         }
     }
 
@@ -34,10 +34,10 @@ public class ContactInformationPageTests extends BaseTests {
 
         String allInfoFromInfoPage = app.getContactHelper().infoFromInfoPage(contact);
 
-        assertThat(allInfoFromInfoPage, equalTo(mergeInfo(contactInfoFromEditForm)));
+        assertThat(allInfoFromInfoPage.replace("\n\n", "\n"), equalTo(mergeInfo(contactInfoFromEditForm).replace("\n\n", "\n")));
     }
 
-    public static String mergeInfo(ContactData contact) {
+    private static String mergeInfo(ContactData contact) {
         String firstParagraph = contact.getFirstName() + " " + contact.getLastName() + "\n"
                 + Arrays.asList(contact.getNickName(), contact.getCompanyName(), contact.getPostAddress())
                 .stream().filter((s) -> !s.equals(""))      // Filter the flow of blank lines

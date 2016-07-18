@@ -1,3 +1,6 @@
+/**
+ *  A class to test the valid post address of contact data
+ */
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.BeforeMethod;
@@ -14,7 +17,7 @@ public class ContactPostAddressTests extends BaseTests {
 
         // Checking for the presence of at least one contact with the subsequent creation
         if (!app.getContactHelper().isThereAContact()) {
-            ContactCreationTests.testContactCreationVer1();
+            ContactCreationTests.testContactCreationVer1(new ContactData());
         }
     }
 

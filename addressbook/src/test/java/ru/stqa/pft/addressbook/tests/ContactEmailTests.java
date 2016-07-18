@@ -1,3 +1,6 @@
+/**
+ *  A class to test the valid email address of contact data
+ */
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.BeforeMethod;
@@ -17,7 +20,7 @@ public class ContactEmailTests extends BaseTests {
 
         // Checking for the presence of at least one contact with the subsequent creation
         if (!app.getContactHelper().isThereAContact()) {
-            ContactCreationTests.testContactCreationVer1();
+            ContactCreationTests.testContactCreationVer1(new ContactData());
         }
     }
 
@@ -33,7 +36,7 @@ public class ContactEmailTests extends BaseTests {
         assertThat(contact.getAllEmailAddress(), equalTo(mergeEmails(contactInfoFromEditForm)));
     }
 
-    public static String mergeEmails(ContactData contact) {
+    private static String mergeEmails(ContactData contact) {
         return Arrays.asList(contact.getEmailAddress1(), contact.getEmailAddress2(), contact.getEmailAddress3())
                 .stream().filter((s) -> !s.equals(""))      // Filter the flow of blank lines
                 .collect(Collectors.joining("\n"));         // Merge lines delimited \n
