@@ -1,9 +1,10 @@
-package ru.stqa.pft.addressbook.tests;
+package ru.stqa.pft.addressbook.tests.ui.contacts;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.ContactData;
 import ru.stqa.pft.addressbook.generator.ContactDataGenerator;
+import ru.stqa.pft.addressbook.tests.BaseTests;
 
 import java.util.Arrays;
 import java.util.Date;

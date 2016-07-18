@@ -2,13 +2,14 @@
  *  A class to test the contact removal
  */
 
-package ru.stqa.pft.addressbook.tests;
+package ru.stqa.pft.addressbook.tests.ui.contacts;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.tests.BaseTests;
 
 import java.util.List;
 

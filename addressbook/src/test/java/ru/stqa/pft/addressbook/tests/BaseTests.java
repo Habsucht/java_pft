@@ -12,7 +12,7 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 
 public class BaseTests {
 
-    static final ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
+    public static final ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
 
     @BeforeSuite
     public static void setUp() throws Exception {
