@@ -6,7 +6,7 @@ package ru.stqa.pft.addressbook.tests.ui.contacts;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.ContactData;
-import ru.stqa.pft.addressbook.tests.BaseTests;
+import ru.stqa.pft.addressbook.tests.ui.BaseTests;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;

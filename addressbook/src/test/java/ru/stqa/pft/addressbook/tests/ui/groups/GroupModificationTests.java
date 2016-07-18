@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
-import ru.stqa.pft.addressbook.tests.BaseTests;
+import ru.stqa.pft.addressbook.tests.ui.BaseTests;
 
 import java.util.HashSet;
 import java.util.List;

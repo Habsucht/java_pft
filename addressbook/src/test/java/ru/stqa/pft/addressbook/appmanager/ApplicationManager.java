@@ -4,7 +4,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -39,7 +38,7 @@ public class ApplicationManager {
 
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
-        properties.load(new FileReader(new File(String.format("src/test/resourses/%s.properties", target))));
+        properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
 
         //Check to run a browser
         switch (browser) {

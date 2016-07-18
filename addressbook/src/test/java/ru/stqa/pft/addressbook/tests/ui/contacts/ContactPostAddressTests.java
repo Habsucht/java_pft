@@ -6,7 +6,7 @@ package ru.stqa.pft.addressbook.tests.ui.contacts;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.ContactData;
-import ru.stqa.pft.addressbook.tests.BaseTests;
+import ru.stqa.pft.addressbook.tests.ui.BaseTests;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;

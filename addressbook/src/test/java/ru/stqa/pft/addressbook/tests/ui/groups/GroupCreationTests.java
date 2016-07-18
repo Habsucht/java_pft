@@ -15,7 +15,7 @@ import ru.stqa.pft.addressbook.data.GroupData;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.generator.BaseGenerator;
 import ru.stqa.pft.addressbook.model.Groups;
-import ru.stqa.pft.addressbook.tests.BaseTests;
+import ru.stqa.pft.addressbook.tests.ui.BaseTests;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
