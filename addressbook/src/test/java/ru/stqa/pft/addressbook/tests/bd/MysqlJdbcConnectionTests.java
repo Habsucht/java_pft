@@ -8,12 +8,12 @@ import ru.stqa.pft.addressbook.model.Groups;
 
 import java.sql.*;
 
-public class MysqlConnectionTests {
-
+public class MysqlJdbcConnectionTests {
     @Test
     public void testDbConnectionForJDBC() {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/addressbook?useSSL=false&serverTimezone=UTC&user=root&password=");
+            Connection connection = DriverManager
+                    .getConnection("jdbc:mysql://localhost:3306/addressbook?useSSL=false&serverTimezone=UTC&user=root&password=");
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery("SELECT group_id, group_name, group_header, group_footer FROM group_list");
@@ -26,8 +26,8 @@ public class MysqlConnectionTests {
                         .setGroupFooter(resultSet.getString("group_footer")));
             }
 
-            resultSet = statement.executeQuery(
-                    "SELECT id, firstname, lastname, nickname, company, address, home, mobile, work, fax, email, email2, email3, bday, bmonth, byear FROM addressbook");
+            resultSet = statement
+                    .executeQuery("SELECT id, firstname, lastname, nickname, company, address, home, mobile, work, fax, email, email2, email3, bday, bmonth, byear FROM addressbook");
             Contacts contacts = new Contacts();
             while (resultSet.next()) {
                 contacts.add(new ContactData()
@@ -53,8 +53,8 @@ public class MysqlConnectionTests {
             statement.close();
             connection.close();
 
-            System.out.println(groups);
-            System.out.println(contacts);
+            groups.forEach(System.out::println);
+            contacts.forEach(System.out::println);
 
         } catch (SQLException ex) {
             // handle any errors
@@ -62,10 +62,5 @@ public class MysqlConnectionTests {
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
-    }
-
-    @Test
-    public void testDbConnectionForHibernate() {
-
     }
 }

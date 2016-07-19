@@ -59,14 +59,6 @@ public class GroupData {
     }
 
     @Override
-    public String toString() {
-        return "GroupData{" +
-                "groupId='" + groupId + '\'' +
-                ", groupName='" + groupName + '\'' +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -76,6 +68,16 @@ public class GroupData {
         if (groupId != groupData.groupId) return false;
         return groupName != null ? groupName.equals(groupData.groupName) : groupData.groupName == null;
 
+    }
+
+    @Override
+    public String toString() {
+        return "GroupData{" +
+                "groupId=" + groupId +
+                ", groupName='" + groupName + '\'' +
+                ", header='" + header + '\'' +
+                ", footer='" + footer + '\'' +
+                '}';
     }
 
     @Override

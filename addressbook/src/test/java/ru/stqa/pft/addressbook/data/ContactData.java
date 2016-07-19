@@ -45,30 +45,6 @@ public class ContactData {
         this.contactId = contactId;
     }
 
-    @Override
-    public String toString() {
-        return "ContactData{" +
-                "contactId=" + contactId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", nickName='" + nickName + '\'' +
-                ", companyName='" + companyName + '\'' +
-                ", postAddress='" + postAddress + '\'' +
-                ", homePhoneNumber='" + homePhoneNumber + '\'' +
-                ", mobilePhoneNumber='" + mobilePhoneNumber + '\'' +
-                ", workPhoneNumber='" + workPhoneNumber + '\'' +
-                ", faxPhoneNumber='" + faxPhoneNumber + '\'' +
-                ", allPhoneNumber='" + allPhoneNumber + '\'' +
-                ", emailAddress1='" + emailAddress1 + '\'' +
-                ", emailAddress2='" + emailAddress2 + '\'' +
-                ", emailAddress3='" + emailAddress3 + '\'' +
-                ", allEmailAddress='" + allEmailAddress + '\'' +
-                ", group='" + group + '\'' +
-                ", birthdayDay=" + birthdayDay +
-                ", birthdayMonth='" + birthdayMonth + '\'' +
-                ", birthdayYear=" + birthdayYear +
-                '}';
-    }
 
     public ContactData() {
         this.contactId = 0;
@@ -287,7 +263,31 @@ public class ContactData {
         if (contactId != that.contactId) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
+    }
 
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "contactId=" + contactId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", postAddress='" + postAddress + '\'' +
+                ", homePhoneNumber='" + homePhoneNumber + '\'' +
+                ", mobilePhoneNumber='" + mobilePhoneNumber + '\'' +
+                ", workPhoneNumber='" + workPhoneNumber + '\'' +
+                ", faxPhoneNumber='" + faxPhoneNumber + '\'' +
+                ", allPhoneNumber='" + allPhoneNumber + '\'' +
+                ", emailAddress1='" + emailAddress1 + '\'' +
+                ", emailAddress2='" + emailAddress2 + '\'' +
+                ", emailAddress3='" + emailAddress3 + '\'' +
+                ", allEmailAddress='" + allEmailAddress + '\'' +
+                ", group='" + group + '\'' +
+                ", birthdayDay=" + birthdayDay +
+                ", birthdayMonth='" + birthdayMonth + '\'' +
+                ", birthdayYear=" + birthdayYear +
+                '}';
     }
 
     @Override

@@ -144,10 +144,22 @@ public class ContactHelper extends BaseHelper {
         String birthdayYear = wd.findElement(By.name("byear")).getAttribute("value");
 
         wd.navigate().back();
-        return new ContactData(contact.getContactId()).setFirstName(firstName).setLastName(lastName).setNickName(nickName).setCompanyName(companyName)
-                .setPostAddress(contactAddress).setHomePhoneNumber(homePhoneNumber).setMobilePhoneNumber(mobilePhoneNumber).setWorkPhoneNumber(workPhoneNumber)
-                .setFaxPhoneNumber(faxPhoneNumber).setEmailAddress1(emailAddress1).setEmailAddress2(emailAddress2).setEmailAddress3(emailAddress3)
-                .setBirthdayDay(birthdayDay).setBirthdayMonth(birthdayMonth).setBirthdayYear(birthdayYear);
+        return new ContactData(contact.getContactId())
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setNickName(nickName)
+                .setCompanyName(companyName)
+                .setPostAddress(contactAddress)
+                .setHomePhoneNumber(homePhoneNumber)
+                .setMobilePhoneNumber(mobilePhoneNumber)
+                .setWorkPhoneNumber(workPhoneNumber)
+                .setFaxPhoneNumber(faxPhoneNumber)
+                .setEmailAddress1(emailAddress1)
+                .setEmailAddress2(emailAddress2)
+                .setEmailAddress3(emailAddress3)
+                .setBirthdayDay(birthdayDay)
+                .setBirthdayMonth(birthdayMonth)
+                .setBirthdayYear(birthdayYear);
     }
 
     public String infoFromInfoPage(ContactData contact) {
