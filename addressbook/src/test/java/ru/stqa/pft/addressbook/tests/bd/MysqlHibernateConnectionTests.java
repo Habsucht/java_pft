@@ -42,7 +42,7 @@ public class MysqlHibernateConnectionTests {
         //List<GroupData> resultGroup = session.createQuery("from GroupData").list();
         //for ( GroupData group : resultGroup ) { System.out.println(group); }
 
-        List<ContactData> resultContact = session.createQuery("from ContactData where deprecate = '0000-00-00'").list();
+        List<ContactData> resultContact = session.createQuery("from ContactData where deprecated = '0000-00-00'").list();
         for ( ContactData contact : resultContact ) { System.out.println(contact); }
 
         session.getTransaction().commit();
