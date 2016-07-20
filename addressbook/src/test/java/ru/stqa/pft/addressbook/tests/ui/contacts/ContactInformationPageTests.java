@@ -59,8 +59,8 @@ public class ContactInformationPageTests extends BaseTests {
                 + " (www." + contact.getEmailAddress3().substring(contact.getEmailAddress3().indexOf("@") + 1) + ")"; }
 
         String fourthParagraph = "";
-        if (contact.getBirthdayDay() != null | contact.getBirthdayMonth() != null | contact.getBirthdayYear() != null) { fourthParagraph = fourthParagraph + "Birthday "; }
-        if (contact.getBirthdayDay() != null) { fourthParagraph = fourthParagraph + contact.getBirthdayDay() + ". "; }
+        if (contact.getBirthdayDay() != 0 | contact.getBirthdayMonth() != null | contact.getBirthdayYear() != null) { fourthParagraph = fourthParagraph + "Birthday "; }
+        if (contact.getBirthdayDay() != 0) { fourthParagraph = fourthParagraph + contact.getBirthdayDay() + ". "; }
         if (contact.getBirthdayMonth() != null) { fourthParagraph = fourthParagraph + contact.getBirthdayMonth() + " "; }
         if (contact.getBirthdayYear() != null) { fourthParagraph = fourthParagraph + contact.getBirthdayYear() + " (" + getAge(contact) + ")"; }
 
@@ -76,13 +76,13 @@ public class ContactInformationPageTests extends BaseTests {
         Date date = new Date();
 
         // Get birthday contact date time with Date()
-        Date dateBirthday = new Date(Integer.parseInt(contact.getBirthdayYear()) - 1900, month, Integer.parseInt(contact.getBirthdayDay()));
+        Date dateBirthday = new Date(Integer.parseInt(contact.getBirthdayYear()) - 1900, month, contact.getBirthdayDay());
 
         int age = date.getYear() - (dateBirthday.getYear());
         if (date.getMonth() < month) {
             age = age - 1;
         } else if (date.getMonth() == month) {
-            if (date.getDate() <= Integer.parseInt(contact.getBirthdayDay())) {
+            if (date.getDate() <= contact.getBirthdayDay()) {
                 age = age - 1;
             }
         }

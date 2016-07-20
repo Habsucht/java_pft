@@ -27,7 +27,8 @@ public class MysqlHibernateConnectionTests {
                     .buildSessionFactory();
         }
         catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+
             // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory so destroy it manually.
             StandardServiceRegistryBuilder
                     .destroy(registry);
@@ -39,8 +40,8 @@ public class MysqlHibernateConnectionTests {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        //List<GroupData> resultGroup = session.createQuery("from GroupData").list();
-        //for ( GroupData group : resultGroup ) { System.out.println(group); }
+        List<GroupData> resultGroup = session.createQuery("from GroupData").list();
+        for ( GroupData group : resultGroup ) { System.out.println(group); }
 
         List<ContactData> resultContact = session.createQuery("from ContactData where deprecated = '0000-00-00'").list();
         for ( ContactData contact : resultContact ) { System.out.println(contact); }

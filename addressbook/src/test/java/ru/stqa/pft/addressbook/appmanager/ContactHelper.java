@@ -106,7 +106,7 @@ public class ContactHelper extends BaseHelper {
         }
 
         // Fill contact birthday day
-        select(By.xpath("//div[@id='content']/form/select[1]")).selectByValue(contactData.getBirthdayDay());
+        select(By.xpath("//div[@id='content']/form/select[1]")).selectByValue(String.valueOf(contactData.getBirthdayDay()));
         System.out.println("birthdayDay: " + contactData.getBirthdayDay());
 
         // Fill contact birthday month
@@ -157,7 +157,7 @@ public class ContactHelper extends BaseHelper {
                 .setEmailAddress1(emailAddress1)
                 .setEmailAddress2(emailAddress2)
                 .setEmailAddress3(emailAddress3)
-                .setBirthdayDay(birthdayDay)
+                .setBirthdayDay(Integer.parseInt(birthdayDay))
                 .setBirthdayMonth(birthdayMonth)
                 .setBirthdayYear(birthdayYear);
     }

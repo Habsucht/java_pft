@@ -75,10 +75,9 @@ public class ContactData {
     @Transient
     private String group;
 
-    @Transient
-    //@Column(name = "bday")
-    //@Type(type = "int" )
-    private String birthdayDay;
+    @Column(name = "bday")
+    @Type(type = "int" )
+    private int birthdayDay;
 
     @Transient
     //@Column(name = "bmonth")
@@ -205,7 +204,7 @@ public class ContactData {
         return this;
     }
 
-    public ContactData setBirthdayDay(String birthdayDay) {
+    public ContactData setBirthdayDay(int birthdayDay) {
         this.birthdayDay = birthdayDay;
         return this;
     }
@@ -284,7 +283,7 @@ public class ContactData {
         return allEmailAddress;
     }
 
-    public String getBirthdayDay() {
+    public int getBirthdayDay() {
         return this.birthdayDay;
     }
 
