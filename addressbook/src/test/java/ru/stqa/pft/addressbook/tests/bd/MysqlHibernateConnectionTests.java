@@ -7,6 +7,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.data.ContactData;
 import ru.stqa.pft.addressbook.data.GroupData;
 
 import java.util.List;
@@ -37,9 +38,12 @@ public class MysqlHibernateConnectionTests {
     public void testDbConnectionForHibernate() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<GroupData> result = session.createQuery("from GroupData").list();
 
-        for ( GroupData group : result ) { System.out.println(group); }
+        //List<GroupData> resultGroup = session.createQuery("from GroupData").list();
+        //for ( GroupData group : resultGroup ) { System.out.println(group); }
+
+        List<ContactData> resultContact = session.createQuery("from ContactData where deprecate = '0000-00-00'").list();
+        for ( ContactData contact : resultContact ) { System.out.println(contact); }
 
         session.getTransaction().commit();
         session.close();

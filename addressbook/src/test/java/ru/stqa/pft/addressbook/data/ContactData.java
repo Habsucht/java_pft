@@ -4,41 +4,88 @@
 
 package ru.stqa.pft.addressbook.data;
 
+import org.hibernate.annotations.Type;
 import ru.stqa.pft.addressbook.generator.ContactDataGenerator;
 import ru.stqa.pft.addressbook.generator.GroupDataGenerator;
 
+import javax.persistence.*;
 import java.io.File;
 
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
+    @Id
+    @Column(name = "id")
     private int contactId;
 
+    @Column(name = "firstname")
     private String firstName;
+
+    @Column(name = "lastname")
     private String lastName;
+
+    @Column(name = "nickname")
     private String nickName;
 
-    private File photo;
+    @Column(name = "photo")
+    @Type(type = "text")
+    private String photo;
 
+    @Column(name = "company")
     private String companyName;
 
+    @Column(name = "address")
+    @Type(type = "text")
     private String postAddress;
 
+    @Column(name = "home")
+    @Type(type = "text")
     private String homePhoneNumber;
+
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobilePhoneNumber;
+
+    @Column(name = "work")
+    @Type(type = "text")
     private String workPhoneNumber;
+
+    @Column(name = "fax")
+    @Type(type = "text")
     private String faxPhoneNumber;
 
+    @Transient
     private String allPhoneNumber;
 
+    @Column(name = "email")
+    @Type(type = "text")
     private String emailAddress1;
+
+    @Column(name = "email2")
+    @Type(type = "text")
     private String emailAddress2;
+
+    @Column(name = "email3")
+    @Type(type = "text")
     private String emailAddress3;
 
+    @Transient
     private String allEmailAddress;
 
+    @Transient
     private String group;
 
+    @Transient
+    //@Column(name = "bday")
+    //@Type(type = "int" )
     private String birthdayDay;
+
+    @Transient
+    //@Column(name = "bmonth")
     private String birthdayMonth;
+
+    @Transient
+    //@Column(name = "byear")
     private String birthdayYear;
 
     public ContactData(int contactId) {
@@ -94,7 +141,7 @@ public class ContactData {
     }
 
     public ContactData setPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
@@ -190,7 +237,7 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        return this.photo;
+        return new File(photo);
     }
 
     public String getCompanyName() {
