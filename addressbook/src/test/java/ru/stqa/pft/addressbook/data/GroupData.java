@@ -4,13 +4,30 @@
 
 package ru.stqa.pft.addressbook.data;
 
+import org.hibernate.annotations.Type;
 import ru.stqa.pft.addressbook.generator.GroupDataGenerator;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table (name = "group_list")
 public class GroupData {
+    @Id
+    @Column (name = "group_id")
     private int groupId;
 
+    @Column (name = "group_name")
     private String groupName;
+
+    @Column (name = "group_header")
+    @Type(type = "text")
     private String header;
+
+    @Column (name = "group_footer")
+    @Type(type = "text")
     private String footer;
 
     public GroupData() {
