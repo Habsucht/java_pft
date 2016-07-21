@@ -76,15 +76,13 @@ public class ContactData {
     private String group;
 
     @Column(name = "bday")
-    @Type(type = "int" )
-    private int birthdayDay;
+    @Type(type = "byte" )
+    private byte birthdayDay;
 
-    @Transient
-    //@Column(name = "bmonth")
+    @Column(name = "bmonth")
     private String birthdayMonth;
 
-    @Transient
-    //@Column(name = "byear")
+    @Column(name = "byear")
     private String birthdayYear;
 
     public ContactData(int contactId) {
@@ -204,7 +202,7 @@ public class ContactData {
         return this;
     }
 
-    public ContactData setBirthdayDay(int birthdayDay) {
+    public ContactData setBirthdayDay(byte birthdayDay) {
         this.birthdayDay = birthdayDay;
         return this;
     }
@@ -283,7 +281,7 @@ public class ContactData {
         return allEmailAddress;
     }
 
-    public int getBirthdayDay() {
+    public byte getBirthdayDay() {
         return this.birthdayDay;
     }
 

@@ -63,8 +63,8 @@ public class ContactDataGenerator extends BaseGenerator {
         return firstName + "." + lastName + "@" + companyName + domain[generateRandom(domain.length)];
     }
 
-    public static int generateDay() {
-        return generateRandom(30) + 1;
+    public static byte generateDay() {
+        return (byte) (generateRandom(30) + 1);
     }
 
     public static String generateMonth() {

@@ -157,7 +157,7 @@ public class ContactHelper extends BaseHelper {
                 .setEmailAddress1(emailAddress1)
                 .setEmailAddress2(emailAddress2)
                 .setEmailAddress3(emailAddress3)
-                .setBirthdayDay(Integer.parseInt(birthdayDay))
+                .setBirthdayDay(Byte.parseByte(birthdayDay))
                 .setBirthdayMonth(birthdayMonth)
                 .setBirthdayYear(birthdayYear);
     }

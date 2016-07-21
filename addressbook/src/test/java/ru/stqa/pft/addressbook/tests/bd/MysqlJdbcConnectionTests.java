@@ -44,7 +44,7 @@ public class MysqlJdbcConnectionTests {
                         .setEmailAddress1(resultSet.getString("email"))
                         .setEmailAddress2(resultSet.getString("email2"))
                         .setEmailAddress3(resultSet.getString("email3"))
-                        .setBirthdayDay(Integer.parseInt(resultSet.getString("bday")))
+                        .setBirthdayDay(Byte.parseByte(resultSet.getString("bday")))
                         .setBirthdayMonth(resultSet.getString("bmonth"))
                         .setBirthdayYear(resultSet.getString("byear")));
             }
