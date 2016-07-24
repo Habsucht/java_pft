@@ -78,6 +78,10 @@ public class GroupData {
         return footer;
     }
 
+    public Set<ContactData> getContacts() {
+        return contacts;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

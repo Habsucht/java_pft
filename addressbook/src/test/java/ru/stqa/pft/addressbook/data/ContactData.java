@@ -224,19 +224,19 @@ public class ContactData {
     }
 
     public int getContactId() {
-        return this.contactId;
+        return contactId;
     }
 
     public String getFirstName() {
-        return this.firstName;
+        return firstName;
     }
 
     public String getLastName() {
-        return this.lastName;
+        return lastName;
     }
 
     public String getNickName() {
-        return this.nickName;
+        return nickName;
     }
 
     public File getPhoto() {
@@ -244,7 +244,7 @@ public class ContactData {
     }
 
     public String getCompanyName() {
-        return this.companyName;
+        return companyName;
     }
 
     public String getPostAddress() {
@@ -252,15 +252,15 @@ public class ContactData {
     }
 
     public String getHomePhoneNumber() {
-        return this.homePhoneNumber;
+        return homePhoneNumber;
     }
 
     public String getMobilePhoneNumber() {
-        return this.mobilePhoneNumber;
+        return mobilePhoneNumber;
     }
 
     public String getWorkPhoneNumber() {
-        return this.workPhoneNumber;
+        return workPhoneNumber;
     }
 
     public String getFaxPhoneNumber() {
@@ -268,7 +268,7 @@ public class ContactData {
     }
 
     public String getAllPhoneNumber() {
-        return this.allPhoneNumber;
+        return allPhoneNumber;
     }
 
     public String getEmailAddress1() {
@@ -288,19 +288,23 @@ public class ContactData {
     }
 
     public byte getBirthdayDay() {
-        return this.birthdayDay;
+        return birthdayDay;
     }
 
     public String getBirthdayMonth() {
-        return this.birthdayMonth;
+        return birthdayMonth;
     }
 
     public String getBirthdayYear() {
-        return this.birthdayYear;
+        return birthdayYear;
     }
 
     public String getGroup() {
-        return this.group;
+        return group;
+    }
+
+    public Set<GroupData> getGroups() {
+        return groups;
     }
 
     @Override
