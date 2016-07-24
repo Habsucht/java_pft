@@ -113,10 +113,11 @@ public class ContactHelper extends BaseHelper {
 
         // Adding a contact to a group
         if (isElementPresent(By.name("new_group"))) {
-            try {
+            if (wd.findElement(By.name("new_group")).getText().contains(contactData.getGroup())) {
                 select(By.name("new_group")).selectByVisibleText(contactData.getGroup());
                 System.out.println("group: " + contactData.getGroup() + " (contact is added to the group)");
-            } catch (NoSuchElementException e) {
+            } else {
+                select(By.name("new_group")).selectByVisibleText("[none]");
                 System.out.println("group: " + contactData.getGroup() + " (the contact is not added to the group, the group is absent)");
             }
         }
