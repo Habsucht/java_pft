@@ -10,6 +10,8 @@ import ru.stqa.pft.addressbook.generator.GroupDataGenerator;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -84,6 +86,10 @@ public class ContactData {
 
     @Column(name = "byear")
     private String birthdayYear;
+
+    @ManyToMany
+    @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<>();
 
     public ContactData(int contactId) {
         this.contactId = contactId;

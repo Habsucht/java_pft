@@ -7,10 +7,9 @@ package ru.stqa.pft.addressbook.data;
 import org.hibernate.annotations.Type;
 import ru.stqa.pft.addressbook.generator.GroupDataGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "group_list")
@@ -29,6 +28,10 @@ public class GroupData {
     @Column(name = "group_footer")
     @Type(type = "text")
     private String footer;
+
+    @ManyToMany
+    @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "group_id"), inverseJoinColumns = @JoinColumn(name = "id"))
+    private Set<ContactData> contacts = new HashSet<>();
 
     public GroupData() {
         String group = GroupDataGenerator.generateGroup();
