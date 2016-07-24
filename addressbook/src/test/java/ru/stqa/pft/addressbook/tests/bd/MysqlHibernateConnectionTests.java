@@ -41,10 +41,16 @@ public class MysqlHibernateConnectionTests {
         session.beginTransaction();
 
         List<GroupData> resultGroup = session.createQuery("from GroupData").list();
-        for ( GroupData group : resultGroup ) { System.out.println(group); }
+        for ( GroupData group : resultGroup ) {
+            System.out.println(group);
+            System.out.println(group.getContacts());
+        }
 
         List<ContactData> resultContact = session.createQuery("from ContactData where deprecated = '0000-00-00'").list();
-        for ( ContactData contact : resultContact ) { System.out.println(contact); }
+        for ( ContactData contact : resultContact ) {
+            System.out.println(contact);
+            System.out.println(contact.getGroups());
+        }
 
         session.getTransaction().commit();
         session.close();
