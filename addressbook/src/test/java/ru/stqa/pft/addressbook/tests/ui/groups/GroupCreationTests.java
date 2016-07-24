@@ -72,7 +72,7 @@ public class GroupCreationTests extends BaseTests {
 
     @BeforeMethod
     public void ensurePrecondition() {
-        app.getNavigationHelper().gotoGroupPage();
+        app.getNavigationHelper().gotoAllGroupsListPage();
     }
 
     @Test(dataProvider = "generateValidGroups")

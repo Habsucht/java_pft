@@ -1,12 +1,13 @@
 /**
  *  A class to test the valid email address of contact data
  */
-package ru.stqa.pft.addressbook.tests.ui.contacts;
+package ru.stqa.pft.addressbook.tests.ui.contacts.units;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.data.ContactData;
 import ru.stqa.pft.addressbook.tests.ui.BaseTests;
+import ru.stqa.pft.addressbook.tests.ui.contacts.ContactCreationTests;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;

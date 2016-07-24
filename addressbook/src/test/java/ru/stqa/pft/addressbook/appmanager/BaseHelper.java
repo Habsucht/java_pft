@@ -70,4 +70,14 @@ public class BaseHelper {
             return false;
         }
     }
+
+    boolean selectElementFromList (String selector, String data) {
+        if (wd.findElement(By.name(selector)).getText().contains(data)) {
+            select(By.name(selector)).selectByVisibleText(data);
+            return true;
+        } else {
+            select(By.name(selector)).selectByVisibleText("[none]");
+            return false;
+        }
+    }
 }

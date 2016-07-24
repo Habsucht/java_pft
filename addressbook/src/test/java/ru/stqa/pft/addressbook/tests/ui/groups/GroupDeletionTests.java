@@ -20,7 +20,7 @@ import static ru.stqa.pft.addressbook.generator.BaseGenerator.generateRandom;
 public class GroupDeletionTests extends BaseTests {
     @BeforeMethod
     public void ensurePrecondition() {
-        app.getNavigationHelper().gotoGroupPage();
+        app.getNavigationHelper().gotoAllGroupsListPage();
 
         //  Checking the presence of base data at least one group
         if (app.getDbHelper().groups().size() == 0) {

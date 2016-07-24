@@ -5,9 +5,9 @@
         <classes>
             <class name="ru.stqa.pft.addressbook.tests.ui.contacts.ContactCreationTests"/>
             <class name="ru.stqa.pft.addressbook.tests.ui.contacts.ContactModificationTests"/>
-            <class name="ru.stqa.pft.addressbook.tests.ui.contacts.ContactPhoneTests"/>
-            <class name="ru.stqa.pft.addressbook.tests.ui.contacts.ContactEmailTests"/>
-            <class name="ru.stqa.pft.addressbook.tests.ui.contacts.ContactPostAddressTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.ui.contacts.units.ContactPhoneTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.ui.contacts.units.ContactEmailTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.ui.contacts.units.ContactPostAddressTests"/>
             <class name="ru.stqa.pft.addressbook.tests.ui.contacts.ContactDeletionTests"/>
         </classes>
     </test>

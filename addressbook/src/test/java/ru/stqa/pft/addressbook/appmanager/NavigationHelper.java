@@ -6,6 +6,7 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import ru.stqa.pft.addressbook.data.GroupData;
 
 public class NavigationHelper extends BaseHelper {
 
@@ -13,9 +14,15 @@ public class NavigationHelper extends BaseHelper {
         super(wd);
     }
 
-    public void gotoGroupPage() {
+    public void gotoAllGroupsListPage() {
         if (!isElementPresent(By.tagName("h1")) || !wd.findElement(By.tagName("h1")).getText().equals("Groups") || !isElementPresent(By.name("new"))) {
             click(By.linkText("groups"));
+        }
+    }
+
+    public void gotoSelectGroupPage(GroupData group) {
+        if (isElementPresent(By.id("maintable"))) {
+            selectElementFromList("group", group.getGroupName());
         }
     }
 

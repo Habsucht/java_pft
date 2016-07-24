@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.data.ContactData;
+import ru.stqa.pft.addressbook.data.GroupData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.*;
@@ -113,11 +114,9 @@ public class ContactHelper extends BaseHelper {
 
         // Adding a contact to a group
         if (isElementPresent(By.name("new_group"))) {
-            if (wd.findElement(By.name("new_group")).getText().contains(contactData.getGroup())) {
-                select(By.name("new_group")).selectByVisibleText(contactData.getGroup());
+            if (selectElementFromList("new_group", contactData.getGroup())) {
                 System.out.println("group: " + contactData.getGroup() + " (contact is added to the group)");
             } else {
-                select(By.name("new_group")).selectByVisibleText("[none]");
                 System.out.println("group: " + contactData.getGroup() + " (the contact is not added to the group, the group is absent)");
             }
         }
@@ -230,5 +229,15 @@ public class ContactHelper extends BaseHelper {
                     .setAllPhoneNumber(allPhones)
                     .setAllEmailAddress(allEmails));
         }
+    }
+
+    public void addSelectContactInGroup(GroupData group) {
+        selectElementFromList("to_group", group.getGroupName());
+        click(By.name("add"));
+    }
+
+    public void deleteSelectContactFromGroup(ContactData contact) {
+        selectContactById(contact.getContactId());
+        click(By.name("remove"));
     }
 }
