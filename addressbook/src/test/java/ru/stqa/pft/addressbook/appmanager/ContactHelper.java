@@ -173,7 +173,6 @@ public class ContactHelper extends BaseHelper {
 
     public void editContactById(int id) {
         click(By.cssSelector("a[href='edit.php?id=" + id + "']"));
-        // wd.get("http://localhost/addressbook/edit.php?id=" + id);
     }
 
     public void viewContactById(int id) {
@@ -221,8 +220,12 @@ public class ContactHelper extends BaseHelper {
             String address = element.findElements(By.tagName("td")).get(3).getText();
             String allEmails = element.findElements(By.tagName("td")).get(4).getText();
             String allPhones = element.findElements(By.tagName("td")).get(5).getText();
-            collection.add(new ContactData(contactId).setFirstName(firstName).setLastName(lastName)
-                    .setPostAddress(address).setAllPhoneNumber(allPhones).setAllEmailAddress(allEmails));
+            collection.add(new ContactData(contactId)
+                    .setFirstName(firstName)
+                    .setLastName(lastName)
+                    .setPostAddress(address)
+                    .setAllPhoneNumber(allPhones)
+                    .setAllEmailAddress(allEmails));
         }
     }
 }

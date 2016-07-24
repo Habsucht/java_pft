@@ -25,6 +25,7 @@ public class ApplicationManager {
     private NavigationHelper navigationHelper;
     private ContactHelper contactHelper;
     private GroupHelper groupHelper;
+    private DbHelper dbHelper;
 
     private WebDriver wd;
 
@@ -40,7 +41,10 @@ public class ApplicationManager {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
 
-        //Check to run a browser
+        // Initializing a database connection
+        dbHelper = new DbHelper();
+
+        // Check to run a browser
         switch (browser) {
             case BrowserType.FIREFOX:
                 wd = new FirefoxDriver();
@@ -88,5 +92,9 @@ public class ApplicationManager {
 
     public ContactHelper getContactHelper() {
         return contactHelper;
+    }
+
+    public DbHelper getDbHelper() {
+        return dbHelper;
     }
 }

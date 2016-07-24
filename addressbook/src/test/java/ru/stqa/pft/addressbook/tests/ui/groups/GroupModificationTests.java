@@ -23,9 +23,14 @@ public class GroupModificationTests extends BaseTests {
     public void ensurePrecondition() {
         app.getNavigationHelper().gotoGroupPage();
 
-        //  Checking for the presence of at least one group with the subsequent creation
-        if (!app.getGroupHelper().isThereAGroup()) {
+        //  Checking the presence of base data at least one group
+        if (app.getDbHelper().groups().size() == 0) {
             GroupCreationTests.testGroupCreationVer1(new GroupData());
+        }
+
+        //  Checking on the page there is at least one group on the selector
+        if (!app.getGroupHelper().isThereAGroup()) {
+            System.out.println("On the page is not found group");
         }
     }
 
@@ -77,6 +82,33 @@ public class GroupModificationTests extends BaseTests {
         assertThat(app.getGroupHelper().getGroupCount(), equalTo(beforeGroupSet.size()));
 
         Groups afterGroupSet = app.getGroupHelper().all();
+
+        // Assign Id the modification element
+        group.setGroupId(modifiedGroup.getGroupId());
+
+        // Check elements for identity verification
+        assertThat(afterGroupSet, equalTo(beforeGroupSet.withOut(modifiedGroup).withAdded(group)));
+    }
+
+    @Test
+    // Modification of the test group with access to the data from the database
+    public void testGroupModificationVer3() {
+        Groups beforeGroupSet = app.getDbHelper().groups();
+
+        GroupData modifiedGroup = beforeGroupSet.iterator().next();
+        GroupData group = new GroupData();
+
+        app.getGroupHelper().selectGroupById(modifiedGroup.getGroupId());
+        app.getGroupHelper().initGroupModification();
+        app.getGroupHelper().fillGroupForm(group);
+        app.getGroupHelper().submitModification();
+
+        app.getNavigationHelper().returnToGroupPage();
+
+        // Check on the number of elements
+        assertThat(app.getGroupHelper().getGroupCount(), equalTo(beforeGroupSet.size()));
+
+        Groups afterGroupSet = app.getDbHelper().groups();
 
         // Assign Id the modification element
         group.setGroupId(modifiedGroup.getGroupId());

@@ -22,9 +22,14 @@ public class GroupDeletionTests extends BaseTests {
     public void ensurePrecondition() {
         app.getNavigationHelper().gotoGroupPage();
 
-        //  Checking for the presence of at least one group with the subsequent creation
-        if (!app.getGroupHelper().isThereAGroup()) {
+        //  Checking the presence of base data at least one group
+        if (app.getDbHelper().groups().size() == 0) {
             GroupCreationTests.testGroupCreationVer1(new GroupData());
+        }
+
+        //  Checking on the page there is at least one group on the selector
+        if (!app.getGroupHelper().isThereAGroup()) {
+            System.out.println("On the page is not found group");
         }
     }
 
@@ -73,6 +78,27 @@ public class GroupDeletionTests extends BaseTests {
         assertThat(app.getGroupHelper().getGroupCount(), equalTo(beforeGroupSet.size() - 1));
 
         Groups afterGroupSet = app.getGroupHelper().all();
+
+        // Check elements for identity verification
+        assertThat(afterGroupSet, equalTo(beforeGroupSet.withOut(deletedGroup)));
+    }
+
+    @Test
+    // Deletion group with access to the data from the database
+    public void testGroupDeletionVer3() {
+        Groups beforeGroupSet = app.getDbHelper().groups();
+
+        GroupData deletedGroup = beforeGroupSet.iterator().next();
+
+        app.getGroupHelper().selectGroupById(deletedGroup.getGroupId());
+        app.getGroupHelper().deleteGroup();
+
+        app.getNavigationHelper().returnToGroupPage();
+
+        // Check on the number of elements
+        assertThat(app.getGroupHelper().getGroupCount(), equalTo(beforeGroupSet.size() - 1));
+
+        Groups afterGroupSet = app.getDbHelper().groups();
 
         // Check elements for identity verification
         assertThat(afterGroupSet, equalTo(beforeGroupSet.withOut(deletedGroup)));
