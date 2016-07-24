@@ -24,9 +24,14 @@ public class ContactModificationTests extends BaseTests {
     public void ensurePrecondition() {
         app.getNavigationHelper().gotoHomePage();
 
-        //  Checking for the presence of at least one contact with the subsequent creation
-        if (!app.getContactHelper().isThereAContact()) {
+        //  Checking the presence of base data at least one contact
+        if (app.getDbHelper().contacts().size() == 0) {
             ContactCreationTests.testContactCreationVer1(new ContactData());
+        }
+
+        //  Checking on the page there is at least one contact on the selector
+        if (!app.getContactHelper().isThereAContact()) {
+            System.out.println("On the page is not found contact");
         }
     }
 
@@ -81,6 +86,32 @@ public class ContactModificationTests extends BaseTests {
         assertThat(app.getContactHelper().getContactCount(), equalTo(beforeContactSet.size()));
 
         Contacts afterContactSet = app.getContactHelper().all();
+
+        // Assign Id the modification element
+        contact.setContactId(modifiedContact.getContactId());
+
+        // Check elements for identity verification
+        assertThat(afterContactSet, equalTo(beforeContactSet.withOut(modifiedContact).withAdded(contact)));
+    }
+
+    @Test
+    // Modification of the test contact with access to the data from the database
+    public void testContactModificationVer3() {
+        Contacts beforeContactSet = app.getDbHelper().contacts();
+
+        ContactData modifiedContact = beforeContactSet.iterator().next();
+        ContactData contact = new ContactData();
+
+        app.getContactHelper().editContactById(modifiedContact.getContactId());
+        app.getContactHelper().fillContactForm(contact);
+        app.getContactHelper().submitModification();
+
+        app.getNavigationHelper().returnToHomePage();
+
+        // Check on the number of elements
+        assertThat(app.getContactHelper().getContactCount(), equalTo(beforeContactSet.size()));
+
+        Contacts afterContactSet = app.getDbHelper().contacts();
 
         // Assign Id the modification element
         contact.setContactId(modifiedContact.getContactId());
