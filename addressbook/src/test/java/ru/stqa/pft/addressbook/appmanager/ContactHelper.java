@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.data.ContactData;
+import ru.stqa.pft.addressbook.data.GroupData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.*;
@@ -48,7 +49,9 @@ public class ContactHelper extends BaseHelper {
         }
         System.out.println("nickName: " + contactData.getNickName());
 
-        if (contactData.getPhoto() != null) { attach(By.name("photo"), contactData.getPhoto()); }
+        if (contactData.getPhoto() != null) {
+            attach(By.name("photo"), contactData.getPhoto());
+        }
 
         if (!wd.findElement(By.name("company")).getText().equals(contactData.getCompanyName())) {
             type(By.name("company"), contactData.getCompanyName());
@@ -95,18 +98,8 @@ public class ContactHelper extends BaseHelper {
         }
         System.out.println("emailAddress3: " + contactData.getEmailAddress3());
 
-        if (isElementPresent(By.name("new_group"))) {
-            String group = contactData.getGroup();
-            System.out.println("group: " + contactData.getGroup());
-
-            if (wd.findElement(By.name("new_group")).getText().equals(group)) {
-                select(By.name("new_group")).selectByValue(group);
-            }
-            //else { new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("test1"); }
-        }
-
         // Fill contact birthday day
-        select(By.xpath("//div[@id='content']/form/select[1]")).selectByValue(contactData.getBirthdayDay());
+        select(By.xpath("//div[@id='content']/form/select[1]")).selectByValue(String.valueOf(contactData.getBirthdayDay()));
         System.out.println("birthdayDay: " + contactData.getBirthdayDay());
 
         // Fill contact birthday month
@@ -118,6 +111,15 @@ public class ContactHelper extends BaseHelper {
             type(By.name("byear"), String.valueOf(contactData.getBirthdayYear()));
         }
         System.out.println("birthdayYear: " + contactData.getBirthdayYear());
+
+        // Adding a contact to a group
+        if (isElementPresent(By.name("new_group"))) {
+            if (selectElementFromList("new_group", contactData.getGroup())) {
+                System.out.println("group: " + contactData.getGroup() + " (contact is added to the group)");
+            } else {
+                System.out.println("group: " + contactData.getGroup() + " (the contact is not added to the group, the group is absent)");
+            }
+        }
     }
 
     public ContactData infoFromEditForm(ContactData contact) {
@@ -144,10 +146,22 @@ public class ContactHelper extends BaseHelper {
         String birthdayYear = wd.findElement(By.name("byear")).getAttribute("value");
 
         wd.navigate().back();
-        return new ContactData(contact.getContactId()).setFirstName(firstName).setLastName(lastName).setNickName(nickName).setCompanyName(companyName)
-                .setPostAddress(contactAddress).setHomePhoneNumber(homePhoneNumber).setMobilePhoneNumber(mobilePhoneNumber).setWorkPhoneNumber(workPhoneNumber)
-                .setFaxPhoneNumber(faxPhoneNumber).setEmailAddress1(emailAddress1).setEmailAddress2(emailAddress2).setEmailAddress3(emailAddress3)
-                .setBirthdayDay(birthdayDay).setBirthdayMonth(birthdayMonth).setBirthdayYear(birthdayYear);
+        return new ContactData(contact.getContactId())
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setNickName(nickName)
+                .setCompanyName(companyName)
+                .setPostAddress(contactAddress)
+                .setHomePhoneNumber(homePhoneNumber)
+                .setMobilePhoneNumber(mobilePhoneNumber)
+                .setWorkPhoneNumber(workPhoneNumber)
+                .setFaxPhoneNumber(faxPhoneNumber)
+                .setEmailAddress1(emailAddress1)
+                .setEmailAddress2(emailAddress2)
+                .setEmailAddress3(emailAddress3)
+                .setBirthdayDay(Byte.parseByte(birthdayDay))
+                .setBirthdayMonth(birthdayMonth)
+                .setBirthdayYear(birthdayYear);
     }
 
     public String infoFromInfoPage(ContactData contact) {
@@ -161,7 +175,6 @@ public class ContactHelper extends BaseHelper {
 
     public void editContactById(int id) {
         click(By.cssSelector("a[href='edit.php?id=" + id + "']"));
-        // wd.get("http://localhost/addressbook/edit.php?id=" + id);
     }
 
     public void viewContactById(int id) {
@@ -209,8 +222,22 @@ public class ContactHelper extends BaseHelper {
             String address = element.findElements(By.tagName("td")).get(3).getText();
             String allEmails = element.findElements(By.tagName("td")).get(4).getText();
             String allPhones = element.findElements(By.tagName("td")).get(5).getText();
-            collection.add(new ContactData(contactId).setFirstName(firstName).setLastName(lastName)
-                    .setPostAddress(address).setAllPhoneNumber(allPhones).setAllEmailAddress(allEmails));
+            collection.add(new ContactData(contactId)
+                    .setFirstName(firstName)
+                    .setLastName(lastName)
+                    .setPostAddress(address)
+                    .setAllPhoneNumber(allPhones)
+                    .setAllEmailAddress(allEmails));
         }
+    }
+
+    public void addSelectContactInGroup(GroupData group) {
+        selectElementFromList("to_group", group.getGroupName());
+        click(By.name("add"));
+    }
+
+    public void deleteSelectContactFromGroup(ContactData contact) {
+        selectContactById(contact.getContactId());
+        click(By.name("remove"));
     }
 }

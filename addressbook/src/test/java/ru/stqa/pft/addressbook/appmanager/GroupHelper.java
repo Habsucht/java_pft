@@ -86,7 +86,9 @@ public class GroupHelper extends BaseHelper {
         for (WebElement element : elements) {
             int groupId = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             String name = element.getText();
-            collection.add(new GroupData().setGroupId(groupId).setGroupName(name));
+            collection.add(new GroupData()
+                    .setGroupId(groupId)
+                    .setGroupName(name));
         }
     }
 }

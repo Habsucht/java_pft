@@ -4,14 +4,34 @@
 
 package ru.stqa.pft.addressbook.data;
 
+import org.hibernate.annotations.Type;
 import ru.stqa.pft.addressbook.generator.GroupDataGenerator;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "group_list")
 public class GroupData {
+    @Id
+    @Column(name = "group_id")
     private int groupId;
 
+    @Column(name = "group_name")
     private String groupName;
+
+    @Column(name = "group_header")
+    @Type(type = "text")
     private String header;
+
+    @Column(name = "group_footer")
+    @Type(type = "text")
     private String footer;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "group_id"), inverseJoinColumns = @JoinColumn(name = "id"))
+    private Set<ContactData> contacts = new HashSet<>();
 
     public GroupData() {
         String group = GroupDataGenerator.generateGroup();
@@ -58,12 +78,8 @@ public class GroupData {
         return footer;
     }
 
-    @Override
-    public String toString() {
-        return "GroupData{" +
-                "groupId='" + groupId + '\'' +
-                ", groupName='" + groupName + '\'' +
-                '}';
+    public Set<ContactData> getContacts() {
+        return contacts;
     }
 
     @Override
@@ -76,6 +92,16 @@ public class GroupData {
         if (groupId != groupData.groupId) return false;
         return groupName != null ? groupName.equals(groupData.groupName) : groupData.groupName == null;
 
+    }
+
+    @Override
+    public String toString() {
+        return "GroupData{" +
+                "groupId=" + groupId +
+                ", groupName='" + groupName + '\'' +
+                ", header='" + header + '\'' +
+                ", footer='" + footer + '\'' +
+                '}';
     }
 
     @Override

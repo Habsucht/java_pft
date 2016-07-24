@@ -4,7 +4,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -26,6 +25,7 @@ public class ApplicationManager {
     private NavigationHelper navigationHelper;
     private ContactHelper contactHelper;
     private GroupHelper groupHelper;
+    private DbHelper dbHelper;
 
     private WebDriver wd;
 
@@ -39,9 +39,12 @@ public class ApplicationManager {
 
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
-        properties.load(new FileReader(new File(String.format("src/test/resourses/%s.properties", target))));
+        properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
 
-        //Check to run a browser
+        // Initializing a database connection
+        dbHelper = new DbHelper();
+
+        // Check to run a browser
         switch (browser) {
             case BrowserType.FIREFOX:
                 wd = new FirefoxDriver();
@@ -89,5 +92,9 @@ public class ApplicationManager {
 
     public ContactHelper getContactHelper() {
         return contactHelper;
+    }
+
+    public DbHelper getDbHelper() {
+        return dbHelper;
     }
 }

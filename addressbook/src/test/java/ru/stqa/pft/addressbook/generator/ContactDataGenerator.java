@@ -28,10 +28,6 @@ public class ContactDataGenerator extends BaseGenerator {
         return birthdayMonth;
     }
 
-    public static void setBirthdayMonth(String[] birthdayMonth) {
-        ContactDataGenerator.birthdayMonth = birthdayMonth;
-    }
-
     public static String generateFirstName() {
         return firstName[generateRandom(firstName.length)];
     }
@@ -63,8 +59,8 @@ public class ContactDataGenerator extends BaseGenerator {
         return firstName + "." + lastName + "@" + companyName + domain[generateRandom(domain.length)];
     }
 
-    public static String generateDay() {
-        return String.valueOf(generateRandom(30) + 1);
+    public static byte generateDay() {
+        return (byte) (generateRandom(30) + 1);
     }
 
     public static String generateMonth() {

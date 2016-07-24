@@ -4,71 +4,97 @@
 
 package ru.stqa.pft.addressbook.data;
 
+import org.hibernate.annotations.Type;
 import ru.stqa.pft.addressbook.generator.ContactDataGenerator;
 import ru.stqa.pft.addressbook.generator.GroupDataGenerator;
 
+import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
+    @Id
+    @Column(name = "id")
     private int contactId;
 
+    @Column(name = "firstname")
     private String firstName;
+
+    @Column(name = "lastname")
     private String lastName;
+
+    @Column(name = "nickname")
     private String nickName;
 
-    private File photo;
+    @Column(name = "photo")
+    @Type(type = "text")
+    private String photo;
 
+    @Column(name = "company")
     private String companyName;
 
+    @Column(name = "address")
+    @Type(type = "text")
     private String postAddress;
 
+    @Column(name = "home")
+    @Type(type = "text")
     private String homePhoneNumber;
+
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobilePhoneNumber;
+
+    @Column(name = "work")
+    @Type(type = "text")
     private String workPhoneNumber;
+
+    @Column(name = "fax")
+    @Type(type = "text")
     private String faxPhoneNumber;
 
+    @Transient
     private String allPhoneNumber;
 
+    @Column(name = "email")
+    @Type(type = "text")
     private String emailAddress1;
+
+    @Column(name = "email2")
+    @Type(type = "text")
     private String emailAddress2;
+
+    @Column(name = "email3")
+    @Type(type = "text")
     private String emailAddress3;
 
+    @Transient
     private String allEmailAddress;
 
+    @Transient
     private String group;
 
-    private String birthdayDay;
+    @Column(name = "bday")
+    @Type(type = "byte" )
+    private byte birthdayDay;
+
+    @Column(name = "bmonth")
     private String birthdayMonth;
+
+    @Column(name = "byear")
     private String birthdayYear;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<>();
 
     public ContactData(int contactId) {
         this.contactId = contactId;
     }
 
-    @Override
-    public String toString() {
-        return "ContactData{" +
-                "contactId=" + contactId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", nickName='" + nickName + '\'' +
-                ", companyName='" + companyName + '\'' +
-                ", postAddress='" + postAddress + '\'' +
-                ", homePhoneNumber='" + homePhoneNumber + '\'' +
-                ", mobilePhoneNumber='" + mobilePhoneNumber + '\'' +
-                ", workPhoneNumber='" + workPhoneNumber + '\'' +
-                ", faxPhoneNumber='" + faxPhoneNumber + '\'' +
-                ", allPhoneNumber='" + allPhoneNumber + '\'' +
-                ", emailAddress1='" + emailAddress1 + '\'' +
-                ", emailAddress2='" + emailAddress2 + '\'' +
-                ", emailAddress3='" + emailAddress3 + '\'' +
-                ", allEmailAddress='" + allEmailAddress + '\'' +
-                ", group='" + group + '\'' +
-                ", birthdayDay=" + birthdayDay +
-                ", birthdayMonth='" + birthdayMonth + '\'' +
-                ", birthdayYear=" + birthdayYear +
-                '}';
-    }
 
     public ContactData() {
         this.contactId = 0;
@@ -118,7 +144,7 @@ public class ContactData {
     }
 
     public ContactData setPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
@@ -182,7 +208,7 @@ public class ContactData {
         return this;
     }
 
-    public ContactData setBirthdayDay(String birthdayDay) {
+    public ContactData setBirthdayDay(byte birthdayDay) {
         this.birthdayDay = birthdayDay;
         return this;
     }
@@ -198,27 +224,27 @@ public class ContactData {
     }
 
     public int getContactId() {
-        return this.contactId;
+        return contactId;
     }
 
     public String getFirstName() {
-        return this.firstName;
+        return firstName;
     }
 
     public String getLastName() {
-        return this.lastName;
+        return lastName;
     }
 
     public String getNickName() {
-        return this.nickName;
+        return nickName;
     }
 
     public File getPhoto() {
-        return this.photo;
+        return new File(photo);
     }
 
     public String getCompanyName() {
-        return this.companyName;
+        return companyName;
     }
 
     public String getPostAddress() {
@@ -226,15 +252,15 @@ public class ContactData {
     }
 
     public String getHomePhoneNumber() {
-        return this.homePhoneNumber;
+        return homePhoneNumber;
     }
 
     public String getMobilePhoneNumber() {
-        return this.mobilePhoneNumber;
+        return mobilePhoneNumber;
     }
 
     public String getWorkPhoneNumber() {
-        return this.workPhoneNumber;
+        return workPhoneNumber;
     }
 
     public String getFaxPhoneNumber() {
@@ -242,7 +268,7 @@ public class ContactData {
     }
 
     public String getAllPhoneNumber() {
-        return this.allPhoneNumber;
+        return allPhoneNumber;
     }
 
     public String getEmailAddress1() {
@@ -261,20 +287,24 @@ public class ContactData {
         return allEmailAddress;
     }
 
-    public String getBirthdayDay() {
-        return this.birthdayDay;
+    public byte getBirthdayDay() {
+        return birthdayDay;
     }
 
     public String getBirthdayMonth() {
-        return this.birthdayMonth;
+        return birthdayMonth;
     }
 
     public String getBirthdayYear() {
-        return this.birthdayYear;
+        return birthdayYear;
     }
 
     public String getGroup() {
-        return this.group;
+        return group;
+    }
+
+    public Set<GroupData> getGroups() {
+        return groups;
     }
 
     @Override
@@ -287,7 +317,31 @@ public class ContactData {
         if (contactId != that.contactId) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
+    }
 
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "contactId=" + contactId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", postAddress='" + postAddress + '\'' +
+                ", homePhoneNumber='" + homePhoneNumber + '\'' +
+                ", mobilePhoneNumber='" + mobilePhoneNumber + '\'' +
+                ", workPhoneNumber='" + workPhoneNumber + '\'' +
+                ", faxPhoneNumber='" + faxPhoneNumber + '\'' +
+                ", allPhoneNumber='" + allPhoneNumber + '\'' +
+                ", emailAddress1='" + emailAddress1 + '\'' +
+                ", emailAddress2='" + emailAddress2 + '\'' +
+                ", emailAddress3='" + emailAddress3 + '\'' +
+                ", allEmailAddress='" + allEmailAddress + '\'' +
+                ", group='" + group + '\'' +
+                ", birthdayDay=" + birthdayDay +
+                ", birthdayMonth='" + birthdayMonth + '\'' +
+                ", birthdayYear=" + birthdayYear +
+                '}';
     }
 
     @Override
