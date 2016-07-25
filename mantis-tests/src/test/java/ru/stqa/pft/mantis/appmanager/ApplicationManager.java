@@ -33,6 +33,10 @@ public class ApplicationManager {
         properties = new Properties();
     }
 
+    // Method retrieves the address
+    String getProperty(String key) {
+        return properties.getProperty(key);
+    }
 
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
@@ -76,5 +80,9 @@ public class ApplicationManager {
 
     public NavigationHelper getNavigationHelper() {
         return navigationHelper;
+    }
+
+    public HttpSession newSession() {
+        return new HttpSession(this);
     }
 }
