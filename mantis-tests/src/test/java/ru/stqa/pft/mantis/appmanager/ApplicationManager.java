@@ -16,8 +16,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
-import ru.stqa.pft.mantis.data.LoginData;
-
 public class ApplicationManager {
     private final Properties properties;
 
@@ -34,39 +32,43 @@ public class ApplicationManager {
     }
 
     // Method retrieves the address
-    String getProperty(String key) {
+    public String getProperty(String key) {
         return properties.getProperty(key);
     }
 
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+    }
 
-        // Check to run a browser
-        switch (browser) {
-            case BrowserType.FIREFOX:
-                wd = new FirefoxDriver();
-                break;
-            case BrowserType.CHROME:
-                wd = new ChromeDriver();
-                break;
-            case BrowserType.IE:
-                wd = new InternetExplorerDriver();
-                break;
+    public WebDriver initBrowser() {
+        if (wd == null ) {
+            // Check to run a browser
+            switch (browser) {
+                case BrowserType.FIREFOX:
+                    wd = new FirefoxDriver();
+                    break;
+                case BrowserType.CHROME:
+                    wd = new ChromeDriver();
+                    break;
+                case BrowserType.IE:
+                    wd = new InternetExplorerDriver();
+                    break;
+            }
+
+            wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+            wd.get(properties.getProperty("web.baseUrl"));
+
+            sessionHelper = new SessionHelper(wd);
+            navigationHelper = new NavigationHelper(wd);
         }
 
-        wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        wd.get(properties.getProperty("web.baseUrl"));
-
-        sessionHelper = new SessionHelper(wd);
-        navigationHelper = new NavigationHelper(wd);
-
-        sessionHelper.logon(new LoginData (properties.getProperty("web.loginAdmin"), properties.getProperty("web.passwordAdmin")));
+        return wd;
     }
 
     public void stop() {
-        wd.quit();
+        if (wd != null) { wd.quit(); }
     }
 
     public static boolean isAlertPresent(WebDriver wd) {
