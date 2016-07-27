@@ -43,7 +43,7 @@ public class BaseHelper {
         return new Select(wd.findElement(locator));
     }
 
-    void click(By locator) {
+    public void click(By locator) {
         wd.findElement(locator).click();
     }
 

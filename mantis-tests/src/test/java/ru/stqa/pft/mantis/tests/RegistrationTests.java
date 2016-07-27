@@ -1,26 +1,24 @@
 package ru.stqa.pft.mantis.tests;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import ru.stqa.pft.mantis.appmanager.ApplicationManager;
+import ru.stqa.pft.mantis.data.UserData;
 
 public class RegistrationTests extends BaseTests{
-    private static ApplicationManager app;
-    private WebDriver wd;
+    @BeforeTest
+    public void ensurePrecondition() {
+        app.initBrowser();
+
+        app.getNavigationHelper().gotoRegistrationPage();
+    }
 
     @Test
     public void testRegistration() {
-        this.app = BaseTests.app;
-        wd = app.initBrowser();
-    }
+        UserData user = new UserData();
 
-    public void start(String username, String email) {
-        wd.get(app.getProperty("web.baseUrl") + "/signup_page.php");
-
-        wd.findElement(By.name("username")).sendKeys(username);
-        wd.findElement(By.name("email")).sendKeys(email);
-
-        wd.findElement(By.cssSelector("input[value='Signup']")).click();
+        app.getBaseHelper().type(By.name("username"), user.getUserName());
+        app.getBaseHelper().type(By.name("email"), user.getEmail());
+        app.getBaseHelper().click(By.cssSelector("input[value='Зарегистрироваться']"));
     }
 }

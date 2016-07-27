@@ -1,4 +1,4 @@
-package ru.stqa.pft.mantis.appmanager;
+package ru.stqa.pft.mantis.appmanager.service;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -10,16 +10,17 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import ru.stqa.pft.mantis.appmanager.ApplicationManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HttpSession {
+public class HttpSessionHelper {
     private CloseableHttpClient httpclient;
     private ApplicationManager app;
 
-    public HttpSession(ApplicationManager app) {
+    public HttpSessionHelper(ApplicationManager app) {
         this.app = app;
         httpclient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
     }

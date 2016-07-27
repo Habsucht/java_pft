@@ -1,17 +1,18 @@
-package ru.stqa.pft.mantis.appmanager;
+package ru.stqa.pft.mantis.appmanager.service;
 
 import org.apache.commons.net.ftp.FTPClient;
+import ru.stqa.pft.mantis.appmanager.ApplicationManager;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class FtpHelper {
+public class FtpSessionHelper {
 
     private final ApplicationManager app;
     private FTPClient ftp;
 
-    public FtpHelper(ApplicationManager app) {
+    public FtpSessionHelper(ApplicationManager app) {
         this.app = app;
         ftp = new FTPClient();
     }

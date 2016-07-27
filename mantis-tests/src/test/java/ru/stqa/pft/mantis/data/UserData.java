@@ -1,21 +1,24 @@
 /**
- *  Class to implement authentication data
+ *  Class to implement new user authentication data
  */
 
 package ru.stqa.pft.mantis.data;
 
-public class LoginData {
+public class UserData {
     private final String userName;
     private final String password;
+    private final String email;
 
-    public LoginData(String userName, String password) {
+    public UserData(String userName, String password, String email) {
         this.userName = userName;
         this.password = password;
+        this.email = email;
     }
 
-    public LoginData() {
+    public UserData() {
         this.userName = "admin";
         this.password = "admin";
+        this.email = "admin@localhost";
     }
 
     public String getUserName() {
@@ -25,5 +28,8 @@ public class LoginData {
     public String getPassword() {
         return password;
     }
-}
 
+    public String getEmail() {
+        return email;
+    }
+}

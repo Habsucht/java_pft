@@ -15,12 +15,14 @@ import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import ru.stqa.pft.mantis.appmanager.service.HttpSessionHelper;
 
 public class ApplicationManager {
     private final Properties properties;
 
-    private SessionHelper sessionHelper;
+    private BaseHelper baseHelper;
     private NavigationHelper navigationHelper;
+
 
     private WebDriver wd;
 
@@ -60,7 +62,7 @@ public class ApplicationManager {
 
             wd.get(properties.getProperty("web.baseUrl"));
 
-            sessionHelper = new SessionHelper(wd);
+            baseHelper = new BaseHelper(wd);
             navigationHelper = new NavigationHelper(wd);
         }
 
@@ -84,7 +86,11 @@ public class ApplicationManager {
         return navigationHelper;
     }
 
-    public HttpSession newSession() {
-        return new HttpSession(this);
+    public BaseHelper getBaseHelper() {
+        return baseHelper;
+    }
+
+    public HttpSessionHelper newSession() {
+        return new HttpSessionHelper(this);
     }
 }
