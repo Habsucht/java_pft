@@ -14,14 +14,14 @@ import java.util.List;
 
 import static java.awt.SystemColor.text;
 
-class BaseHelper {
+public class BaseHelper {
     WebDriver wd;
 
     BaseHelper(WebDriver wd) {
         this.wd = wd;
     }
 
-    void type(By locator, String text) {
+    public void type(By locator, String text) {
         wd.findElement(locator).click();
         if (text != null) {
             String existingText = wd.findElement(locator).getAttribute("value");
