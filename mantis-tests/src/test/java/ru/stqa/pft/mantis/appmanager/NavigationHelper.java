@@ -24,4 +24,8 @@ public class NavigationHelper extends BaseHelper {
             click(By.cssSelector("a[href='signup_page.php']"));
         }
     }
+
+    public void gotoPage(String link) {
+        wd.get(link);
+    }
 }

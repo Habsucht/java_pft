@@ -15,7 +15,9 @@ import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import ru.stqa.pft.mantis.appmanager.service.FtpSessionHelper;
 import ru.stqa.pft.mantis.appmanager.service.HttpSessionHelper;
+import ru.stqa.pft.mantis.appmanager.service.MailHelper;
 
 public class ApplicationManager {
     private final Properties properties;
@@ -23,6 +25,9 @@ public class ApplicationManager {
     private BaseHelper baseHelper;
     private NavigationHelper navigationHelper;
 
+    private FtpSessionHelper ftpSessionHelper;
+    private HttpSessionHelper httpSessionHelper;
+    private MailHelper mailHelper;
 
     private WebDriver wd;
 
@@ -92,5 +97,19 @@ public class ApplicationManager {
 
     public HttpSessionHelper newSession() {
         return new HttpSessionHelper(this);
+    }
+
+    public FtpSessionHelper getFtpSessionHelper() {
+        if (ftpSessionHelper == null) {
+            ftpSessionHelper = new FtpSessionHelper(this);
+        }
+        return ftpSessionHelper;
+    }
+
+    public MailHelper getMailHelper() {
+        if (mailHelper == null) {
+            mailHelper = new MailHelper(this);
+        }
+        return mailHelper;
     }
 }
