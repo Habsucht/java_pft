@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HttpSessionHelper {
+
     private CloseableHttpClient httpclient;
     private ApplicationManager app;
 

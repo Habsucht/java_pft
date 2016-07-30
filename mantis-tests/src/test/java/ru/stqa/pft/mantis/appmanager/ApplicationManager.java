@@ -15,18 +15,22 @@ import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import ru.stqa.pft.mantis.appmanager.service.DbHelper;
 import ru.stqa.pft.mantis.appmanager.service.FtpSessionHelper;
 import ru.stqa.pft.mantis.appmanager.service.HttpSessionHelper;
 import ru.stqa.pft.mantis.appmanager.service.MailHelper;
+import ru.stqa.pft.mantis.data.UserData;
 
 public class ApplicationManager {
     private final Properties properties;
+    public String webBaseUrl;
+    public UserData admin;
 
-    private BaseHelper baseHelper;
     private NavigationHelper navigationHelper;
+    private BaseHelper baseHelper;
+    private DbHelper dbHelper;
 
     private FtpSessionHelper ftpSessionHelper;
-    private HttpSessionHelper httpSessionHelper;
     private MailHelper mailHelper;
 
     private WebDriver wd;
@@ -46,6 +50,8 @@ public class ApplicationManager {
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+
+        admin = new UserData("administrator", properties.getProperty("web.loginAdmin"), properties.getProperty("web.passwordAdmin"), null);
     }
 
     public WebDriver initBrowser() {
@@ -65,6 +71,7 @@ public class ApplicationManager {
 
             wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
+            webBaseUrl = properties.getProperty("web.baseUrl");
             wd.get(properties.getProperty("web.baseUrl"));
 
             baseHelper = new BaseHelper(wd);
@@ -93,6 +100,13 @@ public class ApplicationManager {
 
     public BaseHelper getBaseHelper() {
         return baseHelper;
+    }
+
+    public DbHelper getDbHelper() {
+        if (dbHelper == null) {
+            dbHelper = new DbHelper();
+        }
+        return dbHelper;
     }
 
     public HttpSessionHelper newSession() {

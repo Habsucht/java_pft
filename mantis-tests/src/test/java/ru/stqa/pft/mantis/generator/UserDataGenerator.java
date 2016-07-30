@@ -18,8 +18,8 @@ public class UserDataGenerator extends BaseGenerator {
         return firstName + generateRandom(100);
     }
 
-    public static String generatePassword(String firstName) {
-        return firstName + "Password";
+    public static String generatePassword(String nickName) {
+        return nickName + "Password";
     }
 
     public static String generateEmailAddress(String nickName) {

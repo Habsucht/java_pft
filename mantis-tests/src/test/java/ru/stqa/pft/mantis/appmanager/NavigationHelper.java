@@ -13,10 +13,16 @@ public class NavigationHelper extends BaseHelper {
         super(wd);
     }
 
+    public void gotoPage(String link) {
+        wd.get(link);
+    }
+
     public void gotoMainPage() {
-        if (!isElementPresent(By.linkText("myview_boxes_area"))) {
             click(By.cssSelector("a[href='/mantisbt-1.3.0/my_view_page.php']"));
-        }
+    }
+
+    public void gotoLoginPage(String webBaseUrl) {
+            wd.get(webBaseUrl + "login_page.php");
     }
 
     public void gotoRegistrationPage() {
@@ -25,7 +31,7 @@ public class NavigationHelper extends BaseHelper {
         }
     }
 
-    public void gotoPage(String link) {
-        wd.get(link);
+    public void gotoManageUserPage() {
+        click(By.cssSelector("a[href='/mantisbt-1.3.0/manage_user_page.php']"));
     }
 }

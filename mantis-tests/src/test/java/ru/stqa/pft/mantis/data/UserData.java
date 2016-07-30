@@ -7,14 +7,14 @@ package ru.stqa.pft.mantis.data;
 import ru.stqa.pft.mantis.generator.UserDataGenerator;
 
 public class UserData {
-    private final String userName;
-    private final String login;
-    private final String password;
-    private final String email;
+    private String userName;
+    private String login;
+    private String password;
+    private String email;
 
     public UserData(String userName, String login, String password, String email) {
-        this.login = login;
         this.userName = userName;
+        this.login = login;
         this.password = password;
         this.email = email;
     }
@@ -22,7 +22,7 @@ public class UserData {
     public UserData() {
         this.userName = UserDataGenerator.generateFirstName();
         this.login = UserDataGenerator.generateNickName(this.userName);
-        this.password = UserDataGenerator.generatePassword(this.userName);
+        this.password = UserDataGenerator.generatePassword(this.login);
         this.email = UserDataGenerator.generateEmailAddress(this.login);
     }
 
@@ -35,6 +35,9 @@ public class UserData {
     }
 
     public String getPassword() {
+        if (password == null) {
+            setPassword(UserDataGenerator.generatePassword(this.userName) + "_");
+        }
         return password;
     }
 
@@ -42,10 +45,30 @@ public class UserData {
         return email;
     }
 
+    public UserData setUserName(String userName) {
+        this.userName = userName;
+        return this;
+    }
+
+    public UserData setLogin(String login) {
+        this.login = login;
+        return this;
+    }
+
+    public UserData setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public UserData setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "UserData{" +
-                "userName='" + userName + '\'' +
+                ", userName='" + userName + '\'' +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
