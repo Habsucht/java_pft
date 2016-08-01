@@ -15,10 +15,7 @@ import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import ru.stqa.pft.mantis.appmanager.service.DbHelper;
-import ru.stqa.pft.mantis.appmanager.service.FtpSessionHelper;
-import ru.stqa.pft.mantis.appmanager.service.HttpSessionHelper;
-import ru.stqa.pft.mantis.appmanager.service.MailHelper;
+import ru.stqa.pft.mantis.appmanager.service.*;
 import ru.stqa.pft.mantis.data.UserData;
 
 public class ApplicationManager {
@@ -28,8 +25,9 @@ public class ApplicationManager {
 
     private NavigationHelper navigationHelper;
     private BaseHelper baseHelper;
-    private DbHelper dbHelper;
 
+    private DbHelper dbHelper;
+    private SoapHelper soapHelper;
     private FtpSessionHelper ftpSessionHelper;
     private MailHelper mailHelper;
 
@@ -125,5 +123,12 @@ public class ApplicationManager {
             mailHelper = new MailHelper(this);
         }
         return mailHelper;
+    }
+
+    public SoapHelper getSoapHelper() {
+        if (soapHelper == null) {
+            soapHelper = new SoapHelper(this);
+        }
+        return soapHelper;
     }
 }
