@@ -163,4 +163,14 @@ public class GeoIP {
         this.countryCode = value;
     }
 
+    @Override
+    public String toString() {
+        return "GeoIP{" +
+                "returnCode=" + returnCode +
+                ", ip='" + ip + '\'' +
+                ", returnCodeDetails='" + returnCodeDetails + '\'' +
+                ", countryName='" + countryName + '\'' +
+                ", countryCode='" + countryCode + '\'' +
+                '}';
+    }
 }
