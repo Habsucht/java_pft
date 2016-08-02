@@ -14,7 +14,9 @@ import ru.stqa.pft.mantis.model.MailMessage;
 import ru.stqa.pft.mantis.tests.BaseTests;
 
 import javax.mail.MessagingException;
+import javax.xml.rpc.ServiceException;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.List;
 
 import static org.testng.Assert.assertTrue;
@@ -29,7 +31,9 @@ public class RegistrationTests extends BaseTests {
     }
 
     @Test
-    public void testRegistration() throws IOException, MessagingException {
+    public void testRegistration() throws IOException, MessagingException, ServiceException {
+        skipIfNotFixed(BigInteger.valueOf(0000007));
+
         UserData user = new UserData();
         System.out.println(user.toString());
 

@@ -50,6 +50,8 @@ public class ApplicationManager {
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
 
         admin = new UserData("administrator", properties.getProperty("web.loginAdmin"), properties.getProperty("web.passwordAdmin"), null);
+
+        webBaseUrl = properties.getProperty("web.baseUrl");
     }
 
     public WebDriver initBrowser() {
@@ -69,7 +71,6 @@ public class ApplicationManager {
 
             wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-            webBaseUrl = properties.getProperty("web.baseUrl");
             wd.get(properties.getProperty("web.baseUrl"));
 
             baseHelper = new BaseHelper(wd);
