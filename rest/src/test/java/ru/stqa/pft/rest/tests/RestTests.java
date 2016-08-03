@@ -1,61 +1,46 @@
 package ru.stqa.pft.rest.tests;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
-import org.apache.http.client.fluent.Executor;
-import org.apache.http.message.BasicNameValuePair;
 import org.testng.annotations.Test;
+import ru.stqa.pft.rest.RestHelper;
 import ru.stqa.pft.rest.model.Issue;
 
 import java.io.IOException;
 import java.util.Set;
 
-import static org.apache.http.client.fluent.Request.*;
 import static org.testng.Assert.assertEquals;
 
 public class RestTests {
 
-    private Executor getExecutor() {
-        return Executor.newInstance().auth("LSGjeU4yP1X493ud1hNniA==", "");
-    }
-
     @Test
-    public void testCreateIssue() throws IOException {
-        Set<Issue> oldIssues = getIssues();
+    public void testCreateIssueVer1() throws IOException {
+        Set<Issue> oldIssues = RestHelper.getIssues();
         Issue newIssue = new Issue().setSubject("Test issue").setDescription("New test issue");
 
-        int issueId = createIssue(newIssue);
+        int issueId = RestHelper.createIssue(newIssue);
 
-        Set<Issue> newIssues = getIssues();
+        Set<Issue> newIssues = RestHelper.getIssues();
 
         oldIssues.add(newIssue.setId(issueId));
 
         assertEquals(newIssues, oldIssues);
     }
 
-    private Set<Issue> getIssues() throws IOException {
-        String json = getExecutor()
-                .execute(Get("http://demo.bugify.com/api/issues.json"))
-                .returnContent().asString();
+    @Test
+    public void testForCheckingIssue() throws IOException {
+        Set<Issue> issues = RestHelper.getIssues();
 
-        JsonElement parsed = new JsonParser().parse(json);
-
-        JsonElement issues = parsed.getAsJsonObject().get("issues");
-
-        return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
+        RestHelper.skipIfNotFixed(randomIssue(issues));
+        System.out.println("Somebody test");
     }
 
-    private int createIssue(Issue newIssue) throws IOException {
-        String json = getExecutor()
-                .execute(Post("http://demo.bugify.com/api/issues.json").bodyForm(
-                        new BasicNameValuePair("subject", newIssue.getSubject()),
-                        new BasicNameValuePair("description", newIssue.getDescription())))
-                .returnContent().asString();
+    private int randomIssue(Set<Issue> issues) {
+        for (Issue issue : issues) {
+            System.out.println(issue.toString());
+        }
 
-        JsonElement parsed = new JsonParser().parse(json);
+        Issue issue = issues.iterator().next();
+        System.out.println(issue.toString());
 
-        return parsed.getAsJsonObject().get("issue_id").getAsInt();
+        return issue.getId();
     }
 }

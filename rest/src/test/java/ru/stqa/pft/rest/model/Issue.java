@@ -5,9 +5,22 @@ public class Issue {
     private int id;
     private String subject;
     private String description;
+    private String state;
 
     public int getId() {
         return id;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getState() {
+        return state;
     }
 
     public Issue setId(int id) {
@@ -15,22 +28,29 @@ public class Issue {
         return this;
     }
 
-    public String getSubject() {
-        return subject;
-    }
-
     public Issue setSubject(String subject) {
         this.subject = subject;
         return this;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public Issue setDescription(String description) {
         this.description = description;
         return this;
+    }
+
+    public Issue setState(String state) {
+        this.state = state;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Issue{" +
+                "id=" + id +
+                ", subject='" + subject + '\'' +
+                ", description='" + description + '\'' +
+                ", state='" + state + '\'' +
+                '}';
     }
 
     @Override
