@@ -1,5 +1,4 @@
 apply plugin: 'java'
-apply plugin: 'application'
 
 repositories {
     mavenCentral()
@@ -17,6 +16,22 @@ dependencies {
     compile 'org.hibernate:hibernate-core:5.2.1.Final'
 }
 
-test {
-    useTestNG()
+task testGroups(type: Test) {
+    useTestNG {
+        suites "src/test/resources/testing-groups.xml"
+    }
+    if (project.hasProperty('browser')) { systemProperty 'browser', "${browser}" }
+    if (project.hasProperty('target')) { systemProperty 'target', "${target}" }
+    if (project.hasProperty('platform')) { systemProperty 'platform', "${platform}" }
+    if (project.hasProperty('verifyUI')) { systemProperty 'verifyUI', "${verifyUI}" }
+}
+
+task testContacts(type: Test) {
+    useTestNG {
+        suites "src/test/resources/testing-contacts.xml"
+    }
+    if (project.hasProperty('browser')) { systemProperty 'browser', "${browser}" }
+    if (project.hasProperty('target')) { systemProperty 'target', "${target}" }
+    if (project.hasProperty('platform')) { systemProperty 'platform', "${platform}" }
+    if (project.hasProperty('verifyUI')) { systemProperty 'verifyUI', "${verifyUI}" }
 }
