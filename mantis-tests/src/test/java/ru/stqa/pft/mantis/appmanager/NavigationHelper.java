@@ -32,6 +32,8 @@ public class NavigationHelper extends BaseHelper {
     }
 
     public void gotoManageUserPage() {
-        click(By.cssSelector("a[href='/mantisbt-1.3.0/manage_user_page.php']"));
+        if (isElementPresent(By.linkText("Manage Users")) || isElementPresent(By.linkText("Управление пользователями"))) {
+            click(By.cssSelector("a[href='/mantisbt-1.3.0/manage_user_page.php']"));
+        }
     }
 }
