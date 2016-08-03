@@ -76,7 +76,7 @@ public class ContactInformationPageTests extends BaseTests {
         Date date = new Date();
 
         // Get birthday contact date time with Date()
-        Date dateBirthday = new Date(Integer.parseInt(contact.getBirthdayYear()) - 1900, month, contact.getBirthdayDay());
+/*        Date dateBirthday = new Date(Integer.parseInt(contact.getBirthdayYear()) - 1900, month, contact.getBirthdayDay());
 
         int age = date.getYear() - (dateBirthday.getYear());
         if (date.getMonth() < month) {
@@ -86,6 +86,6 @@ public class ContactInformationPageTests extends BaseTests {
                 age = age - 1;
             }
         }
-        return age;
+*/        return 0;
     }
 }
