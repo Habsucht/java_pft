@@ -46,7 +46,6 @@ public class RestAssuredTests {
     }
 
     private int createIssue(Issue newIssue) throws IOException {
-
         String json = RestAssured.given()
                 .parameter("subject", newIssue.getSubject())
                 .parameter("description", newIssue.getDescription())

@@ -36,7 +36,9 @@ public class RestTests {
     }
 
     private Set<Issue> getIssues() throws IOException {
-        String json = getExecutor().execute(Get("http://demo.bugify.com/api/issues.json")).returnContent().asString();
+        String json = getExecutor()
+                .execute(Get("http://demo.bugify.com/api/issues.json"))
+                .returnContent().asString();
 
         JsonElement parsed = new JsonParser().parse(json);
 
@@ -46,7 +48,6 @@ public class RestTests {
     }
 
     private int createIssue(Issue newIssue) throws IOException {
-        //выполняем POST запрос на создание нового багрепорта
         String json = getExecutor()
                 .execute(Post("http://demo.bugify.com/api/issues.json").bodyForm(
                         new BasicNameValuePair("subject", newIssue.getSubject()),
