@@ -30,3 +30,7 @@ task tests(type: Test) {
     if (project.hasProperty('browser')) { systemProperty 'browser', "${browser}" }
     if (project.hasProperty('target')) { systemProperty 'target', "${target}" }
 }
+
+test {
+    useTestNG()
+}

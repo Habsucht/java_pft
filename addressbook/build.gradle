@@ -17,18 +17,12 @@ dependencies {
     compile 'org.hibernate:hibernate-core:5.2.1.Final'
 }
 
-task testGroup(type: Test) {
+task testGroups(type: Test) {
     useTestNG {
-        suites "src/test/resources/testng-groups.xml"
+        suites "src/test/resources/testing-groups.xml"
     }
     if (project.hasProperty('browser')) { systemProperty 'browser', "${browser}" }
     if (project.hasProperty('target')) { systemProperty 'target', "${target}" }
-}
-
-task testContact(type: Test) {
-    useTestNG {
-        suites "src/test/resources/testng-contacts.xml"
-    }
-    if (project.hasProperty('browser')) { systemProperty 'browser', "${browser}" }
-    if (project.hasProperty('target')) { systemProperty 'target', "${target}" }
+    if (project.hasProperty('platform')) { systemProperty 'platform', "${platform}" }
+    if (project.hasProperty('verifyUI')) { systemProperty 'verifyUI', "${verifyUI}" }
 }

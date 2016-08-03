@@ -6,6 +6,8 @@ package ru.stqa.pft.mantis.appmanager;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +17,8 @@ import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import ru.stqa.pft.mantis.appmanager.service.*;
 import ru.stqa.pft.mantis.data.UserData;
 
@@ -54,19 +58,24 @@ public class ApplicationManager {
         webBaseUrl = properties.getProperty("web.baseUrl");
     }
 
-    public WebDriver initBrowser() {
+    public WebDriver initBrowser() throws MalformedURLException {
         if (wd == null ) {
-            // Check to run a browser
-            switch (browser) {
-                case BrowserType.FIREFOX:
-                    wd = new FirefoxDriver();
-                    break;
-                case BrowserType.CHROME:
-                    wd = new ChromeDriver();
-                    break;
-                case BrowserType.IE:
-                    wd = new InternetExplorerDriver();
-                    break;
+            if ("".equals(properties.getProperty("selenium.server"))) {
+                // Check to run a browser
+                switch (browser) {
+                    case BrowserType.FIREFOX:
+                        wd = new FirefoxDriver();
+                        break;
+                    case BrowserType.CHROME:
+                        wd = new ChromeDriver();
+                        break;
+                    case BrowserType.IE:
+                        wd = new InternetExplorerDriver();
+                        break;
+                }
+            } else {
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
             }
 
             wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -76,7 +85,6 @@ public class ApplicationManager {
             baseHelper = new BaseHelper(wd);
             navigationHelper = new NavigationHelper(wd);
         }
-
         return wd;
     }
 
