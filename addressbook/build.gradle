@@ -25,7 +25,7 @@ task testGroups(type: Test) {
     if (project.hasProperty('target')) { systemProperty 'target', "${target}" }
 }
 
-task testGroups(type: Test) {
+task testContacts(type: Test) {
     useTestNG {
         suites "src/test/resources/testing-contacts.xml"
     }
