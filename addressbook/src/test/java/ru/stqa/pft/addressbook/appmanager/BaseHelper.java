@@ -10,9 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
-import java.util.List;
-
-import static java.awt.SystemColor.text;
 
 public class BaseHelper {
     WebDriver wd;
