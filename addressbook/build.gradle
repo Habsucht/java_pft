@@ -19,7 +19,6 @@ dependencies {
 test {
     useTestNG {
         suites 'src/test/resources/testing-groups.xml'
-        suites 'src/test/resources/testing-contacts.xml'
     }
 }
 
