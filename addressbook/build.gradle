@@ -17,11 +17,14 @@ dependencies {
 }
 
 test {
-    useTestNG()
+    useTestNG {
+        suites "src/test/resources/testing-groups.xml"
+        suites "src/test/resources/testing-contacts.xml"
+    }
 }
 
 task testGroups(type: Test) {
-    useTestNG() {
+    useTestNG {
         suites "src/test/resources/testing-groups.xml"
     }
 
@@ -40,7 +43,7 @@ task testGroups(type: Test) {
 }
 
 task testContacts(type: Test) {
-    useTestNG() {
+    useTestNG {
         suites "src/test/resources/testing-contacts.xml"
     }
 
