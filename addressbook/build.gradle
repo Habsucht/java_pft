@@ -18,14 +18,14 @@ dependencies {
 
 test {
     useTestNG {
-        suites "src/test/resources/testing-groups.xml"
-        suites "src/test/resources/testing-contacts.xml"
+        suites 'src/test/resources/testing-groups.xml'
+        suites 'src/test/resources/testing-contacts.xml'
     }
 }
 
 task testGroups(type: Test) {
     useTestNG {
-        suites "src/test/resources/testing-groups.xml"
+        suites 'src/test/resources/testing-groups.xml'
     }
 
     if (project.hasProperty('browser')){
@@ -44,7 +44,7 @@ task testGroups(type: Test) {
 
 task testContacts(type: Test) {
     useTestNG {
-        suites "src/test/resources/testing-contacts.xml"
+        suites 'src/test/resources/testing-contacts.xml'
     }
 
     if (project.hasProperty('browser')){
